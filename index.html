@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Segoe UI', 'Arial', sans-serif;
-            background: #fef7e8;
+            background: #18230F;
             padding: 20px;
         }
 
@@ -30,13 +30,13 @@
 
         .header h1 {
             font-size: 28px;
-            color: #b45309;
-            border-bottom: 3px solid #f59e0b;
+            color: #F5E6D3;
+            border-bottom: 3px solid #1F7D53;
             display: inline-block;
             padding-bottom: 5px;
         }
 
-        /* Member Cards - Warm Colors */
+        /* Member Cards - New Color Palette */
         .members-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -45,32 +45,32 @@
         }
 
         .member-card {
-            background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+            background: linear-gradient(135deg, #27391C 0%, #255F38 100%);
             border-radius: 12px;
             padding: 15px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            border-left: 5px solid #f59e0b;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            border-left: 5px solid #1F7D53;
         }
 
         .member-card h3 {
-            color: #92400e;
+            color: #F5E6D3;
             font-size: 16px;
             font-weight: 600;
         }
 
         .member-card p {
-            color: #b45309;
+            color: #C4E0C4;
             font-size: 13px;
         }
 
         .voice {
             display: inline-block;
-            background: #fed7aa;
+            background: #1F7D53;
             padding: 2px 10px;
             border-radius: 20px;
             font-size: 11px;
             margin-top: 5px;
-            color: #92400e;
+            color: #F5E6D3;
         }
 
         /* Tabs */
@@ -83,33 +83,33 @@
 
         .tab-btn {
             padding: 10px 28px;
-            background: #fff7ed;
+            background: #27391C;
             border: none;
             border-radius: 30px;
             cursor: pointer;
             font-size: 14px;
             font-weight: 600;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
             transition: all 0.3s;
-            color: #92400e;
+            color: #F5E6D3;
         }
 
         .tab-btn.active {
-            background: #f59e0b;
+            background: #1F7D53;
             color: white;
         }
 
         .tab-btn:hover:not(.active) {
-            background: #fed7aa;
+            background: #255F38;
         }
 
         /* Tab Content */
         .tab-content {
             display: none;
-            background: white;
+            background: #27391C;
             border-radius: 20px;
             padding: 24px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
 
         .tab-content.active {
@@ -133,23 +133,29 @@
             margin-bottom: 6px;
             font-weight: 600;
             font-size: 13px;
-            color: #b45309;
+            color: #C4E0C4;
         }
 
         select, input {
             width: 100%;
             padding: 12px;
-            border: 1px solid #fed7aa;
+            border: 1px solid #1F7D53;
             border-radius: 12px;
             font-size: 14px;
-            background: #fffaf5;
+            background: #18230F;
+            color: #F5E6D3;
             transition: all 0.3s;
+        }
+
+        select option {
+            background: #18230F;
+            color: #F5E6D3;
         }
 
         select:focus, input:focus {
             outline: none;
-            border-color: #f59e0b;
-            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+            border-color: #F5E6D3;
+            box-shadow: 0 0 0 3px rgba(31, 125, 83, 0.3);
         }
 
         .reason-field {
@@ -161,7 +167,7 @@
         }
 
         button {
-            background: #f59e0b;
+            background: #1F7D53;
             color: white;
             border: none;
             padding: 12px 28px;
@@ -173,33 +179,29 @@
         }
 
         button:hover {
-            background: #d97706;
+            background: #255F38;
             transform: translateY(-1px);
         }
 
         .btn-success {
-            background: #10b981;
+            background: #255F38;
         }
 
         .btn-success:hover {
-            background: #059669;
+            background: #1F7D53;
         }
 
         .btn-danger {
-            background: #ef4444;
+            background: #8B4513;
         }
 
         .btn-danger:hover {
-            background: #dc2626;
-        }
-
-        .btn-warning {
-            background: #f97316;
+            background: #A0522D;
         }
 
         .success-msg {
-            background: #d1fae5;
-            color: #065f46;
+            background: #255F38;
+            color: #F5E6D3;
             padding: 12px;
             border-radius: 12px;
             margin-top: 15px;
@@ -207,8 +209,8 @@
         }
 
         .error-msg {
-            background: #fee2e2;
-            color: #991b1b;
+            background: #8B4513;
+            color: #F5E6D3;
             padding: 12px;
             border-radius: 12px;
             margin-top: 15px;
@@ -219,7 +221,7 @@
         .records-container {
             overflow-x: auto;
             border-radius: 16px;
-            background: #fffaf5;
+            background: #18230F;
         }
 
         .records-table {
@@ -230,76 +232,77 @@
         }
 
         .records-table th {
-            background: #fef3c7;
-            color: #92400e;
+            background: #255F38;
+            color: #F5E6D3;
             padding: 14px 10px;
             text-align: center;
             font-weight: 700;
-            border: 1px solid #fed7aa;
+            border: 1px solid #1F7D53;
             font-size: 13px;
         }
 
         .records-table td {
-            border: 1px solid #fed7aa;
+            border: 1px solid #1F7D53;
             padding: 12px 8px;
             vertical-align: top;
-            background: white;
+            background: #18230F;
+            color: #C4E0C4;
         }
 
         .records-table tr:hover td {
-            background: #fffbeb;
+            background: #27391C;
         }
 
-        /* Status Colors - Warm Palette */
+        /* Status Colors */
         .status-p {
-            background: #d1fae5;
-            color: #065f46;
+            background: #1F7D53;
+            color: white;
             font-weight: bold;
-            padding: 4px 8px;
+            padding: 4px 12px;
             border-radius: 20px;
             display: inline-block;
-            font-size: 11px;
+            font-size: 12px;
         }
 
         .status-pnf {
-            background: #fed7aa;
-            color: #9c4221;
+            background: #F4A261;
+            color: #2C2C2C;
             font-weight: bold;
-            padding: 4px 8px;
+            padding: 4px 12px;
             border-radius: 20px;
             display: inline-block;
-            font-size: 11px;
+            font-size: 12px;
         }
 
         .status-a {
-            background: #fee2e2;
-            color: #991b1b;
+            background: #E76F51;
+            color: white;
             font-weight: bold;
-            padding: 4px 8px;
+            padding: 4px 12px;
             border-radius: 20px;
             display: inline-block;
-            font-size: 11px;
+            font-size: 12px;
         }
 
         .status-nr {
-            background: #f3f4f6;
-            color: #6b7280;
+            background: #6C6C6C;
+            color: white;
             font-weight: bold;
-            padding: 4px 8px;
+            padding: 4px 12px;
             border-radius: 20px;
             display: inline-block;
-            font-size: 11px;
+            font-size: 12px;
         }
 
         .reason-text {
             font-size: 10px;
-            color: #92400e;
+            color: #C4E0C4;
             margin-top: 4px;
             display: block;
             font-style: italic;
         }
 
-        /* Summary Table */
+        /* Summary Table - Numbers Only */
         .summary-container {
             overflow-x: auto;
         }
@@ -307,42 +310,49 @@
         .summary-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 12px;
+            font-size: 13px;
         }
 
         .summary-table th {
-            background: #fef3c7;
-            color: #92400e;
-            padding: 12px;
+            background: #255F38;
+            color: #F5E6D3;
+            padding: 14px 10px;
             text-align: center;
-            border: 1px solid #fed7aa;
+            border: 1px solid #1F7D53;
             font-weight: 700;
         }
 
         .summary-table td {
-            border: 1px solid #fed7aa;
-            padding: 10px;
+            border: 1px solid #1F7D53;
+            padding: 12px 8px;
             text-align: center;
-            background: white;
+            background: #18230F;
+            color: #C4E0C4;
         }
 
         .summary-table td:first-child {
-            background: #fffbeb;
+            background: #27391C;
             font-weight: 600;
             text-align: left;
+            color: #F5E6D3;
+        }
+
+        .summary-table td:first-child small {
+            color: #C4E0C4;
+            font-size: 11px;
         }
 
         .complete {
-            color: #10b981;
+            color: #1F7D53;
             font-weight: bold;
         }
 
         .incomplete {
-            color: #f97316;
+            color: #F4A261;
             font-weight: bold;
         }
 
-        /* Stats Cards - Warm */
+        /* Stats Cards */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -351,30 +361,32 @@
         }
 
         .stat-card {
-            background: linear-gradient(135deg, #fef3c7 0%, #fed7aa 100%);
-            color: #92400e;
+            background: #27391C;
+            color: #F5E6D3;
             padding: 15px;
             border-radius: 16px;
             text-align: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            border: 1px solid #1F7D53;
         }
 
         .stat-card h4 {
             font-size: 12px;
-            opacity: 0.8;
+            opacity: 0.9;
             margin-bottom: 8px;
+            color: #C4E0C4;
         }
 
         .stat-card .value {
             font-size: 28px;
             font-weight: bold;
-            color: #b45309;
+            color: #F5E6D3;
         }
 
         .loading {
             text-align: center;
             padding: 40px;
-            color: #b45309;
+            color: #C4E0C4;
         }
 
         /* Filter Bar */
@@ -384,7 +396,7 @@
             margin-bottom: 20px;
             flex-wrap: wrap;
             align-items: center;
-            background: #fffbeb;
+            background: #27391C;
             padding: 15px;
             border-radius: 16px;
         }
@@ -392,7 +404,9 @@
         .filter-bar select, .filter-bar input {
             width: auto;
             min-width: 160px;
-            background: white;
+            background: #18230F;
+            color: #F5E6D3;
+            border-color: #1F7D53;
         }
 
         .date-range {
@@ -405,30 +419,31 @@
         .date-range label {
             font-size: 12px;
             margin-bottom: 0;
+            color: #C4E0C4;
         }
 
         .event-group {
-            background: #fffaf5;
+            background: #18230F;
             padding: 20px;
             margin-bottom: 25px;
             border-radius: 16px;
+            border: 1px solid #1F7D53;
         }
 
         .event-group h4 {
-            color: #b45309;
+            color: #F5E6D3;
             margin-bottom: 15px;
             padding-bottom: 8px;
-            border-bottom: 2px solid #fed7aa;
+            border-bottom: 2px solid #1F7D53;
             font-size: 18px;
         }
 
         .clear-filter {
-            background: #9ca3af;
-            padding: 8px 16px;
+            background: #6C6C6C;
         }
 
         .clear-filter:hover {
-            background: #6b7280;
+            background: #8B8B8B;
         }
 
         @media (max-width: 768px) {
@@ -468,7 +483,7 @@
 
         <!-- Tab 1: Add Attendance Form -->
         <div id="formTab" class="tab-content active">
-            <h3 style="color:#b45309; margin-bottom:20px;">📝 Record Attendance</h3>
+            <h3 style="color:#F5E6D3; margin-bottom:20px;">📝 Record Attendance</h3>
             <form id="attendanceForm">
                 <div class="form-row">
                     <div class="form-group">
@@ -517,13 +532,9 @@
             <div id="formMessage"></div>
         </div>
 
-        <!-- Tab 2: Summary Report -->
+        <!-- Tab 2: Summary Report - Numbers Only -->
         <div id="summaryTab" class="tab-content">
-            <h3 style="color:#b45309; margin-bottom:20px;">📊 Attendance Summary</h3>
-            <div class="stats-grid" id="statsGrid">
-                <div class="loading">Loading statistics...</div>
-            </div>
-            
+            <!-- Stats Cards removed as requested -->
             <div class="event-group">
                 <h4>🎯 MAJOR FUNCTIONS</h4>
                 <div class="summary-container">
@@ -551,9 +562,8 @@
 
         <!-- Tab 3: View Records with Date Range -->
         <div id="recordsTab" class="tab-content">
-            <h3 style="color:#b45309; margin-bottom:20px;">📋 Attendance Records</h3>
+            <h3 style="color:#F5E6D3; margin-bottom:20px;">📋 Attendance Records</h3>
             
-            <!-- Filter Bar with Date Range -->
             <div class="filter-bar">
                 <select id="filterName" onchange="loadRecords()">
                     <option value="">All Members</option>
@@ -575,8 +585,8 @@
                     <button onclick="clearDateRange()" class="clear-filter">Clear Dates</button>
                 </div>
                 
-                <button onclick="loadRecords()" style="background:#f59e0b;">🔄 Refresh</button>
-                <button onclick="exportToCSV()" style="background:#10b981;">📥 Export CSV</button>
+                <button onclick="loadRecords()" style="background:#1F7D53;">🔄 Refresh</button>
+                <button onclick="exportToCSV()" style="background:#255F38;">📥 Export CSV</button>
                 <button onclick="deleteAllRecords()" class="btn-danger">🗑️ Delete All</button>
             </div>
             
@@ -626,7 +636,6 @@
             if (stored) {
                 attendanceData = JSON.parse(stored);
             } else {
-                // Sample data with formatted dates
                 attendanceData = [
                     { name: "Agarin, Christine", date: "2026-02-21", category: "Major", event: "PM", status: "PNF", reason: "masama po pakiramdam" },
                     { name: "Agarin, Christine", date: "2026-02-21", category: "Major", event: "WS", status: "P", reason: "" },
@@ -634,9 +643,7 @@
                     { name: "Imoria, Sheena Mae Joy", date: "2026-02-21", category: "Major", event: "PM", status: "PNF", reason: "masama pakiramdam" },
                     { name: "Imoria, Sheena Mae Joy", date: "2026-02-23", category: "Major", event: "PM", status: "P", reason: "via FB Live" },
                     { name: "Mallari, Jennifer Victoria", date: "2026-02-21", category: "Major", event: "PM", status: "A", reason: "may work" },
-                    { name: "Agarin, Dione", date: "2026-02-21", category: "Major", event: "PM", status: "PNF", reason: "masama po pakiramdam" },
-                    { name: "Agarin, Christine", date: "2026-03-01", category: "Major", event: "PM", status: "P", reason: "" },
-                    { name: "Agarin, Christine", date: "2026-03-01", category: "Minor", event: "SK EVENING", status: "PNF", reason: "late arrival" }
+                    { name: "Agarin, Dione", date: "2026-02-21", category: "Major", event: "PM", status: "PNF", reason: "masama po pakiramdam" }
                 ];
                 saveData();
             }
@@ -647,7 +654,6 @@
         // Save data
         function saveData() {
             localStorage.setItem('pagsulongAttendance', JSON.stringify(attendanceData));
-            console.log('Data saved:', attendanceData.length, 'records');
         }
 
         // Render member cards
@@ -679,7 +685,7 @@
             });
         }
 
-        // Update event dropdown based on category
+        // Update event dropdown
         function updateEventDropdown() {
             const category = document.getElementById('eventCategory').value;
             const eventSelect = document.getElementById('event');
@@ -689,13 +695,7 @@
                 return;
             }
             
-            let events = [];
-            if (category === 'Major') {
-                events = majorEvents;
-            } else if (category === 'Minor') {
-                events = minorEvents;
-            }
-            
+            let events = category === 'Major' ? majorEvents : minorEvents;
             eventSelect.innerHTML = '<option value="">-- Select Event --</option>';
             events.forEach(event => {
                 eventSelect.innerHTML += `<option value="${event}">${event}</option>`;
@@ -706,46 +706,34 @@
         function updateFilterEventDropdown() {
             const filterEvent = document.getElementById('filterEvent');
             filterEvent.innerHTML = '<option value="">All Events</option>';
-            
             [...majorEvents, ...minorEvents].forEach(event => {
                 filterEvent.innerHTML += `<option value="${event}">${event}</option>`;
             });
         }
 
-        // Clear date range filter
+        // Clear date range
         function clearDateRange() {
             document.getElementById('dateFrom').value = '';
             document.getElementById('dateTo').value = '';
             loadRecords();
         }
 
-        // Get status badge HTML
+        // Get status badge
         function getStatusBadge(status, reason) {
             let badgeClass = '';
-            let statusText = '';
+            if (status === 'P') badgeClass = 'status-p';
+            else if (status === 'PNF') badgeClass = 'status-pnf';
+            else if (status === 'A') badgeClass = 'status-a';
+            else if (status === 'NR') badgeClass = 'status-nr';
             
-            if (status === 'P') {
-                badgeClass = 'status-p';
-                statusText = 'P';
-            } else if (status === 'PNF') {
-                badgeClass = 'status-pnf';
-                statusText = 'PNF';
-            } else if (status === 'A') {
-                badgeClass = 'status-a';
-                statusText = 'A';
-            } else if (status === 'NR') {
-                badgeClass = 'status-nr';
-                statusText = 'NR';
-            }
-            
-            let html = `<span class="${badgeClass}">${statusText}</span>`;
+            let html = `<span class="${badgeClass}">${status}</span>`;
             if (reason && (status === 'PNF' || status === 'A')) {
                 html += `<span class="reason-text">${reason}</span>`;
             }
             return html;
         }
 
-        // LOAD RECORDS with Date Range
+        // Load records
         function loadRecords() {
             const filterName = document.getElementById('filterName')?.value || '';
             const filterCategory = document.getElementById('filterCategory')?.value || '';
@@ -755,82 +743,47 @@
             
             let filtered = [...attendanceData];
             
-            // Apply filters
-            if (filterName) {
-                filtered = filtered.filter(r => r.name === filterName);
-            }
-            if (filterCategory) {
-                filtered = filtered.filter(r => r.category === filterCategory);
-            }
-            if (filterEvent) {
-                filtered = filtered.filter(r => r.event === filterEvent);
-            }
-            if (dateFrom) {
-                filtered = filtered.filter(r => r.date >= dateFrom);
-            }
-            if (dateTo) {
-                filtered = filtered.filter(r => r.date <= dateTo);
-            }
+            if (filterName) filtered = filtered.filter(r => r.name === filterName);
+            if (filterCategory) filtered = filtered.filter(r => r.category === filterCategory);
+            if (filterEvent) filtered = filtered.filter(r => r.event === filterEvent);
+            if (dateFrom) filtered = filtered.filter(r => r.date >= dateFrom);
+            if (dateTo) filtered = filtered.filter(r => r.date <= dateTo);
             
             if (filtered.length === 0) {
-                document.getElementById('recordsTable').innerHTML = '<p style="text-align:center; padding:40px; color:#b45309;">📭 No records found</p>';
+                document.getElementById('recordsTable').innerHTML = '<p style="text-align:center; padding:40px; color:#C4E0C4;">📭 No records found</p>';
                 return;
             }
             
-            // Sort by date (newest first)
             filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
             
             let html = `
                 <div class="records-container">
                     <table class="records-table">
                         <thead>
-                            <tr>
-                                <th style="background:#fef3c7;">DATE</th>
-                                <th style="background:#fef3c7;">NAME</th>
-                                <th style="background:#fef3c7;">CATEGORY</th>
-                                <th style="background:#fef3c7;">EVENT</th>
-                                <th style="background:#fef3c7;">STATUS</th>
-                                <th style="background:#fef3c7;">REASON</th>
-                                <th style="background:#fef3c7;">ACTION</th>
-                            </tr>
+                            <tr><th>DATE</th><th>NAME</th><th>CATEGORY</th><th>EVENT</th><th>STATUS</th><th>REASON</th><th>ACTION</th></tr>
                         </thead>
                         <tbody>
             `;
             
-            filtered.forEach((record, idx) => {
-                const formattedDate = formatDate(record.date);
-                const dayName = getDayName(record.date);
+            filtered.forEach((record) => {
                 const originalIndex = attendanceData.findIndex((r, i) => 
                     r.name === record.name && r.date === record.date && 
                     r.event === record.event && r.status === record.status
                 );
-                
                 html += `
                     <tr>
-                        <td style="background:#fffbeb; font-weight:bold;">
-                            ${formattedDate}<br>
-                            <span style="font-size:10px; color:#b45309;">${dayName}</span>
-                        </td>
+                        <td style="background:#27391C; font-weight:bold;">${formatDate(record.date)}<br><span style="font-size:10px;">${getDayName(record.date)}</span></td>
                         <td>${record.name}</td>
                         <td>${record.category === 'Major' ? '🎯 Major' : '📋 Minor'}</td>
                         <td>${record.event}</td>
                         <td style="text-align:center;">${getStatusBadge(record.status, record.reason)}</td>
-                        <td style="max-width:200px;">${record.reason || '-'}</td>
-                        <td style="text-align:center;">
-                            <button onclick="deleteSingleRecord(${originalIndex})" 
-                                    style="background:#ef4444; padding:6px 16px; font-size:12px;">Delete</button>
-                        </td>
+                        <td>${record.reason || '-'}</td>
+                        <td style="text-align:center;"><button onclick="deleteSingleRecord(${originalIndex})" style="background:#8B4513; padding:6px 16px; font-size:12px;">Delete</button></td>
                     </tr>
                 `;
             });
             
-            html += `
-                        </tbody>
-                    </table>
-                </div>
-                <p style="margin-top:15px; color:#b45309; text-align:center;">Total: ${filtered.length} records</p>
-            `;
-            
+            html += `</tbody></table></div><p style="margin-top:15px; color:#C4E0C4; text-align:center;">Total: ${filtered.length} records</p>`;
             document.getElementById('recordsTable').innerHTML = html;
         }
 
@@ -841,94 +794,85 @@
                 saveData();
                 loadRecords();
                 renderSummary();
-                showMessage('formMessage', 'Record deleted successfully!', 'success');
             }
         }
 
         // Delete all records
         function deleteAllRecords() {
-            if (confirm('⚠️ Delete ALL records? This cannot be undone!')) {
+            if (confirm('⚠️ Delete ALL records?')) {
                 attendanceData = [];
                 saveData();
                 loadRecords();
                 renderSummary();
-                showMessage('formMessage', 'All records deleted successfully!', 'success');
             }
         }
 
-        // Render Summary Tables
+        // Render Summary - Numbers Only (Counts)
         function renderSummary() {
             renderCategorySummary('Major', majorEvents, 'majorSummaryHeader', 'majorSummaryBody');
             renderCategorySummary('Minor', minorEvents, 'minorSummaryHeader', 'minorSummaryBody');
-            
-            const totalRecords = attendanceData.length;
-            const pCount = attendanceData.filter(r => r.status === 'P').length;
-            const pnfCount = attendanceData.filter(r => r.status === 'PNF').length;
-            const aCount = attendanceData.filter(r => r.status === 'A').length;
-            const nrCount = attendanceData.filter(r => r.status === 'NR').length;
-            const attendanceRate = totalRecords > 0 ? ((pCount + (pnfCount * 0.5)) / totalRecords * 100).toFixed(1) : 0;
-            
-            const majorCount = attendanceData.filter(r => r.category === 'Major').length;
-            const minorCount = attendanceData.filter(r => r.category === 'Minor').length;
-            
-            document.getElementById('statsGrid').innerHTML = `
-                <div class="stat-card"><h4>Total Records</h4><div class="value">${totalRecords}</div></div>
-                <div class="stat-card"><h4>✅ Present (P)</h4><div class="value">${pCount}</div></div>
-                <div class="stat-card"><h4>⚠️ PNF</h4><div class="value">${pnfCount}</div></div>
-                <div class="stat-card"><h4>❌ Absent (A)</h4><div class="value">${aCount}</div></div>
-                <div class="stat-card"><h4>📋 No Report</h4><div class="value">${nrCount}</div></div>
-                <div class="stat-card"><h4>🎯 Major</h4><div class="value">${majorCount}</div></div>
-                <div class="stat-card"><h4>📋 Minor</h4><div class="value">${minorCount}</div></div>
-                <div class="stat-card"><h4>📊 Rate</h4><div class="value">${attendanceRate}%</div></div>
-            `;
         }
 
-        // Render summary for a category
+        // Render category summary with COUNTS only
         function renderCategorySummary(category, events, headerId, bodyId) {
-            const summary = {};
-            
+            // Calculate counts per member per status
+            const counts = {};
             members.forEach(member => {
-                summary[member.name] = {};
-                events.forEach(event => {
-                    const records = attendanceData.filter(r => r.name === member.name && r.event === event && r.category === category);
-                    if (records.length > 0) {
-                        summary[member.name][event] = records[records.length - 1].status;
-                    } else {
-                        summary[member.name][event] = 'NR';
-                    }
-                });
+                counts[member.name] = { P: 0, PNF: 0, A: 0, NR: 0 };
             });
 
-            let headerHtml = '<tr><th>NAME</th>';
+            attendanceData.forEach(record => {
+                if (record.category === category && counts[record.name]) {
+                    if (record.status === 'P') counts[record.name].P++;
+                    else if (record.status === 'PNF') counts[record.name].PNF++;
+                    else if (record.status === 'A') counts[record.name].A++;
+                    else if (record.status === 'NR') counts[record.name].NR++;
+                }
+            });
+
+            // Build header
+            let headerHtml = '<tr><th>NAME / VOICE</th>';
             events.forEach(event => {
                 headerHtml += `<th>${event}</th>`;
             });
-            headerHtml += '<th>REMARKS</th></tr>';
+            headerHtml += '<th>TOTAL P</th><th>TOTAL PNF</th><th>TOTAL A</th><th>TOTAL NR</th><th>ATTENDANCE RATE</th><th>REMARKS</th></tr>';
             document.getElementById(headerId).innerHTML = headerHtml;
 
+            // Build body with NUMBERS only
             let bodyHtml = '';
             members.forEach(member => {
-                let pCount = 0, pnfCount = 0;
-                bodyHtml += '<tr>';
-                bodyHtml += `<td style="background:#fffbeb;"><strong>${member.name}</strong><br><small>${member.voice}</small></td>`;
+                let totalP = counts[member.name].P;
+                let totalPNF = counts[member.name].PNF;
+                let totalA = counts[member.name].A;
+                let totalNR = counts[member.name].NR;
+                let totalEvents = totalP + totalPNF + totalA + totalNR;
+                let attendanceScore = totalEvents > 0 ? ((totalP + (totalPNF * 0.5)) / totalEvents * 100).toFixed(1) : 0;
+                let remarks = attendanceScore >= 80 ? 'COMPLETE' : 'INCOMPLETE';
+                let remarksClass = remarks === 'COMPLETE' ? 'complete' : 'incomplete';
                 
+                bodyHtml += `<tr>
+                    <td style="background:#27391C;"><strong>${member.name}</strong><br><small>${member.voice}</small></td>`;
+                
+                // For each event, show the latest status (not count)
                 events.forEach(event => {
-                    const status = summary[member.name][event];
+                    const records = attendanceData.filter(r => r.name === member.name && r.event === event && r.category === category);
+                    let status = records.length > 0 ? records[records.length - 1].status : 'NR';
                     let cellClass = '';
-                    if (status === 'P') { pCount++; cellClass = 'status-p'; }
-                    else if (status === 'PNF') { pnfCount++; cellClass = 'status-pnf'; }
-                    else if (status === 'A') { cellClass = 'status-a'; }
-                    else if (status === 'NR') { cellClass = 'status-nr'; }
-                    
+                    if (status === 'P') cellClass = 'status-p';
+                    else if (status === 'PNF') cellClass = 'status-pnf';
+                    else if (status === 'A') cellClass = 'status-a';
+                    else if (status === 'NR') cellClass = 'status-nr';
                     bodyHtml += `<td class="${cellClass}">${status}</td>`;
                 });
                 
-                const totalEvents = events.length;
-                const attendanceScore = (pCount + (pnfCount * 0.5)) / totalEvents;
-                const remarks = attendanceScore >= 0.8 ? 'COMPLETE' : 'INCOMPLETE';
-                const remarksClass = remarks === 'COMPLETE' ? 'complete' : 'incomplete';
-                bodyHtml += `<td><span class="${remarksClass}">${remarks}</span></td>`;
-                bodyHtml += '</tr>';
+                bodyHtml += `
+                    <td><strong>${totalP}</strong></td>
+                    <td><strong>${totalPNF}</strong></td>
+                    <td><strong>${totalA}</strong></td>
+                    <td><strong>${totalNR}</strong></td>
+                    <td><strong>${attendanceScore}%</strong></td>
+                    <td><span class="${remarksClass}">${remarks}</span></td>
+                </tr>`;
             });
 
             document.getElementById(bodyId).innerHTML = bodyHtml;
@@ -943,8 +887,7 @@
             
             let csv = 'Name,Date,Category,Event,Status,Reason\n';
             attendanceData.forEach(record => {
-                const formattedDate = formatDate(record.date);
-                csv += `"${record.name}","${formattedDate}","${record.category}","${record.event}","${record.status}","${record.reason || ''}"\n`;
+                csv += `"${record.name}","${formatDate(record.date)}","${record.category}","${record.event}","${record.status}","${record.reason || ''}"\n`;
             });
             
             const blob = new Blob([csv], { type: 'text/csv' });
@@ -963,19 +906,17 @@
             setTimeout(() => msgDiv.innerHTML = '', 3000);
         }
 
-        // Show/hide reason field
+        // Toggle reason field
         function toggleReasonField() {
             const status = document.getElementById('status').value;
             const reasonGroup = document.getElementById('reasonGroup');
-            const reasonInput = document.getElementById('reason');
-            
             if (status === 'PNF' || status === 'A') {
                 reasonGroup.classList.add('show');
-                reasonInput.required = true;
+                document.getElementById('reason').required = true;
             } else {
                 reasonGroup.classList.remove('show');
-                reasonInput.required = false;
-                reasonInput.value = '';
+                document.getElementById('reason').required = false;
+                document.getElementById('reason').value = '';
             }
         }
 
@@ -984,25 +925,17 @@
             document.getElementById('formTab').classList.remove('active');
             document.getElementById('summaryTab').classList.remove('active');
             document.getElementById('recordsTab').classList.remove('active');
-            
             document.getElementById(`${tab}Tab`).classList.add('active');
-            
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
-            
-            if (tab === 'summary') {
-                renderSummary();
-            } else if (tab === 'records') {
-                updateFilterEventDropdown();
-                loadRecords();
-            }
+            if (tab === 'summary') renderSummary();
+            else if (tab === 'records') { updateFilterEventDropdown(); loadRecords(); }
         }
 
         // Set today's date
         function setDefaultDate() {
             const today = new Date().toISOString().split('T')[0];
-            const dateInput = document.getElementById('date');
-            if (dateInput) dateInput.value = today;
+            document.getElementById('date').value = today;
         }
 
         // Form submission
@@ -1026,18 +959,8 @@
                 return;
             }
             
-            const newRecord = { 
-                name, 
-                date, 
-                category, 
-                event, 
-                status, 
-                reason: reason || '' 
-            };
-            
-            attendanceData.push(newRecord);
+            attendanceData.push({ name, date, category, event, status, reason: reason || '' });
             saveData();
-            
             showMessage('formMessage', '✅ Attendance recorded successfully!', 'success');
             
             document.getElementById('name').value = '';
@@ -1046,9 +969,6 @@
             document.getElementById('status').value = '';
             document.getElementById('reason').value = '';
             document.getElementById('reasonGroup').classList.remove('show');
-            
-            console.log('Record added:', newRecord);
-            console.log('Total records:', attendanceData.length);
         });
         
         // Initialize
