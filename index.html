@@ -18,7 +18,7 @@
         }
 
         .container {
-            max-width: 1600px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
@@ -109,109 +109,58 @@
             display: block;
         }
 
-        .form-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 6px;
-            font-weight: 600;
-            font-size: 13px;
-            color: #C4E0C4;
-        }
-
-        select, input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #1F7D53;
-            border-radius: 12px;
-            font-size: 14px;
-            background: #18230F;
-            color: #F5E6D3;
-        }
-
-        .reason-field {
-            display: none;
-        }
-
-        .reason-field.show {
-            display: block;
-        }
-
-        button {
-            background: #1F7D53;
-            color: white;
-            border: none;
-            padding: 12px 28px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        button:hover {
-            background: #255F38;
-        }
-
-        .btn-success {
-            background: #255F38;
-        }
-
-        .btn-danger {
-            background: #8B4513;
-        }
-
-        .success-msg {
-            background: #255F38;
-            color: #F5E6D3;
-            padding: 12px;
-            border-radius: 12px;
-            margin-top: 15px;
-            text-align: center;
-        }
-
-        .error-msg {
-            background: #8B4513;
-            color: #F5E6D3;
-            padding: 12px;
-            border-radius: 12px;
-            margin-top: 15px;
-            text-align: center;
-        }
-
-        .records-container {
-            overflow-x: auto;
-        }
-
-        .records-table {
+        /* Attendance Input Table */
+        .attendance-input-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 13px;
+            margin-top: 15px;
         }
 
-        .records-table th {
+        .attendance-input-table th {
             background: #255F38;
             color: #F5E6D3;
             padding: 12px;
             border: 1px solid #1F7D53;
+            text-align: center;
         }
 
-        .records-table td {
+        .attendance-input-table td {
             border: 1px solid #1F7D53;
             padding: 10px;
             background: #18230F;
             color: #C4E0C4;
         }
 
-        .status-p {
+        .attendance-input-table select, 
+        .attendance-input-table input {
+            width: 100%;
+            padding: 8px;
+            background: #27391C;
+            border: 1px solid #1F7D53;
+            border-radius: 8px;
+            color: #F5E6D3;
+        }
+
+        .copy-btn {
+            background: #1F7D53;
+            padding: 6px 12px;
+            font-size: 12px;
+            margin-left: 5px;
+        }
+
+        .copy-btn:hover {
+            background: #255F38;
+        }
+
+        .submit-attendance-btn {
+            margin-top: 20px;
+            width: 100%;
+            background: #1F7D53;
+            padding: 12px;
+            font-size: 16px;
+        }
+
+        .status-pf {
             background: #1F7D53;
             color: white;
             padding: 4px 12px;
@@ -243,11 +192,28 @@
             display: inline-block;
         }
 
-        .reason-text {
-            font-size: 10px;
+        .records-container {
+            overflow-x: auto;
+        }
+
+        .records-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .records-table th {
+            background: #255F38;
+            color: #F5E6D3;
+            padding: 12px;
+            border: 1px solid #1F7D53;
+        }
+
+        .records-table td {
+            border: 1px solid #1F7D53;
+            padding: 10px;
+            background: #18230F;
             color: #C4E0C4;
-            margin-top: 4px;
-            display: block;
         }
 
         .summary-container {
@@ -307,6 +273,11 @@
         .filter-bar select, .filter-bar input {
             width: auto;
             min-width: 140px;
+            padding: 8px;
+            background: #18230F;
+            border: 1px solid #1F7D53;
+            border-radius: 8px;
+            color: #F5E6D3;
         }
 
         .date-range {
@@ -330,12 +301,25 @@
             border-bottom: 2px solid #1F7D53;
         }
 
+        .reason-input {
+            width: 100%;
+            padding: 6px;
+            background: #27391C;
+            border: 1px solid #1F7D53;
+            border-radius: 6px;
+            color: #F5E6D3;
+            font-size: 11px;
+        }
+
         @media (max-width: 768px) {
             .filter-bar select, .filter-bar input {
                 width: 100%;
             }
             .date-range {
                 width: 100%;
+            }
+            .attendance-input-table {
+                font-size: 11px;
             }
         }
     </style>
@@ -354,58 +338,56 @@
             <button class="tab-btn" data-tab="records">📝 View Records</button>
         </div>
 
-        <!-- FORM TAB -->
+        <!-- FORM TAB - TABLE INPUT WITH ALL MEMBERS -->
         <div id="formTab" class="tab-content active">
             <h3 style="color:#F5E6D3; margin-bottom:20px;">📝 Record Attendance</h3>
-            <form id="attendanceForm">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>👤 Select Member *</label>
-                        <select id="name" required>
-                            <option value="">-- Select Member --</option>
-                        </select>
+            
+            <!-- Master Controls Row -->
+            <div style="background: #27391C; padding: 15px; border-radius: 12px; margin-bottom: 20px;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px;">
+                    <div>
+                        <label style="color:#C4E0C4;">📅 Date</label>
+                        <input type="date" id="masterDate" style="width:100%;">
+                        <button id="copyDateBtn" class="copy-btn" style="margin-top:5px; width:100%;">📋 Copy to All</button>
                     </div>
-                    <div class="form-group">
-                        <label>📅 Date *</label>
-                        <input type="date" id="date" required>
-                    </div>
-                    <div class="form-group">
-                        <label>📂 Category *</label>
-                        <select id="eventCategory" required>
+                    <div>
+                        <label style="color:#C4E0C4;">📂 Category</label>
+                        <select id="masterCategory" style="width:100%;">
                             <option value="">-- Select Category --</option>
                             <option value="Major">🎯 MAJOR FUNCTIONS</option>
                             <option value="Minor">📋 MINOR FUNCTIONS</option>
                         </select>
+                        <button id="copyCategoryBtn" class="copy-btn" style="margin-top:5px; width:100%;">📋 Copy to All</button>
                     </div>
-                    <div class="form-group">
-                        <label>📌 Event *</label>
-                        <select id="event" required>
+                    <div>
+                        <label style="color:#C4E0C4;">📌 Event</label>
+                        <select id="masterEvent" style="width:100%;">
                             <option value="">-- Select Event --</option>
                         </select>
-                    </div>
-                    <div class="form-group">
-                        <label>✅ Status *</label>
-                        <select id="status" required>
-                            <option value="">-- Select Status --</option>
-                            <option value="P">P - Present</option>
-                            <option value="PNF">PNF - Present No Function</option>
-                            <option value="A">A - Absent</option>
-                            <option value="NR">NR - No Report</option>
-                        </select>
+                        <button id="copyEventBtn" class="copy-btn" style="margin-top:5px; width:100%;">📋 Copy to All</button>
                     </div>
                 </div>
+            </div>
 
-                <div class="form-group reason-field" id="reasonGroup">
-                    <label>📝 Reason (required for PNF or Absent)</label>
-                    <input type="text" id="reason" placeholder="e.g., Late arrival, Medical, May work">
-                </div>
+            <!-- Member Table -->
+            <table class="attendance-input-table" id="attendanceTable">
+                <thead>
+                    <tr>
+                        <th>NAME / VOICE</th>
+                        <th>STATUS</th>
+                        <th>REASON (if PF/NF or Absent)</th>
+                    </tr>
+                </thead>
+                <tbody id="attendanceTableBody">
+                    <!-- Members will be populated here -->
+                </tbody>
+            </table>
 
-                <button type="submit" class="btn-success">✅ Submit Attendance</button>
-            </form>
+            <button id="submitAttendanceBtn" class="submit-attendance-btn">✅ Submit All Attendance</button>
             <div id="formMessage"></div>
         </div>
 
-        <!-- SUMMARY TAB - COUNTS ONLY "P" -->
+        <!-- SUMMARY TAB -->
         <div id="summaryTab" class="tab-content">
             <div class="event-group">
                 <h4>🎯 MAJOR FUNCTIONS</h4>
@@ -468,14 +450,24 @@
 
         let attendanceData = [];
 
+        // Status options with new names: PF (Present Function) and PF/NF (Present Not Function)
+        const statusOptions = [
+            { value: "PF", label: "PF - Present Function" },
+            { value: "PNF", label: "PNF - Present Not Function" },
+            { value: "A", label: "A - Absent" },
+            { value: "NR", label: "NR - No Report" }
+        ];
+
         // Helper Functions
         function formatDate(dateStr) {
+            if (!dateStr) return '';
             let d = new Date(dateStr);
             let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
             return `${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
         }
 
         function getDayName(dateStr) {
+            if (!dateStr) return '';
             let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
             return days[new Date(dateStr).getDay()];
         }
@@ -486,21 +478,12 @@
             if (stored) {
                 attendanceData = JSON.parse(stored);
             } else {
-                // Sample data based on your image
-                attendanceData = [
-                    { name: "Agarin, Christine", date: "2026-02-21", category: "Major", event: "PM", status: "PNF", reason: "masama po pakiramdam" },
-                    { name: "Agarin, Christine", date: "2026-02-21", category: "Major", event: "WS", status: "P", reason: "" },
-                    { name: "Agarin, Christine", date: "2026-02-23", category: "Major", event: "PM", status: "P", reason: "via FB Live" },
-                    { name: "Agarin, Christine", date: "2026-04-01", category: "Major", event: "WS", status: "P", reason: "" },
-                    { name: "Agarin, Christine", date: "2026-04-01", category: "Minor", event: "SK EVENING", status: "P", reason: "" },
-                    { name: "Imoria, Sheena Mae Joy", date: "2026-02-21", category: "Major", event: "PM", status: "PNF", reason: "masama pakiramdam" },
-                    { name: "Imoria, Sheena Mae Joy", date: "2026-02-23", category: "Major", event: "PM", status: "P", reason: "via FB Live" },
-                    { name: "Mallari, Jennifer Victoria", date: "2026-02-21", category: "Major", event: "PM", status: "A", reason: "may work" }
-                ];
+                attendanceData = [];
                 saveData();
             }
             renderMembers();
-            populateDropdowns();
+            populateFilters();
+            renderAttendanceTable();
         }
 
         function saveData() {
@@ -515,76 +498,163 @@
             document.getElementById('membersGrid').innerHTML = html;
         }
 
-        function populateDropdowns() {
-            let nameSelect = document.getElementById('name');
+        function populateFilters() {
             let filterName = document.getElementById('filterName');
-            nameSelect.innerHTML = '<option value="">-- Select Member --</option>';
             filterName.innerHTML = '<option value="">All Members</option>';
             members.forEach(m => {
-                nameSelect.innerHTML += `<option value="${m.name}">${m.name}</option>`;
                 filterName.innerHTML += `<option value="${m.name}">${m.name}</option>`;
             });
         }
 
-        // Event dropdown based on category
-        document.getElementById('eventCategory').addEventListener('change', function() {
-            let category = this.value;
-            let eventSelect = document.getElementById('event');
+        // Render Attendance Input Table with all 4 members
+        function renderAttendanceTable() {
+            let html = '';
+            members.forEach((member, idx) => {
+                html += `
+                    <tr data-member="${member.name}">
+                        <td style="background:#27391C;">
+                            <strong>${member.name}</strong><br>
+                            <small>${member.voice} | ${member.locale}</small>
+                        </td>
+                        <td>
+                            <select class="status-select" data-member="${member.name}" style="width:100%; padding:8px;">
+                                <option value="">-- Select Status --</option>
+                                ${statusOptions.map(opt => `<option value="${opt.value}">${opt.label}</option>`).join('')}
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" class="reason-input" data-member="${member.name}" placeholder="Reason for PF/NF or Absent" style="width:100%;">
+                        </td>
+                    </tr>
+                `;
+            });
+            document.getElementById('attendanceTableBody').innerHTML = html;
+            
+            // Set default date
+            document.getElementById('masterDate').valueAsDate = new Date();
+            
+            // Add event listeners for reason field visibility
+            document.querySelectorAll('.status-select').forEach(select => {
+                select.addEventListener('change', function() {
+                    const memberName = this.getAttribute('data-member');
+                    const reasonInput = document.querySelector(`.reason-input[data-member="${memberName}"]`);
+                    if (this.value === 'PNF' || this.value === 'A') {
+                        reasonInput.required = true;
+                        reasonInput.placeholder = "Required: Enter reason...";
+                    } else {
+                        reasonInput.required = false;
+                        reasonInput.placeholder = "Reason for PF/NF or Absent";
+                    }
+                });
+            });
+        }
+
+        // Update master event dropdown based on category
+        function updateMasterEventDropdown() {
+            const category = document.getElementById('masterCategory').value;
+            const eventSelect = document.getElementById('masterEvent');
             let events = category === 'Major' ? majorEvents : (category === 'Minor' ? minorEvents : []);
             eventSelect.innerHTML = '<option value="">-- Select Event --</option>';
             events.forEach(e => {
                 eventSelect.innerHTML += `<option value="${e}">${e}</option>`;
             });
+        }
+
+        document.getElementById('masterCategory').addEventListener('change', updateMasterEventDropdown);
+
+        // Copy functions
+        document.getElementById('copyDateBtn').addEventListener('click', function() {
+            const date = document.getElementById('masterDate').value;
+            // No need to copy to table cells since date is not in the table
+            alert(`Date set to ${date}. Will be applied when submitting.`);
         });
 
-        // Show/hide reason field
-        document.getElementById('status').addEventListener('change', function() {
-            let reasonGroup = document.getElementById('reasonGroup');
-            if (this.value === 'PNF' || this.value === 'A') {
-                reasonGroup.classList.add('show');
-            } else {
-                reasonGroup.classList.remove('show');
-            }
+        document.getElementById('copyCategoryBtn').addEventListener('click', function() {
+            const category = document.getElementById('masterCategory').value;
+            const categoryText = document.getElementById('masterCategory').options[document.getElementById('masterCategory').selectedIndex]?.text;
+            alert(`Category set to ${categoryText || category}. Will be applied to all when submitting.`);
         });
 
-        // Form Submit
-        document.getElementById('attendanceForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        document.getElementById('copyEventBtn').addEventListener('click', function() {
+            const event = document.getElementById('masterEvent').value;
+            alert(`Event set to ${event}. Will be applied to all when submitting.`);
+        });
+
+        // Submit all attendance
+        document.getElementById('submitAttendanceBtn').addEventListener('click', function() {
+            const masterDate = document.getElementById('masterDate').value;
+            const masterCategory = document.getElementById('masterCategory').value;
+            const masterEvent = document.getElementById('masterEvent').value;
             
-            let name = document.getElementById('name').value;
-            let date = document.getElementById('date').value;
-            let category = document.getElementById('eventCategory').value;
-            let event = document.getElementById('event').value;
-            let status = document.getElementById('status').value;
-            let reason = document.getElementById('reason').value;
-            
-            if (!name || !date || !category || !event || !status) {
-                document.getElementById('formMessage').innerHTML = '<div class="error-msg">❌ Please fill all required fields</div>';
+            if (!masterDate) {
+                document.getElementById('formMessage').innerHTML = '<div class="error-msg">❌ Please select a date</div>';
                 setTimeout(() => document.getElementById('formMessage').innerHTML = '', 3000);
                 return;
             }
             
-            if ((status === 'PNF' || status === 'A') && !reason) {
-                document.getElementById('formMessage').innerHTML = '<div class="error-msg">❌ Please provide a reason</div>';
+            if (!masterCategory) {
+                document.getElementById('formMessage').innerHTML = '<div class="error-msg">❌ Please select a category</div>';
                 setTimeout(() => document.getElementById('formMessage').innerHTML = '', 3000);
                 return;
             }
             
-            attendanceData.push({ name, date, category, event, status, reason: reason || '' });
+            if (!masterEvent) {
+                document.getElementById('formMessage').innerHTML = '<div class="error-msg">❌ Please select an event</div>';
+                setTimeout(() => document.getElementById('formMessage').innerHTML = '', 3000);
+                return;
+            }
+            
+            let submittedCount = 0;
+            let errors = [];
+            
+            members.forEach(member => {
+                const statusSelect = document.querySelector(`.status-select[data-member="${member.name}"]`);
+                const reasonInput = document.querySelector(`.reason-input[data-member="${member.name}"]`);
+                const status = statusSelect?.value;
+                const reason = reasonInput?.value || '';
+                
+                if (!status) {
+                    errors.push(`${member.name}: No status selected`);
+                    return;
+                }
+                
+                if ((status === 'PNF' || status === 'A') && !reason) {
+                    errors.push(`${member.name}: Reason required for ${status}`);
+                    return;
+                }
+                
+                // Convert PF to P for consistency in storage
+                const storedStatus = status === 'PF' ? 'P' : status;
+                
+                attendanceData.push({
+                    name: member.name,
+                    date: masterDate,
+                    category: masterCategory,
+                    event: masterEvent,
+                    status: storedStatus,
+                    reason: reason
+                });
+                submittedCount++;
+            });
+            
+            if (errors.length > 0) {
+                document.getElementById('formMessage').innerHTML = `<div class="error-msg">❌ Errors:<br>${errors.join('<br>')}</div>`;
+                setTimeout(() => document.getElementById('formMessage').innerHTML = '', 5000);
+                return;
+            }
+            
             saveData();
-            
-            document.getElementById('formMessage').innerHTML = '<div class="success-msg">✅ Attendance recorded!</div>';
+            document.getElementById('formMessage').innerHTML = `<div class="success-msg">✅ ${submittedCount} attendance records submitted!</div>`;
             setTimeout(() => document.getElementById('formMessage').innerHTML = '', 3000);
             
-            document.getElementById('attendanceForm').reset();
-            document.getElementById('reasonGroup').classList.remove('show');
-            document.getElementById('date').valueAsDate = new Date();
+            // Reset form
+            document.querySelectorAll('.status-select').forEach(select => select.value = '');
+            document.querySelectorAll('.reason-input').forEach(input => input.value = '');
             
             renderSummary();
-            loadRecords();
         });
 
-        // RENDER SUMMARY - COUNT ONLY "P" STATUS
+        // RENDER SUMMARY - Count only "P" (Present Function)
         function renderSummary() {
             renderCategorySummary('Major', majorEvents, 'majorHeader', 'majorBody');
             renderCategorySummary('Minor', minorEvents, 'minorHeader', 'minorBody');
@@ -626,7 +696,7 @@
             headerHtml += '<th>TOTAL P</th><th>TOTAL PNF</th><th>TOTAL A</th><th>TOTAL NR</th><th>RATE</th><th>REMARKS</th></tr>';
             document.getElementById(headerId).innerHTML = headerHtml;
             
-            // Build Body - Show COUNT of P per event
+            // Build Body
             let bodyHtml = '';
             members.forEach(m => {
                 let totalP = totals[m.name].P;
@@ -637,9 +707,9 @@
                 let rate = totalEvents > 0 ? ((totalP + totalPNF * 0.5) / totalEvents * 100).toFixed(1) : 0;
                 let remarks = rate >= 80 ? 'COMPLETE' : 'INCOMPLETE';
                 
-                bodyHtml += `<tr><td><strong>${m.name}</strong><br><small>${m.voice}</small></td>`;
+                bodyHtml += `<tr>
+                    <td style="background:#27391C;"><strong>${m.name}</strong><br><small>${m.voice}</small></td>`;
                 
-                // Show count of P for each event
                 events.forEach(ev => {
                     let count = pCounts[m.name][ev];
                     bodyHtml += `<td><strong>${count}</strong></td>`;
@@ -685,13 +755,14 @@
             
             filtered.forEach((r, idx) => {
                 let originalIdx = attendanceData.findIndex((x,i) => x.name === r.name && x.date === r.date && x.event === r.event);
-                let statusClass = `status-${r.status.toLowerCase()}`;
+                let statusDisplay = r.status === 'P' ? 'PF' : r.status;
+                let statusClass = r.status === 'P' ? 'status-pf' : (r.status === 'PNF' ? 'status-pnf' : (r.status === 'A' ? 'status-a' : 'status-nr'));
                 html += `<tr>
                     <td>${formatDate(r.date)}<br><span style="font-size:10px;">${getDayName(r.date)}</span></td>
                     <td>${r.name}</td>
                     <td>${r.category === 'Major' ? '🎯 Major' : '📋 Minor'}</td>
                     <td>${r.event}</td>
-                    <td><span class="${statusClass}">${r.status}</span></td>
+                    <td><span class="${statusClass}">${statusDisplay}</span></td>
                     <td>${r.reason || '-'}</td>
                     <td><button onclick="deleteRecord(${originalIdx})" style="background:#8B4513; padding:5px 12px;">Delete</button></td>
                 </tr>`;
@@ -721,7 +792,8 @@
         function exportToCSV() {
             let csv = 'Name,Date,Category,Event,Status,Reason\n';
             attendanceData.forEach(r => {
-                csv += `"${r.name}","${formatDate(r.date)}","${r.category}","${r.event}","${r.status}","${r.reason || ''}"\n`;
+                let statusDisplay = r.status === 'P' ? 'PF' : r.status;
+                csv += `"${r.name}","${formatDate(r.date)}","${r.category}","${r.event}","${statusDisplay}","${r.reason || ''}"\n`;
             });
             let blob = new Blob([csv], {type: 'text/csv'});
             let a = document.createElement('a');
@@ -750,6 +822,7 @@
                 
                 if (tab === 'summary') renderSummary();
                 if (tab === 'records') { updateFilterEvents(); loadRecords(); }
+                if (tab === 'form') renderAttendanceTable();
             });
         });
         
@@ -762,9 +835,6 @@
         document.getElementById('filterEvent')?.addEventListener('change', loadRecords);
         document.getElementById('dateFrom')?.addEventListener('change', loadRecords);
         document.getElementById('dateTo')?.addEventListener('change', loadRecords);
-        
-        // Set default date
-        document.getElementById('date').valueAsDate = new Date();
         
         // Initialize
         loadData();
