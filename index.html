@@ -405,7 +405,7 @@
             <div id="formMessage"></div>
         </div>
 
-        <!-- SUMMARY TAB -->
+        <!-- SUMMARY TAB - COUNTS ONLY "P" -->
         <div id="summaryTab" class="tab-content">
             <div class="event-group">
                 <h4>🎯 MAJOR FUNCTIONS</h4>
@@ -486,13 +486,16 @@
             if (stored) {
                 attendanceData = JSON.parse(stored);
             } else {
+                // Sample data based on your image
                 attendanceData = [
                     { name: "Agarin, Christine", date: "2026-02-21", category: "Major", event: "PM", status: "PNF", reason: "masama po pakiramdam" },
                     { name: "Agarin, Christine", date: "2026-02-21", category: "Major", event: "WS", status: "P", reason: "" },
+                    { name: "Agarin, Christine", date: "2026-02-23", category: "Major", event: "PM", status: "P", reason: "via FB Live" },
+                    { name: "Agarin, Christine", date: "2026-04-01", category: "Major", event: "WS", status: "P", reason: "" },
+                    { name: "Agarin, Christine", date: "2026-04-01", category: "Minor", event: "SK EVENING", status: "P", reason: "" },
                     { name: "Imoria, Sheena Mae Joy", date: "2026-02-21", category: "Major", event: "PM", status: "PNF", reason: "masama pakiramdam" },
-                    { name: "Mallari, Jennifer Victoria", date: "2026-02-21", category: "Major", event: "PM", status: "A", reason: "may work" },
-                    { name: "Agarin, Christine", date: "2026-03-01", category: "Minor", event: "24/7", status: "P", reason: "" },
-                    { name: "Agarin, Christine", date: "2026-03-01", category: "Minor", event: "SK EVENING", status: "P", reason: "" }
+                    { name: "Imoria, Sheena Mae Joy", date: "2026-02-23", category: "Major", event: "PM", status: "P", reason: "via FB Live" },
+                    { name: "Mallari, Jennifer Victoria", date: "2026-02-21", category: "Major", event: "PM", status: "A", reason: "may work" }
                 ];
                 saveData();
             }
@@ -581,62 +584,74 @@
             loadRecords();
         });
 
-        // Render Summary
+        // RENDER SUMMARY - COUNT ONLY "P" STATUS
         function renderSummary() {
-            // Major Functions
             renderCategorySummary('Major', majorEvents, 'majorHeader', 'majorBody');
-            // Minor Functions
             renderCategorySummary('Minor', minorEvents, 'minorHeader', 'minorBody');
         }
 
         function renderCategorySummary(category, events, headerId, bodyId) {
-            // Count per member
-            let counts = {};
-            members.forEach(m => { counts[m.name] = { P: 0, PNF: 0, A: 0, NR: 0 }; });
+            // Count P (Present) per member per event
+            let pCounts = {};
+            members.forEach(m => { 
+                pCounts[m.name] = {};
+                events.forEach(ev => { pCounts[m.name][ev] = 0; });
+            });
+            
+            // Also count total P, PNF, A, NR for totals
+            let totals = {};
+            members.forEach(m => { totals[m.name] = { P: 0, PNF: 0, A: 0, NR: 0 }; });
             
             attendanceData.forEach(r => {
-                if (r.category === category && counts[r.name]) {
-                    if (r.status === 'P') counts[r.name].P++;
-                    else if (r.status === 'PNF') counts[r.name].PNF++;
-                    else if (r.status === 'A') counts[r.name].A++;
-                    else if (r.status === 'NR') counts[r.name].NR++;
+                if (r.category === category) {
+                    // Count P per event
+                    if (r.status === 'P') {
+                        if (pCounts[r.name] && pCounts[r.name][r.event] !== undefined) {
+                            pCounts[r.name][r.event]++;
+                        }
+                    }
+                    // Count totals
+                    if (totals[r.name]) {
+                        if (r.status === 'P') totals[r.name].P++;
+                        else if (r.status === 'PNF') totals[r.name].PNF++;
+                        else if (r.status === 'A') totals[r.name].A++;
+                        else if (r.status === 'NR') totals[r.name].NR++;
+                    }
                 }
             });
             
-            // Latest status per event
-            let latest = {};
-            members.forEach(m => { latest[m.name] = {}; });
-            events.forEach(ev => {
-                members.forEach(m => {
-                    let records = attendanceData.filter(r => r.name === m.name && r.event === ev && r.category === category);
-                    latest[m.name][ev] = records.length > 0 ? records[records.length - 1].status : 'NR';
-                });
-            });
-            
-            // Header
+            // Build Header
             let headerHtml = '<tr><th>NAME / VOICE</th>';
             events.forEach(ev => { headerHtml += `<th>${ev}</th>`; });
             headerHtml += '<th>TOTAL P</th><th>TOTAL PNF</th><th>TOTAL A</th><th>TOTAL NR</th><th>RATE</th><th>REMARKS</th></tr>';
             document.getElementById(headerId).innerHTML = headerHtml;
             
-            // Body
+            // Build Body - Show COUNT of P per event
             let bodyHtml = '';
             members.forEach(m => {
-                let totalP = counts[m.name].P;
-                let totalPNF = counts[m.name].PNF;
-                let totalA = counts[m.name].A;
-                let totalNR = counts[m.name].NR;
-                let total = totalP + totalPNF + totalA + totalNR;
-                let rate = total > 0 ? ((totalP + totalPNF * 0.5) / total * 100).toFixed(1) : 0;
+                let totalP = totals[m.name].P;
+                let totalPNF = totals[m.name].PNF;
+                let totalA = totals[m.name].A;
+                let totalNR = totals[m.name].NR;
+                let totalEvents = totalP + totalPNF + totalA + totalNR;
+                let rate = totalEvents > 0 ? ((totalP + totalPNF * 0.5) / totalEvents * 100).toFixed(1) : 0;
                 let remarks = rate >= 80 ? 'COMPLETE' : 'INCOMPLETE';
                 
                 bodyHtml += `<tr><td><strong>${m.name}</strong><br><small>${m.voice}</small></td>`;
+                
+                // Show count of P for each event
                 events.forEach(ev => {
-                    let status = latest[m.name][ev];
-                    bodyHtml += `<td>${status}</td>`;
+                    let count = pCounts[m.name][ev];
+                    bodyHtml += `<td><strong>${count}</strong></td>`;
                 });
-                bodyHtml += `<td><strong>${totalP}</strong></td><td><strong>${totalPNF}</strong></td><td><strong>${totalA}</strong></td><td><strong>${totalNR}</strong></td>`;
-                bodyHtml += `<td><strong>${rate}%</strong></td><td class="${remarks === 'COMPLETE' ? 'complete' : 'incomplete'}">${remarks}</td></tr>`;
+                
+                bodyHtml += `<td><strong>${totalP}</strong></td>`;
+                bodyHtml += `<td><strong>${totalPNF}</strong></td>`;
+                bodyHtml += `<td><strong>${totalA}</strong></td>`;
+                bodyHtml += `<td><strong>${totalNR}</strong></td>`;
+                bodyHtml += `<td><strong>${rate}%</strong></td>`;
+                bodyHtml += `<td class="${remarks === 'COMPLETE' ? 'complete' : 'incomplete'}">${remarks}</td>`;
+                bodyHtml += `</tr>`;
             });
             document.getElementById(bodyId).innerHTML = bodyHtml;
         }
@@ -670,12 +685,13 @@
             
             filtered.forEach((r, idx) => {
                 let originalIdx = attendanceData.findIndex((x,i) => x.name === r.name && x.date === r.date && x.event === r.event);
+                let statusClass = `status-${r.status.toLowerCase()}`;
                 html += `<tr>
                     <td>${formatDate(r.date)}<br><span style="font-size:10px;">${getDayName(r.date)}</span></td>
                     <td>${r.name}</td>
                     <td>${r.category === 'Major' ? '🎯 Major' : '📋 Minor'}</td>
                     <td>${r.event}</td>
-                    <td><span class="status-${r.status.toLowerCase()}">${r.status}</span></td>
+                    <td><span class="${statusClass}">${r.status}</span></td>
                     <td>${r.reason || '-'}</td>
                     <td><button onclick="deleteRecord(${originalIdx})" style="background:#8B4513; padding:5px 12px;">Delete</button></td>
                 </tr>`;
