@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagsulong Batch 13 - Attendance System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            background: #fef7e8;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            color: #b45309;
+            border-bottom: 3px solid #f59e0b;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        /* Member Cards - Warm Colors */
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .member-card {
+            background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-left: 5px solid #f59e0b;
+        }
+
+        .member-card h3 {
+            color: #92400e;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .member-card p {
+            color: #b45309;
+            font-size: 13px;
+        }
+
+        .voice {
+            display: inline-block;
+            background: #fed7aa;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            margin-top: 5px;
+            color: #92400e;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 10px 28px;
+            background: #fff7ed;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            color: #92400e;
+        }
+
+        .tab-btn.active {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .tab-btn:hover:not(.active) {
+            background: #fed7aa;
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            background: white;
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Form */
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            font-size: 13px;
+            color: #b45309;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #fed7aa;
+            border-radius: 12px;
+            font-size: 14px;
+            background: #fffaf5;
+            transition: all 0.3s;
+        }
+
+        select:focus, input:focus {
+            outline: none;
+            border-color: #f59e0b;
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+        }
+
+        .reason-field {
+            display: none;
+        }
+
+        .reason-field.show {
+            display: block;
+        }
+
+        button {
+            background: #f59e0b;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background: #d97706;
+            transform: translateY(-1px);
+        }
+
+        .btn-success {
+            background: #10b981;
+        }
+
+        .btn-success:hover {
+            background: #059669;
+        }
+
+        .btn-danger {
+            background: #ef4444;
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+
+        .btn-warning {
+            background: #f97316;
+        }
+
+        .success-msg {
+            background: #d1fae5;
+            color: #065f46;
+            padding: 12px;
+            border-radius: 12px;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .error-msg {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 12px;
+            border-radius: 12px;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        /* RECORDS TABLE - Like your image */
+        .records-container {
+            overflow-x: auto;
+            border-radius: 16px;
+            background: #fffaf5;
+        }
+
+        .records-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            min-width: 800px;
+        }
+
+        .records-table th {
+            background: #fef3c7;
+            color: #92400e;
+            padding: 14px 10px;
+            text-align: center;
+            font-weight: 700;
+            border: 1px solid #fed7aa;
+            font-size: 13px;
+        }
+
+        .records-table td {
+            border: 1px solid #fed7aa;
+            padding: 12px 8px;
+            vertical-align: top;
+            background: white;
+        }
+
+        .records-table tr:hover td {
+            background: #fffbeb;
+        }
+
+        /* Date Header Styling */
+        .date-header {
+            background: #fef3c7;
+            font-weight: bold;
+        }
+
+        .day-header {
+            background: #ffedd5;
+            font-size: 11px;
+            color: #b45309;
+        }
+
+        /* Status Colors - Warm Palette */
+        .status-p {
+            background: #d1fae5;
+            color: #065f46;
+            font-weight: bold;
+            padding: 4px 8px;
+            border-radius: 20px;
+            display: inline-block;
+            font-size: 11px;
+        }
+
+        .status-pnf {
+            background: #fed7aa;
+            color: #9c4221;
+            font-weight: bold;
+            padding: 4px 8px;
+            border-radius: 20px;
+            display: inline-block;
+            font-size: 11px;
+        }
+
+        .status-a {
+            background: #fee2e2;
+            color: #991b1b;
+            font-weight: bold;
+            padding: 4px 8px;
+            border-radius: 20px;
+            display: inline-block;
+            font-size: 11px;
+        }
+
+        .status-nr {
+            background: #f3f4f6;
+            color: #6b7280;
+            font-weight: bold;
+            padding: 4px 8px;
+            border-radius: 20px;
+            display: inline-block;
+            font-size: 11px;
+        }
+
+        .reason-text {
+            font-size: 10px;
+            color: #92400e;
+            margin-top: 4px;
+            display: block;
+            font-style: italic;
+        }
+
+        /* Summary Table */
+        .summary-container {
+            overflow-x: auto;
+        }
+
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+
+        .summary-table th {
+            background: #fef3c7;
+            color: #92400e;
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #fed7aa;
+            font-weight: 700;
+        }
+
+        .summary-table td {
+            border: 1px solid #fed7aa;
+            padding: 10px;
+            text-align: center;
+            background: white;
+        }
+
+        .summary-table td:first-child {
+            background: #fffbeb;
+            font-weight: 600;
+            text-align: left;
+        }
+
+        .complete {
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        .incomplete {
+            color: #f97316;
+            font-weight: bold;
+        }
+
+        /* Stats Cards - Warm */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #fef3c7 0%, #fed7aa 100%);
+            color: #92400e;
+            padding: 15px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .stat-card h4 {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-bottom: 8px;
+        }
+
+        .stat-card .value {
+            font-size: 28px;
+            font-weight: bold;
+            color: #b45309;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #b45309;
+        }
+
+        .filter-bar {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-bar select {
+            width: auto;
+            min-width: 160px;
+            background: #fffaf5;
+        }
+
+        .event-group {
+            background: #fffaf5;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 16px;
+        }
+
+        .event-group h4 {
+            color: #b45309;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #fed7aa;
+            font-size: 18px;
+        }
+
+        @media (max-width: 768px) {
+            .summary-table {
+                font-size: 10px;
+            }
+            .filter-bar select {
+                width: 100%;
+            }
+            .records-table {
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📋 PAGSULONG BATCH 13</h1>
+        </div>
+
+        <!-- Member Cards -->
+        <div class="members-grid" id="membersGrid"></div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('form')">➕ Add Attendance</button>
+            <button class="tab-btn" onclick="switchTab('summary')">📊 Summary Report</button>
+            <button class="tab-btn" onclick="switchTab('records')">📝 View Records</button>
+        </div>
+
+        <!-- Tab 1: Add Attendance Form -->
+        <div id="formTab" class="tab-content active">
+            <h3 style="color:#b45309; margin-bottom:20px;">📝 Record Attendance</h3>
+            <form id="attendanceForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>👤 Select Member *</label>
+                        <select id="name" required>
+                            <option value="">-- Select Member --</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>📅 Date *</label>
+                        <input type="date" id="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label>📂 Event Category *</label>
+                        <select id="eventCategory" required onchange="updateEventDropdown()">
+                            <option value="">-- Select Category --</option>
+                            <option value="Major">🎯 MAJOR FUNCTIONS</option>
+                            <option value="Minor">📋 MINOR FUNCTIONS</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>📌 Event *</label>
+                        <select id="event" required>
+                            <option value="">-- Select Event --</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>✅ Status *</label>
+                        <select id="status" required>
+                            <option value="">-- Select Status --</option>
+                            <option value="P">P - Present</option>
+                            <option value="PNF">PNF - Present No Function</option>
+                            <option value="A">A - Absent</option>
+                            <option value="NR">NR - No Report</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group reason-field" id="reasonGroup">
+                    <label>📝 Reason (required for PNF or Absent)</label>
+                    <input type="text" id="reason" placeholder="e.g., Late arrival, Medical, Family emergency, May work">
+                </div>
+
+                <button type="submit" class="btn-success">✅ Submit Attendance</button>
+            </form>
+            <div id="formMessage"></div>
+        </div>
+
+        <!-- Tab 2: Summary Report -->
+        <div id="summaryTab" class="tab-content">
+            <h3 style="color:#b45309; margin-bottom:20px;">📊 Attendance Summary</h3>
+            <div class="stats-grid" id="statsGrid">
+                <div class="loading">Loading statistics...</div>
+            </div>
+            
+            <div class="event-group">
+                <h4>🎯 MAJOR FUNCTIONS</h4>
+                <div class="summary-container">
+                    <table class="summary-table" id="majorSummaryTable">
+                        <thead id="majorSummaryHeader"></thead>
+                        <tbody id="majorSummaryBody">
+                            <tr><td colspan="10" class="loading">Loading data...</td</tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="event-group">
+                <h4>📋 MINOR FUNCTIONS</h4>
+                <div class="summary-container">
+                    <table class="summary-table" id="minorSummaryTable">
+                        <thead id="minorSummaryHeader"></thead>
+                        <tbody id="minorSummaryBody">
+                            <tr><td colspan="10" class="loading">Loading data...</td</tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 3: View Records - Like your image -->
+        <div id="recordsTab" class="tab-content">
+            <h3 style="color:#b45309; margin-bottom:20px;">📋 Attendance Records</h3>
+            <div class="filter-bar">
+                <select id="filterName" onchange="loadRecords()">
+                    <option value="">All Members</option>
+                </select>
+                <select id="filterCategory" onchange="loadRecords()">
+                    <option value="">All Categories</option>
+                    <option value="Major">Major Functions</option>
+                    <option value="Minor">Minor Functions</option>
+                </select>
+                <select id="filterEvent" onchange="loadRecords()">
+                    <option value="">All Events</option>
+                </select>
+                <button onclick="loadRecords()" style="background:#f59e0b;">🔄 Refresh</button>
+                <button onclick="exportToCSV()" style="background:#10b981;">📥 Export CSV</button>
+                <button onclick="deleteAllRecords()" class="btn-danger">🗑️ Delete All</button>
+            </div>
+            <div id="recordsTable"></div>
+        </div>
+    </div>
+
+    <script>
+        // MEMBERS DATA
+        const members = [
+            { name: "Agarin, Christine", locale: "Bulihan", voice: "Soprano 2" },
+            { name: "Imoria, Sheena Mae Joy", locale: "Tartaria", voice: "Soprano 2" },
+            { name: "Mallari, Jennifer Victoria", locale: "Biga", voice: "Alto 1" },
+            { name: "Agarin, Dione", locale: "Bulihan", voice: "Bass 1" }
+        ];
+
+        // MAJOR FUNCTIONS
+        const majorEvents = [
+            "PM", "WS", "TG", "HARANA", "COMBINED PM/WS", 
+            "LORD SUPPER", "CNY", "SPBB DAY 1", "SPBB DAY 2", "SPBB DAY 3"
+        ];
+
+        // MINOR FUNCTIONS
+        const minorEvents = [
+            "24/7", "LMI", "MCGI CARES", "SK EVENING", "SK AFTERNOON"
+        ];
+
+        let attendanceData = [];
+
+        // Load data from localStorage
+        function loadData() {
+            const stored = localStorage.getItem('pagsulongAttendance');
+            if (stored) {
+                attendanceData = JSON.parse(stored);
+            } else {
+                // Sample data
+                attendanceData = [
+                    { name: "Agarin, Christine", date: "2026-02-21", category: "Major", event: "PM", status: "PNF", reason: "masama po pakiramdam" },
+                    { name: "Agarin, Christine", date: "2026-02-21", category: "Major", event: "WS", status: "P", reason: "" },
+                    { name: "Agarin, Christine", date: "2026-02-23", category: "Major", event: "PM", status: "P", reason: "via FB Live" },
+                    { name: "Imoria, Sheena Mae Joy", date: "2026-02-21", category: "Major", event: "PM", status: "PNF", reason: "masama pakiramdam" },
+                    { name: "Imoria, Sheena Mae Joy", date: "2026-02-23", category: "Major", event: "PM", status: "P", reason: "via FB Live" },
+                    { name: "Mallari, Jennifer Victoria", date: "2026-02-21", category: "Major", event: "PM", status: "A", reason: "may work" },
+                    { name: "Agarin, Dione", date: "2026-02-21", category: "Major", event: "PM", status: "PNF", reason: "masama po pakiramdam" }
+                ];
+                saveData();
+            }
+            renderMembersGrid();
+            populateDropdowns();
+        }
+
+        // Save data
+        function saveData() {
+            localStorage.setItem('pagsulongAttendance', JSON.stringify(attendanceData));
+            console.log('Data saved:', attendanceData.length, 'records');
+        }
+
+        // Render member cards
+        function renderMembersGrid() {
+            let html = '';
+            members.forEach(member => {
+                html += `
+                    <div class="member-card">
+                        <h3>${member.name}</h3>
+                        <p>${member.locale}</p>
+                        <span class="voice">${member.voice}</span>
+                    </div>
+                `;
+            });
+            document.getElementById('membersGrid').innerHTML = html;
+        }
+
+        // Populate dropdowns
+        function populateDropdowns() {
+            const nameSelect = document.getElementById('name');
+            const filterName = document.getElementById('filterName');
+            
+            nameSelect.innerHTML = '<option value="">-- Select Member --</option>';
+            filterName.innerHTML = '<option value="">All Members</option>';
+            
+            members.forEach(member => {
+                nameSelect.innerHTML += `<option value="${member.name}">${member.name} (${member.voice})</option>`;
+                filterName.innerHTML += `<option value="${member.name}">${member.name}</option>`;
+            });
+        }
+
+        // Update event dropdown based on category
+        function updateEventDropdown() {
+            const category = document.getElementById('eventCategory').value;
+            const eventSelect = document.getElementById('event');
+            
+            if (!category) {
+                eventSelect.innerHTML = '<option value="">-- Select Event --</option>';
+                return;
+            }
+            
+            let events = [];
+            if (category === 'Major') {
+                events = majorEvents;
+            } else if (category === 'Minor') {
+                events = minorEvents;
+            }
+            
+            eventSelect.innerHTML = '<option value="">-- Select Event --</option>';
+            events.forEach(event => {
+                eventSelect.innerHTML += `<option value="${event}">${event}</option>`;
+            });
+        }
+
+        // Update filter event dropdown
+        function updateFilterEventDropdown() {
+            const filterEvent = document.getElementById('filterEvent');
+            filterEvent.innerHTML = '<option value="">All Events</option>';
+            
+            [...majorEvents, ...minorEvents].forEach(event => {
+                filterEvent.innerHTML += `<option value="${event}">${event}</option>`;
+            });
+        }
+
+        // Get status badge HTML
+        function getStatusBadge(status, reason) {
+            let badgeClass = '';
+            let statusText = '';
+            
+            if (status === 'P') {
+                badgeClass = 'status-p';
+                statusText = 'P';
+            } else if (status === 'PNF') {
+                badgeClass = 'status-pnf';
+                statusText = 'PNF';
+            } else if (status === 'A') {
+                badgeClass = 'status-a';
+                statusText = 'A';
+            } else if (status === 'NR') {
+                badgeClass = 'status-nr';
+                statusText = 'NR';
+            }
+            
+            let html = `<span class="${badgeClass}">${statusText}</span>`;
+            if (reason && (status === 'PNF' || status === 'A')) {
+                html += `<span class="reason-text">${reason}</span>`;
+            }
+            return html;
+        }
+
+        // LOAD RECORDS - Like your image format
+        function loadRecords() {
+            const filterName = document.getElementById('filterName')?.value || '';
+            const filterCategory = document.getElementById('filterCategory')?.value || '';
+            const filterEvent = document.getElementById('filterEvent')?.value || '';
+            
+            let filtered = [...attendanceData];
+            
+            if (filterName) {
+                filtered = filtered.filter(r => r.name === filterName);
+            }
+            if (filterCategory) {
+                filtered = filtered.filter(r => r.category === filterCategory);
+            }
+            if (filterEvent) {
+                filtered = filtered.filter(r => r.event === filterEvent);
+            }
+            
+            if (filtered.length === 0) {
+                document.getElementById('recordsTable').innerHTML = '<p style="text-align:center; padding:40px; color:#b45309;">📭 No records found</p>';
+                return;
+            }
+            
+            // Group by date and event
+            const grouped = {};
+            filtered.forEach(record => {
+                const key = `${record.date}|${record.event}`;
+                if (!grouped[key]) {
+                    grouped[key] = {
+                        date: record.date,
+                        event: record.event,
+                        category: record.category,
+                        records: []
+                    };
+                }
+                grouped[key].records.push(record);
+            });
+            
+            // Sort dates
+            const sortedKeys = Object.keys(grouped).sort();
+            
+            let html = `
+                <div class="records-container">
+                    <table class="records-table">
+                        <thead>
+                            <tr>
+                                <th style="background:#fef3c7;">DATE</th>
+                                <th style="background:#fef3c7;">EVENT</th>
+                                <th style="background:#fef3c7;">AGARIN, CHRISTINE<br><span style="font-size:10px;">Bulihan | Soprano 2</span></th>
+                                <th style="background:#fef3c7;">IMORIA, SHEENA MAE JOY<br><span style="font-size:10px;">Tartaria | Soprano 2</span></th>
+                                <th style="background:#fef3c7;">MALLARI, JENNIFER VICTORIA<br><span style="font-size:10px;">Biga | Alto 1</span></th>
+                                <th style="background:#fef3c7;">AGARIN, DIONE<br><span style="font-size:10px;">Bulihan | Bass 1</span></th>
+                                <th style="background:#fef3c7;">ACTION</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+            
+            sortedKeys.forEach(key => {
+                const group = grouped[key];
+                const dateObj = new Date(group.date);
+                const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+                const dayName = dayNames[dateObj.getDay()];
+                
+                // Get status for each member
+                const memberStatus = {};
+                members.forEach(member => {
+                    const record = group.records.find(r => r.name === member.name);
+                    if (record) {
+                        memberStatus[member.name] = { status: record.status, reason: record.reason };
+                    } else {
+                        memberStatus[member.name] = { status: 'NR', reason: '' };
+                    }
+                });
+                
+                html += `
+                    <tr>
+                        <td style="background:#fffbeb; font-weight:bold;">
+                            ${group.date}<br>
+                            <span style="font-size:10px; color:#b45309;">${dayName}</span>
+                        </td>
+                        <td style="background:#fffbeb; font-weight:bold;">${group.event}</td>
+                `;
+                
+                members.forEach(member => {
+                    const status = memberStatus[member.name];
+                    html += `<td style="text-align:center;">${getStatusBadge(status.status, status.reason)}</td>`;
+                });
+                
+                // Find original index for delete
+                const firstRecord = group.records[0];
+                const originalIndex = attendanceData.findIndex((r, i) => 
+                    r.date === firstRecord.date && r.event === firstRecord.event
+                );
+                
+                html += `
+                        <td style="text-align:center;">
+                            <button onclick="deleteRecordByDateEvent('${group.date}', '${group.event}')" 
+                                    style="background:#ef4444; padding:6px 12px; font-size:11px;">Delete</button>
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            html += `
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            
+            document.getElementById('recordsTable').innerHTML = html;
+        }
+
+        // Delete records by date and event
+        function deleteRecordByDateEvent(date, event) {
+            if (confirm(`Delete all records for ${date} - ${event}?`)) {
+                attendanceData = attendanceData.filter(r => !(r.date === date && r.event === event));
+                saveData();
+                loadRecords();
+                renderSummary();
+                showMessage('formMessage', 'Record deleted successfully!', 'success');
+            }
+        }
+
+        // Delete single record (legacy)
+        function deleteRecord(index) {
+            if (confirm('Delete this record?')) {
+                attendanceData.splice(index, 1);
+                saveData();
+                loadRecords();
+                renderSummary();
+            }
+        }
+
+        // Delete all records
+        function deleteAllRecords() {
+            if (confirm('⚠️ Delete ALL records? This cannot be undone!')) {
+                attendanceData = [];
+                saveData();
+                loadRecords();
+                renderSummary();
+                showMessage('formMessage', 'All records deleted successfully!', 'success');
+            }
+        }
+
+        // Render Summary Tables
+        function renderSummary() {
+            renderCategorySummary('Major', majorEvents, 'majorSummaryHeader', 'majorSummaryBody');
+            renderCategorySummary('Minor', minorEvents, 'minorSummaryHeader', 'minorSummaryBody');
+            
+            const totalRecords = attendanceData.length;
+            const pCount = attendanceData.filter(r => r.status === 'P').length;
+            const pnfCount = attendanceData.filter(r => r.status === 'PNF').length;
+            const aCount = attendanceData.filter(r => r.status === 'A').length;
+            const nrCount = attendanceData.filter(r => r.status === 'NR').length;
+            const attendanceRate = totalRecords > 0 ? ((pCount + (pnfCount * 0.5)) / totalRecords * 100).toFixed(1) : 0;
+            
+            const majorCount = attendanceData.filter(r => r.category === 'Major').length;
+            const minorCount = attendanceData.filter(r => r.category === 'Minor').length;
+            
+            document.getElementById('statsGrid').innerHTML = `
+                <div class="stat-card"><h4>Total Records</h4><div class="value">${totalRecords}</div></div>
+                <div class="stat-card"><h4>✅ Present (P)</h4><div class="value">${pCount}</div></div>
+                <div class="stat-card"><h4>⚠️ PNF</h4><div class="value">${pnfCount}</div></div>
+                <div class="stat-card"><h4>❌ Absent (A)</h4><div class="value">${aCount}</div></div>
+                <div class="stat-card"><h4>📋 No Report</h4><div class="value">${nrCount}</div></div>
+                <div class="stat-card"><h4>🎯 Major</h4><div class="value">${majorCount}</div></div>
+                <div class="stat-card"><h4>📋 Minor</h4><div class="value">${minorCount}</div></div>
+                <div class="stat-card"><h4>📊 Rate</h4><div class="value">${attendanceRate}%</div></div>
+            `;
+        }
+
+        // Render summary for a category
+        function renderCategorySummary(category, events, headerId, bodyId) {
+            const summary = {};
+            
+            members.forEach(member => {
+                summary[member.name] = {};
+                events.forEach(event => {
+                    const records = attendanceData.filter(r => r.name === member.name && r.event === event && r.category === category);
+                    if (records.length > 0) {
+                        summary[member.name][event] = records[records.length - 1].status;
+                    } else {
+                        summary[member.name][event] = 'NR';
+                    }
+                });
+            });
+
+            let headerHtml = '<tr><th>NAME</th>';
+            events.forEach(event => {
+                headerHtml += `<th>${event}</th>`;
+            });
+            headerHtml += '<th>REMARKS</th></tr>';
+            document.getElementById(headerId).innerHTML = headerHtml;
+
+            let bodyHtml = '';
+            members.forEach(member => {
+                let pCount = 0, pnfCount = 0;
+                bodyHtml += '<tr>';
+                bodyHtml += `<td style="background:#fffbeb;"><strong>${member.name}</strong><br><small>${member.voice}</small></td>`;
+                
+                events.forEach(event => {
+                    const status = summary[member.name][event];
+                    let cellClass = '';
+                    if (status === 'P') { pCount++; cellClass = 'status-p'; }
+                    else if (status === 'PNF') { pnfCount++; cellClass = 'status-pnf'; }
+                    else if (status === 'A') { cellClass = 'status-a'; }
+                    else if (status === 'NR') { cellClass = 'status-nr'; }
+                    
+                    bodyHtml += `<td class="${cellClass}">${status}</td>`;
+                });
+                
+                const totalEvents = events.length;
+                const attendanceScore = (pCount + (pnfCount * 0.5)) / totalEvents;
+                const remarks = attendanceScore >= 0.8 ? 'COMPLETE' : 'INCOMPLETE';
+                const remarksClass = remarks === 'COMPLETE' ? 'complete' : 'incomplete';
+                bodyHtml += `<td><span class="${remarksClass}">${remarks}</span></td>`;
+                bodyHtml += '</tr>';
+            });
+
+            document.getElementById(bodyId).innerHTML = bodyHtml;
+        }
+
+        // Export to CSV
+        function exportToCSV() {
+            if (attendanceData.length === 0) {
+                alert('No data to export');
+                return;
+            }
+            
+            let csv = 'Name,Date,Category,Event,Status,Reason\n';
+            attendanceData.forEach(record => {
+                csv += `"${record.name}","${record.date}","${record.category}","${record.event}","${record.status}","${record.reason || ''}"\n`;
+            });
+            
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `attendance_${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Show message
+        function showMessage(elementId, message, type) {
+            const msgDiv = document.getElementById(elementId);
+            msgDiv.innerHTML = `<div class="${type === 'success' ? 'success-msg' : 'error-msg'}">${message}</div>`;
+            setTimeout(() => msgDiv.innerHTML = '', 3000);
+        }
+
+        // Show/hide reason field
+        function toggleReasonField() {
+            const status = document.getElementById('status').value;
+            const reasonGroup = document.getElementById('reasonGroup');
+            const reasonInput = document.getElementById('reason');
+            
+            if (status === 'PNF' || status === 'A') {
+                reasonGroup.classList.add('show');
+                reasonInput.required = true;
+            } else {
+                reasonGroup.classList.remove('show');
+                reasonInput.required = false;
+                reasonInput.value = '';
+            }
+        }
+
+        // Switch tabs
+        function switchTab(tab) {
+            document.getElementById('formTab').classList.remove('active');
+            document.getElementById('summaryTab').classList.remove('active');
+            document.getElementById('recordsTab').classList.remove('active');
+            
+            document.getElementById(`${tab}Tab`).classList.add('active');
+            
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            if (tab === 'summary') {
+                renderSummary();
+            } else if (tab === 'records') {
+                updateFilterEventDropdown();
+                loadRecords();
+            }
+        }
+
+        // Set today's date
+        function setDefaultDate() {
+            const today = new Date().toISOString().split('T')[0];
+            const dateInput = document.getElementById('date');
+            if (dateInput) dateInput.value = today;
+        }
+
+        // Form submission - FIXED SAVING ISSUE
+        document.getElementById('attendanceForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const date = document.getElementById('date').value;
+            const category = document.getElementById('eventCategory').value;
+            const event = document.getElementById('event').value;
+            const status = document.getElementById('status').value;
+            const reason = document.getElementById('reason').value;
+            
+            // Validation
+            if (!name || !date || !category || !event || !status) {
+                showMessage('formMessage', '❌ Please fill all required fields', 'error');
+                return;
+            }
+            
+            if ((status === 'PNF' || status === 'A') && !reason) {
+                showMessage('formMessage', '❌ Please provide a reason for PNF or Absent', 'error');
+                return;
+            }
+            
+            // Create new record
+            const newRecord = { 
+                name, 
+                date, 
+                category, 
+                event, 
+                status, 
+                reason: reason || '' 
+            };
+            
+            // Add to array
+            attendanceData.push(newRecord);
+            
+            // Save to localStorage
+            saveData();
+            
+            // Show success message
+            showMessage('formMessage', '✅ Attendance recorded successfully!', 'success');
+            
+            // Reset form but keep date
+            document.getElementById('name').value = '';
+            document.getElementById('eventCategory').value = '';
+            document.getElementById('event').innerHTML = '<option value="">-- Select Event --</option>';
+            document.getElementById('status').value = '';
+            document.getElementById('reason').value = '';
+            document.getElementById('reasonGroup').classList.remove('show');
+            
+            // Log for debugging
+            console.log('Record added:', newRecord);
+            console.log('Total records:', attendanceData.length);
+        });
+        
+        // Initialize
+        loadData();
+        setDefaultDate();
+        document.getElementById('status').addEventListener('change', toggleReasonField);
+        updateFilterEventDropdown();
+    </script>
+</body>
+</html>
