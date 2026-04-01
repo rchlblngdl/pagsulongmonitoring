@@ -22,7 +22,6 @@
             margin: 0 auto;
         }
 
-        /* Header */
         .header {
             text-align: center;
             margin-bottom: 25px;
@@ -36,7 +35,6 @@
             padding-bottom: 5px;
         }
 
-        /* Member Cards */
         .members-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -55,7 +53,6 @@
         .member-card h3 {
             color: #F5E6D3;
             font-size: 16px;
-            font-weight: 600;
         }
 
         .member-card p {
@@ -73,7 +70,6 @@
             color: #F5E6D3;
         }
 
-        /* Tabs */
         .tabs {
             display: flex;
             gap: 10px;
@@ -89,9 +85,8 @@
             cursor: pointer;
             font-size: 14px;
             font-weight: 600;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            transition: all 0.3s;
             color: #F5E6D3;
+            transition: all 0.3s;
         }
 
         .tab-btn.active {
@@ -103,20 +98,17 @@
             background: #255F38;
         }
 
-        /* Tab Content */
         .tab-content {
             display: none;
             background: #27391C;
             border-radius: 20px;
             padding: 24px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
 
         .tab-content.active {
             display: block;
         }
 
-        /* Form */
         .form-row {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -144,18 +136,6 @@
             font-size: 14px;
             background: #18230F;
             color: #F5E6D3;
-            transition: all 0.3s;
-        }
-
-        select option {
-            background: #18230F;
-            color: #F5E6D3;
-        }
-
-        select:focus, input:focus {
-            outline: none;
-            border-color: #F5E6D3;
-            box-shadow: 0 0 0 3px rgba(31, 125, 83, 0.3);
         }
 
         .reason-field {
@@ -175,28 +155,18 @@
             cursor: pointer;
             font-size: 14px;
             font-weight: 600;
-            transition: all 0.3s;
         }
 
         button:hover {
             background: #255F38;
-            transform: translateY(-1px);
         }
 
         .btn-success {
             background: #255F38;
         }
 
-        .btn-success:hover {
-            background: #1F7D53;
-        }
-
         .btn-danger {
             background: #8B4513;
-        }
-
-        .btn-danger:hover {
-            background: #A0522D;
         }
 
         .success-msg {
@@ -217,81 +187,60 @@
             text-align: center;
         }
 
-        /* RECORDS TABLE */
         .records-container {
             overflow-x: auto;
-            border-radius: 16px;
-            background: #18230F;
         }
 
         .records-table {
             width: 100%;
             border-collapse: collapse;
             font-size: 13px;
-            min-width: 900px;
         }
 
         .records-table th {
             background: #255F38;
             color: #F5E6D3;
-            padding: 14px 10px;
-            text-align: center;
-            font-weight: 700;
+            padding: 12px;
             border: 1px solid #1F7D53;
-            font-size: 13px;
         }
 
         .records-table td {
             border: 1px solid #1F7D53;
-            padding: 12px 8px;
-            vertical-align: top;
+            padding: 10px;
             background: #18230F;
             color: #C4E0C4;
         }
 
-        .records-table tr:hover td {
-            background: #27391C;
-        }
-
-        /* Status Colors */
         .status-p {
             background: #1F7D53;
             color: white;
-            font-weight: bold;
             padding: 4px 12px;
             border-radius: 20px;
             display: inline-block;
-            font-size: 12px;
         }
 
         .status-pnf {
             background: #F4A261;
             color: #2C2C2C;
-            font-weight: bold;
             padding: 4px 12px;
             border-radius: 20px;
             display: inline-block;
-            font-size: 12px;
         }
 
         .status-a {
             background: #E76F51;
             color: white;
-            font-weight: bold;
             padding: 4px 12px;
             border-radius: 20px;
             display: inline-block;
-            font-size: 12px;
         }
 
         .status-nr {
             background: #6C6C6C;
             color: white;
-            font-weight: bold;
             padding: 4px 12px;
             border-radius: 20px;
             display: inline-block;
-            font-size: 12px;
         }
 
         .reason-text {
@@ -299,58 +248,40 @@
             color: #C4E0C4;
             margin-top: 4px;
             display: block;
-            font-style: italic;
         }
 
-        /* Summary Table - Fixed Alignment */
         .summary-container {
             overflow-x: auto;
-            margin-bottom: 20px;
         }
 
         .summary-table {
             width: 100%;
             border-collapse: collapse;
             font-size: 12px;
-            min-width: 1200px;
+            min-width: 1000px;
         }
 
         .summary-table th {
             background: #255F38;
             color: #F5E6D3;
-            padding: 12px 8px;
-            text-align: center;
+            padding: 10px 6px;
             border: 1px solid #1F7D53;
-            font-weight: 700;
             font-size: 11px;
-            white-space: nowrap;
         }
 
         .summary-table td {
             border: 1px solid #1F7D53;
-            padding: 10px 6px;
+            padding: 8px 4px;
             text-align: center;
             background: #18230F;
             color: #C4E0C4;
-            font-size: 12px;
+            font-size: 11px;
         }
 
         .summary-table td:first-child {
             background: #27391C;
-            font-weight: 600;
             text-align: left;
             color: #F5E6D3;
-            white-space: nowrap;
-        }
-
-        .summary-table td:first-child small {
-            color: #C4E0C4;
-            font-size: 10px;
-            display: block;
-        }
-
-        .summary-table .status-cell {
-            font-weight: bold;
         }
 
         .complete {
@@ -363,13 +294,11 @@
             font-weight: bold;
         }
 
-        /* Filter Bar */
         .filter-bar {
             display: flex;
-            gap: 12px;
+            gap: 10px;
             margin-bottom: 20px;
             flex-wrap: wrap;
-            align-items: center;
             background: #27391C;
             padding: 15px;
             border-radius: 16px;
@@ -377,23 +306,13 @@
 
         .filter-bar select, .filter-bar input {
             width: auto;
-            min-width: 160px;
-            background: #18230F;
-            color: #F5E6D3;
-            border-color: #1F7D53;
+            min-width: 140px;
         }
 
         .date-range {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .date-range label {
-            font-size: 12px;
-            margin-bottom: 0;
-            color: #C4E0C4;
         }
 
         .event-group {
@@ -409,30 +328,14 @@
             margin-bottom: 15px;
             padding-bottom: 8px;
             border-bottom: 2px solid #1F7D53;
-            font-size: 18px;
-        }
-
-        .clear-filter {
-            background: #6C6C6C;
-        }
-
-        .clear-filter:hover {
-            background: #8B8B8B;
         }
 
         @media (max-width: 768px) {
-            .summary-table {
-                font-size: 10px;
-                min-width: 1000px;
-            }
             .filter-bar select, .filter-bar input {
                 width: 100%;
             }
             .date-range {
                 width: 100%;
-            }
-            .date-range input {
-                flex: 1;
             }
         }
     </style>
@@ -443,17 +346,15 @@
             <h1>📋 PAGSULONG BATCH 13</h1>
         </div>
 
-        <!-- Member Cards -->
         <div class="members-grid" id="membersGrid"></div>
 
-        <!-- Tabs -->
         <div class="tabs">
-            <button class="tab-btn active" onclick="switchTab('form')">➕ Add Attendance</button>
-            <button class="tab-btn" onclick="switchTab('summary')">📊 Summary Report</button>
-            <button class="tab-btn" onclick="switchTab('records')">📝 View Records</button>
+            <button class="tab-btn active" data-tab="form">➕ Add Attendance</button>
+            <button class="tab-btn" data-tab="summary">📊 Summary Report</button>
+            <button class="tab-btn" data-tab="records">📝 View Records</button>
         </div>
 
-        <!-- Tab 1: Add Attendance Form -->
+        <!-- FORM TAB -->
         <div id="formTab" class="tab-content active">
             <h3 style="color:#F5E6D3; margin-bottom:20px;">📝 Record Attendance</h3>
             <form id="attendanceForm">
@@ -469,8 +370,8 @@
                         <input type="date" id="date" required>
                     </div>
                     <div class="form-group">
-                        <label>📂 Event Category *</label>
-                        <select id="eventCategory" required onchange="updateEventDropdown()">
+                        <label>📂 Category *</label>
+                        <select id="eventCategory" required>
                             <option value="">-- Select Category --</option>
                             <option value="Major">🎯 MAJOR FUNCTIONS</option>
                             <option value="Minor">📋 MINOR FUNCTIONS</option>
@@ -496,7 +397,7 @@
 
                 <div class="form-group reason-field" id="reasonGroup">
                     <label>📝 Reason (required for PNF or Absent)</label>
-                    <input type="text" id="reason" placeholder="e.g., Late arrival, Medical, Family emergency, May work">
+                    <input type="text" id="reason" placeholder="e.g., Late arrival, Medical, May work">
                 </div>
 
                 <button type="submit" class="btn-success">✅ Submit Attendance</button>
@@ -504,69 +405,57 @@
             <div id="formMessage"></div>
         </div>
 
-        <!-- Tab 2: Summary Report - Fixed Alignment -->
+        <!-- SUMMARY TAB -->
         <div id="summaryTab" class="tab-content">
             <div class="event-group">
                 <h4>🎯 MAJOR FUNCTIONS</h4>
                 <div class="summary-container">
-                    <table class="summary-table" id="majorSummaryTable">
-                        <thead id="majorSummaryHeader"></thead>
-                        <tbody id="majorSummaryBody">
-                            <tr><td colspan="20" class="loading">Loading data...</td></tr>
-                        </tbody>
+                    <table class="summary-table" id="majorTable">
+                        <thead id="majorHeader"></thead>
+                        <tbody id="majorBody"></tbody>
                     </table>
                 </div>
             </div>
-
             <div class="event-group">
                 <h4>📋 MINOR FUNCTIONS</h4>
                 <div class="summary-container">
-                    <table class="summary-table" id="minorSummaryTable">
-                        <thead id="minorSummaryHeader"></thead>
-                        <tbody id="minorSummaryBody">
-                            <tr><td colspan="20" class="loading">Loading data...</td></tr>
-                        </tbody>
+                    <table class="summary-table" id="minorTable">
+                        <thead id="minorHeader"></thead>
+                        <tbody id="minorBody"></tbody>
                     </table>
                 </div>
             </div>
         </div>
 
-        <!-- Tab 3: View Records -->
+        <!-- RECORDS TAB -->
         <div id="recordsTab" class="tab-content">
             <h3 style="color:#F5E6D3; margin-bottom:20px;">📋 Attendance Records</h3>
-            
             <div class="filter-bar">
-                <select id="filterName" onchange="loadRecords()">
+                <select id="filterName">
                     <option value="">All Members</option>
                 </select>
-                <select id="filterCategory" onchange="loadRecords()">
+                <select id="filterCategory">
                     <option value="">All Categories</option>
                     <option value="Major">Major Functions</option>
                     <option value="Minor">Minor Functions</option>
                 </select>
-                <select id="filterEvent" onchange="loadRecords()">
+                <select id="filterEvent">
                     <option value="">All Events</option>
                 </select>
-                
                 <div class="date-range">
-                    <label>📅 From:</label>
-                    <input type="date" id="dateFrom" onchange="loadRecords()">
-                    <label>To:</label>
-                    <input type="date" id="dateTo" onchange="loadRecords()">
-                    <button onclick="clearDateRange()" class="clear-filter">Clear Dates</button>
+                    <input type="date" id="dateFrom" placeholder="From">
+                    <input type="date" id="dateTo" placeholder="To">
                 </div>
-                
-                <button onclick="loadRecords()" style="background:#1F7D53;">🔄 Refresh</button>
-                <button onclick="exportToCSV()" style="background:#255F38;">📥 Export CSV</button>
-                <button onclick="deleteAllRecords()" class="btn-danger">🗑️ Delete All</button>
+                <button id="refreshRecords">🔄 Refresh</button>
+                <button id="exportCSV" style="background:#255F38;">📥 Export CSV</button>
+                <button id="deleteAll" class="btn-danger">🗑️ Delete All</button>
             </div>
-            
             <div id="recordsTable"></div>
         </div>
     </div>
 
     <script>
-        // MEMBERS DATA
+        // DATA
         const members = [
             { name: "Agarin, Christine", locale: "Bulihan", voice: "Soprano 2" },
             { name: "Imoria, Sheena Mae Joy", locale: "Tartaria", voice: "Soprano 2" },
@@ -574,52 +463,40 @@
             { name: "Agarin, Dione", locale: "Bulihan", voice: "Bass 1" }
         ];
 
-        // MAJOR FUNCTIONS
-        const majorEvents = [
-            "PM", "WS", "TG", "HARANA", "COMBINED PM/WS", 
-            "LORD SUPPER", "CNY", "SPBB DAY 1", "SPBB DAY 2", "SPBB DAY 3"
-        ];
-
-        // MINOR FUNCTIONS
-        const minorEvents = [
-            "24/7", "LMI", "MCGI CARES", "SK EVENING", "SK AFTERNOON"
-        ];
+        const majorEvents = ["PM", "WS", "TG", "HARANA", "COMBINED PM/WS", "LORD SUPPER", "CNY", "SPBB DAY 1", "SPBB DAY 2", "SPBB DAY 3"];
+        const minorEvents = ["24/7", "LMI", "MCGI CARES", "SK EVENING", "SK AFTERNOON"];
 
         let attendanceData = [];
 
-        // Format date
-        function formatDate(dateString) {
-            const date = new Date(dateString);
-            const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-            return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+        // Helper Functions
+        function formatDate(dateStr) {
+            let d = new Date(dateStr);
+            let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            return `${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
         }
 
-        function getDayName(dateString) {
-            const date = new Date(dateString);
-            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-            return days[date.getDay()];
+        function getDayName(dateStr) {
+            let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            return days[new Date(dateStr).getDay()];
         }
 
-        // Load data
+        // Load/Save
         function loadData() {
-            const stored = localStorage.getItem('pagsulongAttendance');
+            let stored = localStorage.getItem('pagsulongAttendance');
             if (stored) {
                 attendanceData = JSON.parse(stored);
             } else {
                 attendanceData = [
                     { name: "Agarin, Christine", date: "2026-02-21", category: "Major", event: "PM", status: "PNF", reason: "masama po pakiramdam" },
                     { name: "Agarin, Christine", date: "2026-02-21", category: "Major", event: "WS", status: "P", reason: "" },
-                    { name: "Agarin, Christine", date: "2026-02-23", category: "Major", event: "PM", status: "P", reason: "via FB Live" },
                     { name: "Imoria, Sheena Mae Joy", date: "2026-02-21", category: "Major", event: "PM", status: "PNF", reason: "masama pakiramdam" },
-                    { name: "Imoria, Sheena Mae Joy", date: "2026-02-23", category: "Major", event: "PM", status: "P", reason: "via FB Live" },
                     { name: "Mallari, Jennifer Victoria", date: "2026-02-21", category: "Major", event: "PM", status: "A", reason: "may work" },
-                    { name: "Agarin, Dione", date: "2026-02-21", category: "Major", event: "PM", status: "PNF", reason: "masama po pakiramdam" },
-                    { name: "Agarin, Christine", date: "2026-03-01", category: "Minor", event: "SK EVENING", status: "P", reason: "" },
-                    { name: "Agarin, Christine", date: "2026-03-01", category: "Minor", event: "24/7", status: "P", reason: "" }
+                    { name: "Agarin, Christine", date: "2026-03-01", category: "Minor", event: "24/7", status: "P", reason: "" },
+                    { name: "Agarin, Christine", date: "2026-03-01", category: "Minor", event: "SK EVENING", status: "P", reason: "" }
                 ];
                 saveData();
             }
-            renderMembersGrid();
+            renderMembers();
             populateDropdowns();
         }
 
@@ -627,83 +504,150 @@
             localStorage.setItem('pagsulongAttendance', JSON.stringify(attendanceData));
         }
 
-        function renderMembersGrid() {
+        function renderMembers() {
             let html = '';
-            members.forEach(member => {
-                html += `
-                    <div class="member-card">
-                        <h3>${member.name}</h3>
-                        <p>${member.locale}</p>
-                        <span class="voice">${member.voice}</span>
-                    </div>
-                `;
+            members.forEach(m => {
+                html += `<div class="member-card"><h3>${m.name}</h3><p>${m.locale}</p><span class="voice">${m.voice}</span></div>`;
             });
             document.getElementById('membersGrid').innerHTML = html;
         }
 
         function populateDropdowns() {
-            const nameSelect = document.getElementById('name');
-            const filterName = document.getElementById('filterName');
-            
+            let nameSelect = document.getElementById('name');
+            let filterName = document.getElementById('filterName');
             nameSelect.innerHTML = '<option value="">-- Select Member --</option>';
             filterName.innerHTML = '<option value="">All Members</option>';
-            
-            members.forEach(member => {
-                nameSelect.innerHTML += `<option value="${member.name}">${member.name} (${member.voice})</option>`;
-                filterName.innerHTML += `<option value="${member.name}">${member.name}</option>`;
+            members.forEach(m => {
+                nameSelect.innerHTML += `<option value="${m.name}">${m.name}</option>`;
+                filterName.innerHTML += `<option value="${m.name}">${m.name}</option>`;
             });
         }
 
-        function updateEventDropdown() {
-            const category = document.getElementById('eventCategory').value;
-            const eventSelect = document.getElementById('event');
+        // Event dropdown based on category
+        document.getElementById('eventCategory').addEventListener('change', function() {
+            let category = this.value;
+            let eventSelect = document.getElementById('event');
+            let events = category === 'Major' ? majorEvents : (category === 'Minor' ? minorEvents : []);
+            eventSelect.innerHTML = '<option value="">-- Select Event --</option>';
+            events.forEach(e => {
+                eventSelect.innerHTML += `<option value="${e}">${e}</option>`;
+            });
+        });
+
+        // Show/hide reason field
+        document.getElementById('status').addEventListener('change', function() {
+            let reasonGroup = document.getElementById('reasonGroup');
+            if (this.value === 'PNF' || this.value === 'A') {
+                reasonGroup.classList.add('show');
+            } else {
+                reasonGroup.classList.remove('show');
+            }
+        });
+
+        // Form Submit
+        document.getElementById('attendanceForm').addEventListener('submit', function(e) {
+            e.preventDefault();
             
-            if (!category) {
-                eventSelect.innerHTML = '<option value="">-- Select Event --</option>';
+            let name = document.getElementById('name').value;
+            let date = document.getElementById('date').value;
+            let category = document.getElementById('eventCategory').value;
+            let event = document.getElementById('event').value;
+            let status = document.getElementById('status').value;
+            let reason = document.getElementById('reason').value;
+            
+            if (!name || !date || !category || !event || !status) {
+                document.getElementById('formMessage').innerHTML = '<div class="error-msg">❌ Please fill all required fields</div>';
+                setTimeout(() => document.getElementById('formMessage').innerHTML = '', 3000);
                 return;
             }
             
-            let events = category === 'Major' ? majorEvents : minorEvents;
-            eventSelect.innerHTML = '<option value="">-- Select Event --</option>';
-            events.forEach(event => {
-                eventSelect.innerHTML += `<option value="${event}">${event}</option>`;
-            });
-        }
-
-        function updateFilterEventDropdown() {
-            const filterEvent = document.getElementById('filterEvent');
-            filterEvent.innerHTML = '<option value="">All Events</option>';
-            [...majorEvents, ...minorEvents].forEach(event => {
-                filterEvent.innerHTML += `<option value="${event}">${event}</option>`;
-            });
-        }
-
-        function clearDateRange() {
-            document.getElementById('dateFrom').value = '';
-            document.getElementById('dateTo').value = '';
-            loadRecords();
-        }
-
-        function getStatusBadge(status, reason) {
-            let badgeClass = '';
-            if (status === 'P') badgeClass = 'status-p';
-            else if (status === 'PNF') badgeClass = 'status-pnf';
-            else if (status === 'A') badgeClass = 'status-a';
-            else if (status === 'NR') badgeClass = 'status-nr';
-            
-            let html = `<span class="${badgeClass}">${status}</span>`;
-            if (reason && (status === 'PNF' || status === 'A')) {
-                html += `<span class="reason-text">${reason}</span>`;
+            if ((status === 'PNF' || status === 'A') && !reason) {
+                document.getElementById('formMessage').innerHTML = '<div class="error-msg">❌ Please provide a reason</div>';
+                setTimeout(() => document.getElementById('formMessage').innerHTML = '', 3000);
+                return;
             }
-            return html;
+            
+            attendanceData.push({ name, date, category, event, status, reason: reason || '' });
+            saveData();
+            
+            document.getElementById('formMessage').innerHTML = '<div class="success-msg">✅ Attendance recorded!</div>';
+            setTimeout(() => document.getElementById('formMessage').innerHTML = '', 3000);
+            
+            document.getElementById('attendanceForm').reset();
+            document.getElementById('reasonGroup').classList.remove('show');
+            document.getElementById('date').valueAsDate = new Date();
+            
+            renderSummary();
+            loadRecords();
+        });
+
+        // Render Summary
+        function renderSummary() {
+            // Major Functions
+            renderCategorySummary('Major', majorEvents, 'majorHeader', 'majorBody');
+            // Minor Functions
+            renderCategorySummary('Minor', minorEvents, 'minorHeader', 'minorBody');
         }
 
+        function renderCategorySummary(category, events, headerId, bodyId) {
+            // Count per member
+            let counts = {};
+            members.forEach(m => { counts[m.name] = { P: 0, PNF: 0, A: 0, NR: 0 }; });
+            
+            attendanceData.forEach(r => {
+                if (r.category === category && counts[r.name]) {
+                    if (r.status === 'P') counts[r.name].P++;
+                    else if (r.status === 'PNF') counts[r.name].PNF++;
+                    else if (r.status === 'A') counts[r.name].A++;
+                    else if (r.status === 'NR') counts[r.name].NR++;
+                }
+            });
+            
+            // Latest status per event
+            let latest = {};
+            members.forEach(m => { latest[m.name] = {}; });
+            events.forEach(ev => {
+                members.forEach(m => {
+                    let records = attendanceData.filter(r => r.name === m.name && r.event === ev && r.category === category);
+                    latest[m.name][ev] = records.length > 0 ? records[records.length - 1].status : 'NR';
+                });
+            });
+            
+            // Header
+            let headerHtml = '<tr><th>NAME / VOICE</th>';
+            events.forEach(ev => { headerHtml += `<th>${ev}</th>`; });
+            headerHtml += '<th>TOTAL P</th><th>TOTAL PNF</th><th>TOTAL A</th><th>TOTAL NR</th><th>RATE</th><th>REMARKS</th></tr>';
+            document.getElementById(headerId).innerHTML = headerHtml;
+            
+            // Body
+            let bodyHtml = '';
+            members.forEach(m => {
+                let totalP = counts[m.name].P;
+                let totalPNF = counts[m.name].PNF;
+                let totalA = counts[m.name].A;
+                let totalNR = counts[m.name].NR;
+                let total = totalP + totalPNF + totalA + totalNR;
+                let rate = total > 0 ? ((totalP + totalPNF * 0.5) / total * 100).toFixed(1) : 0;
+                let remarks = rate >= 80 ? 'COMPLETE' : 'INCOMPLETE';
+                
+                bodyHtml += `<tr><td><strong>${m.name}</strong><br><small>${m.voice}</small></td>`;
+                events.forEach(ev => {
+                    let status = latest[m.name][ev];
+                    bodyHtml += `<td>${status}</td>`;
+                });
+                bodyHtml += `<td><strong>${totalP}</strong></td><td><strong>${totalPNF}</strong></td><td><strong>${totalA}</strong></td><td><strong>${totalNR}</strong></td>`;
+                bodyHtml += `<td><strong>${rate}%</strong></td><td class="${remarks === 'COMPLETE' ? 'complete' : 'incomplete'}">${remarks}</td></tr>`;
+            });
+            document.getElementById(bodyId).innerHTML = bodyHtml;
+        }
+
+        // Load Records
         function loadRecords() {
-            const filterName = document.getElementById('filterName')?.value || '';
-            const filterCategory = document.getElementById('filterCategory')?.value || '';
-            const filterEvent = document.getElementById('filterEvent')?.value || '';
-            const dateFrom = document.getElementById('dateFrom')?.value || '';
-            const dateTo = document.getElementById('dateTo')?.value || '';
+            let filterName = document.getElementById('filterName').value;
+            let filterCategory = document.getElementById('filterCategory').value;
+            let filterEvent = document.getElementById('filterEvent').value;
+            let dateFrom = document.getElementById('dateFrom').value;
+            let dateTo = document.getElementById('dateTo').value;
             
             let filtered = [...attendanceData];
             
@@ -714,233 +658,102 @@
             if (dateTo) filtered = filtered.filter(r => r.date <= dateTo);
             
             if (filtered.length === 0) {
-                document.getElementById('recordsTable').innerHTML = '<p style="text-align:center; padding:40px; color:#C4E0C4;">📭 No records found</p>';
+                document.getElementById('recordsTable').innerHTML = '<p style="text-align:center; padding:40px;">📭 No records found</p>';
                 return;
             }
             
-            filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+            filtered.sort((a,b) => new Date(b.date) - new Date(a.date));
             
-            let html = `
-                <div class="records-container">
-                    <table class="records-table">
-                        <thead>
-                            <tr><th>DATE</th><th>NAME</th><th>CATEGORY</th><th>EVENT</th><th>STATUS</th><th>REASON</th><th>ACTION</th></tr>
-                        </thead>
-                        <tbody>
-            `;
+            let html = `<div class="records-container"><table class="records-table"><thead><tr>
+                <th>DATE</th><th>NAME</th><th>CATEGORY</th><th>EVENT</th><th>STATUS</th><th>REASON</th><th>ACTION</th>
+            </tr></thead><tbody>`;
             
-            filtered.forEach((record) => {
-                const originalIndex = attendanceData.findIndex((r, i) => 
-                    r.name === record.name && r.date === record.date && 
-                    r.event === record.event && r.status === record.status
-                );
-                html += `
-                    <tr>
-                        <td style="background:#27391C; font-weight:bold;">${formatDate(record.date)}<br><span style="font-size:10px;">${getDayName(record.date)}</span></td>
-                        <td>${record.name}</td>
-                        <td>${record.category === 'Major' ? '🎯 Major' : '📋 Minor'}</td>
-                        <td>${record.event}</td>
-                        <td style="text-align:center;">${getStatusBadge(record.status, record.reason)}</td>
-                        <td>${record.reason || '-'}</td>
-                        <td style="text-align:center;"><button onclick="deleteSingleRecord(${originalIndex})" style="background:#8B4513; padding:6px 16px; font-size:12px;">Delete</button></td>
-                    </tr>
-                `;
+            filtered.forEach((r, idx) => {
+                let originalIdx = attendanceData.findIndex((x,i) => x.name === r.name && x.date === r.date && x.event === r.event);
+                html += `<tr>
+                    <td>${formatDate(r.date)}<br><span style="font-size:10px;">${getDayName(r.date)}</span></td>
+                    <td>${r.name}</td>
+                    <td>${r.category === 'Major' ? '🎯 Major' : '📋 Minor'}</td>
+                    <td>${r.event}</td>
+                    <td><span class="status-${r.status.toLowerCase()}">${r.status}</span></td>
+                    <td>${r.reason || '-'}</td>
+                    <td><button onclick="deleteRecord(${originalIdx})" style="background:#8B4513; padding:5px 12px;">Delete</button></td>
+                </tr>`;
             });
-            
-            html += `</tbody></table></div><p style="margin-top:15px; color:#C4E0C4; text-align:center;">Total: ${filtered.length} records</p>`;
+            html += '</tbody></table></div><p style="margin-top:10px;">Total: ' + filtered.length + ' records</p>';
             document.getElementById('recordsTable').innerHTML = html;
         }
-
-        function deleteSingleRecord(index) {
+        
+        function deleteRecord(idx) {
             if (confirm('Delete this record?')) {
-                attendanceData.splice(index, 1);
+                attendanceData.splice(idx, 1);
                 saveData();
                 loadRecords();
                 renderSummary();
             }
         }
-
+        
         function deleteAllRecords() {
-            if (confirm('⚠️ Delete ALL records?')) {
+            if (confirm('Delete ALL records?')) {
                 attendanceData = [];
                 saveData();
                 loadRecords();
                 renderSummary();
             }
         }
-
-        // RENDER SUMMARY - Fixed with proper alignment
-        function renderSummary() {
-            renderCategorySummary('Major', majorEvents, 'majorSummaryHeader', 'majorSummaryBody');
-            renderCategorySummary('Minor', minorEvents, 'minorSummaryHeader', 'minorSummaryBody');
-        }
-
-        function renderCategorySummary(category, events, headerId, bodyId) {
-            // Calculate counts per member
-            const counts = {};
-            members.forEach(member => {
-                counts[member.name] = { P: 0, PNF: 0, A: 0, NR: 0 };
-            });
-
-            attendanceData.forEach(record => {
-                if (record.category === category && counts[record.name]) {
-                    if (record.status === 'P') counts[record.name].P++;
-                    else if (record.status === 'PNF') counts[record.name].PNF++;
-                    else if (record.status === 'A') counts[record.name].A++;
-                    else if (record.status === 'NR') counts[record.name].NR++;
-                }
-            });
-
-            // Get latest status for each event per member
-            const latestStatus = {};
-            members.forEach(member => {
-                latestStatus[member.name] = {};
-                events.forEach(event => {
-                    const records = attendanceData.filter(r => r.name === member.name && r.event === event && r.category === category);
-                    latestStatus[member.name][event] = records.length > 0 ? records[records.length - 1].status : 'NR';
-                });
-            });
-
-            // Build Header
-            let headerHtml = '<tr><th>NAME / VOICE</th>';
-            events.forEach(event => {
-                headerHtml += `<th>${event}</th>`;
-            });
-            headerHtml += '<th>TOTAL P</th><th>TOTAL PNF</th><th>TOTAL A</th><th>TOTAL NR</th><th>ATTENDANCE RATE</th><th>REMARKS</th></tr>';
-            document.getElementById(headerId).innerHTML = headerHtml;
-
-            // Build Body
-            let bodyHtml = '';
-            members.forEach(member => {
-                let totalP = counts[member.name].P;
-                let totalPNF = counts[member.name].PNF;
-                let totalA = counts[member.name].A;
-                let totalNR = counts[member.name].NR;
-                let totalEvents = totalP + totalPNF + totalA + totalNR;
-                let attendanceScore = totalEvents > 0 ? ((totalP + (totalPNF * 0.5)) / totalEvents * 100).toFixed(1) : 0;
-                let remarks = attendanceScore >= 80 ? 'COMPLETE' : 'INCOMPLETE';
-                let remarksClass = remarks === 'COMPLETE' ? 'complete' : 'incomplete';
-                
-                bodyHtml += `<tr>
-                    <td style="background:#27391C;"><strong>${member.name}</strong><br><small>${member.voice}</small></td>`;
-                
-                // Add status for each event
-                events.forEach(event => {
-                    const status = latestStatus[member.name][event];
-                    let cellClass = '';
-                    if (status === 'P') cellClass = 'status-p';
-                    else if (status === 'PNF') cellClass = 'status-pnf';
-                    else if (status === 'A') cellClass = 'status-a';
-                    else if (status === 'NR') cellClass = 'status-nr';
-                    bodyHtml += `<td class="status-cell ${cellClass}">${status}</td>`;
-                });
-                
-                bodyHtml += `
-                    <td><strong>${totalP}</strong></td>
-                    <td><strong>${totalPNF}</strong></td>
-                    <td><strong>${totalA}</strong></td>
-                    <td><strong>${totalNR}</strong></td>
-                    <td><strong>${attendanceScore}%</strong></td>
-                    <td><span class="${remarksClass}">${remarks}</span></td>
-                </tr>`;
-            });
-
-            document.getElementById(bodyId).innerHTML = bodyHtml;
-        }
-
+        
         function exportToCSV() {
-            if (attendanceData.length === 0) {
-                alert('No data to export');
-                return;
-            }
-            
             let csv = 'Name,Date,Category,Event,Status,Reason\n';
-            attendanceData.forEach(record => {
-                csv += `"${record.name}","${formatDate(record.date)}","${record.category}","${record.event}","${record.status}","${record.reason || ''}"\n`;
+            attendanceData.forEach(r => {
+                csv += `"${r.name}","${formatDate(r.date)}","${r.category}","${r.event}","${r.status}","${r.reason || ''}"\n`;
             });
-            
-            const blob = new Blob([csv], { type: 'text/csv' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
+            let blob = new Blob([csv], {type: 'text/csv'});
+            let a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
             a.download = `attendance_${new Date().toISOString().split('T')[0]}.csv`;
             a.click();
-            URL.revokeObjectURL(url);
+            URL.revokeObjectURL(a.href);
         }
-
-        function showMessage(elementId, message, type) {
-            const msgDiv = document.getElementById(elementId);
-            msgDiv.innerHTML = `<div class="${type === 'success' ? 'success-msg' : 'error-msg'}">${message}</div>`;
-            setTimeout(() => msgDiv.innerHTML = '', 3000);
+        
+        function updateFilterEvents() {
+            let filterEvent = document.getElementById('filterEvent');
+            filterEvent.innerHTML = '<option value="">All Events</option>';
+            [...majorEvents, ...minorEvents].forEach(e => {
+                filterEvent.innerHTML += `<option value="${e}">${e}</option>`;
+            });
         }
-
-        function toggleReasonField() {
-            const status = document.getElementById('status').value;
-            const reasonGroup = document.getElementById('reasonGroup');
-            if (status === 'PNF' || status === 'A') {
-                reasonGroup.classList.add('show');
-                document.getElementById('reason').required = true;
-            } else {
-                reasonGroup.classList.remove('show');
-                document.getElementById('reason').required = false;
-                document.getElementById('reason').value = '';
-            }
-        }
-
-        function switchTab(tab) {
-            document.getElementById('formTab').classList.remove('active');
-            document.getElementById('summaryTab').classList.remove('active');
-            document.getElementById('recordsTab').classList.remove('active');
-            document.getElementById(`${tab}Tab`).classList.add('active');
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            if (tab === 'summary') renderSummary();
-            else if (tab === 'records') { updateFilterEventDropdown(); loadRecords(); }
-        }
-
-        function setDefaultDate() {
-            const today = new Date().toISOString().split('T')[0];
-            document.getElementById('date').value = today;
-        }
-
-        // Form submission
-        document.getElementById('attendanceForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const name = document.getElementById('name').value;
-            const date = document.getElementById('date').value;
-            const category = document.getElementById('eventCategory').value;
-            const event = document.getElementById('event').value;
-            const status = document.getElementById('status').value;
-            const reason = document.getElementById('reason').value;
-            
-            if (!name || !date || !category || !event || !status) {
-                showMessage('formMessage', '❌ Please fill all required fields', 'error');
-                return;
-            }
-            
-            if ((status === 'PNF' || status === 'A') && !reason) {
-                showMessage('formMessage', '❌ Please provide a reason for PNF or Absent', 'error');
-                return;
-            }
-            
-            attendanceData.push({ name, date, category, event, status, reason: reason || '' });
-            saveData();
-            showMessage('formMessage', '✅ Attendance recorded successfully!', 'success');
-            
-            document.getElementById('name').value = '';
-            document.getElementById('eventCategory').value = '';
-            document.getElementById('event').innerHTML = '<option value="">-- Select Event --</option>';
-            document.getElementById('status').value = '';
-            document.getElementById('reason').value = '';
-            document.getElementById('reasonGroup').classList.remove('show');
+        
+        // Tab Switching
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                let tab = this.getAttribute('data-tab');
+                document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+                document.querySelectorAll('.tab-btn').forEach(tb => tb.classList.remove('active'));
+                this.classList.add('active');
+                document.getElementById(tab + 'Tab').classList.add('active');
+                
+                if (tab === 'summary') renderSummary();
+                if (tab === 'records') { updateFilterEvents(); loadRecords(); }
+            });
         });
+        
+        // Event Listeners for Records Tab
+        document.getElementById('refreshRecords')?.addEventListener('click', loadRecords);
+        document.getElementById('exportCSV')?.addEventListener('click', exportToCSV);
+        document.getElementById('deleteAll')?.addEventListener('click', deleteAllRecords);
+        document.getElementById('filterName')?.addEventListener('change', loadRecords);
+        document.getElementById('filterCategory')?.addEventListener('change', loadRecords);
+        document.getElementById('filterEvent')?.addEventListener('change', loadRecords);
+        document.getElementById('dateFrom')?.addEventListener('change', loadRecords);
+        document.getElementById('dateTo')?.addEventListener('change', loadRecords);
+        
+        // Set default date
+        document.getElementById('date').valueAsDate = new Date();
         
         // Initialize
         loadData();
-        setDefaultDate();
-        document.getElementById('status').addEventListener('change', toggleReasonField);
-        updateFilterEventDropdown();
+        updateFilterEvents();
+        renderSummary();
     </script>
 </body>
 </html>
