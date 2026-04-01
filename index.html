@@ -36,7 +36,7 @@
             padding-bottom: 5px;
         }
 
-        /* Member Cards - New Color Palette */
+        /* Member Cards */
         .members-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -302,32 +302,37 @@
             font-style: italic;
         }
 
-        /* Summary Table - Numbers Only */
+        /* Summary Table - Fixed Alignment */
         .summary-container {
             overflow-x: auto;
+            margin-bottom: 20px;
         }
 
         .summary-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 13px;
+            font-size: 12px;
+            min-width: 1200px;
         }
 
         .summary-table th {
             background: #255F38;
             color: #F5E6D3;
-            padding: 14px 10px;
+            padding: 12px 8px;
             text-align: center;
             border: 1px solid #1F7D53;
             font-weight: 700;
+            font-size: 11px;
+            white-space: nowrap;
         }
 
         .summary-table td {
             border: 1px solid #1F7D53;
-            padding: 12px 8px;
+            padding: 10px 6px;
             text-align: center;
             background: #18230F;
             color: #C4E0C4;
+            font-size: 12px;
         }
 
         .summary-table td:first-child {
@@ -335,11 +340,17 @@
             font-weight: 600;
             text-align: left;
             color: #F5E6D3;
+            white-space: nowrap;
         }
 
         .summary-table td:first-child small {
             color: #C4E0C4;
-            font-size: 11px;
+            font-size: 10px;
+            display: block;
+        }
+
+        .summary-table .status-cell {
+            font-weight: bold;
         }
 
         .complete {
@@ -350,43 +361,6 @@
         .incomplete {
             color: #F4A261;
             font-weight: bold;
-        }
-
-        /* Stats Cards */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 12px;
-            margin-bottom: 25px;
-        }
-
-        .stat-card {
-            background: #27391C;
-            color: #F5E6D3;
-            padding: 15px;
-            border-radius: 16px;
-            text-align: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-            border: 1px solid #1F7D53;
-        }
-
-        .stat-card h4 {
-            font-size: 12px;
-            opacity: 0.9;
-            margin-bottom: 8px;
-            color: #C4E0C4;
-        }
-
-        .stat-card .value {
-            font-size: 28px;
-            font-weight: bold;
-            color: #F5E6D3;
-        }
-
-        .loading {
-            text-align: center;
-            padding: 40px;
-            color: #C4E0C4;
         }
 
         /* Filter Bar */
@@ -449,6 +423,7 @@
         @media (max-width: 768px) {
             .summary-table {
                 font-size: 10px;
+                min-width: 1000px;
             }
             .filter-bar select, .filter-bar input {
                 width: 100%;
@@ -458,9 +433,6 @@
             }
             .date-range input {
                 flex: 1;
-            }
-            .records-table {
-                font-size: 10px;
             }
         }
     </style>
@@ -532,16 +504,15 @@
             <div id="formMessage"></div>
         </div>
 
-        <!-- Tab 2: Summary Report - Numbers Only -->
+        <!-- Tab 2: Summary Report - Fixed Alignment -->
         <div id="summaryTab" class="tab-content">
-            <!-- Stats Cards removed as requested -->
             <div class="event-group">
                 <h4>🎯 MAJOR FUNCTIONS</h4>
                 <div class="summary-container">
                     <table class="summary-table" id="majorSummaryTable">
                         <thead id="majorSummaryHeader"></thead>
                         <tbody id="majorSummaryBody">
-                            <tr><td colspan="10" class="loading">Loading data...</td></tr>
+                            <tr><td colspan="20" class="loading">Loading data...</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -553,14 +524,14 @@
                     <table class="summary-table" id="minorSummaryTable">
                         <thead id="minorSummaryHeader"></thead>
                         <tbody id="minorSummaryBody">
-                            <tr><td colspan="10" class="loading">Loading data...</td></tr>
+                            <tr><td colspan="20" class="loading">Loading data...</td></tr>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
 
-        <!-- Tab 3: View Records with Date Range -->
+        <!-- Tab 3: View Records -->
         <div id="recordsTab" class="tab-content">
             <h3 style="color:#F5E6D3; margin-bottom:20px;">📋 Attendance Records</h3>
             
@@ -616,21 +587,20 @@
 
         let attendanceData = [];
 
-        // Format date to "March 1, 2026"
+        // Format date
         function formatDate(dateString) {
             const date = new Date(dateString);
             const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
             return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
         }
 
-        // Get day name
         function getDayName(dateString) {
             const date = new Date(dateString);
             const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
             return days[date.getDay()];
         }
 
-        // Load data from localStorage
+        // Load data
         function loadData() {
             const stored = localStorage.getItem('pagsulongAttendance');
             if (stored) {
@@ -643,7 +613,9 @@
                     { name: "Imoria, Sheena Mae Joy", date: "2026-02-21", category: "Major", event: "PM", status: "PNF", reason: "masama pakiramdam" },
                     { name: "Imoria, Sheena Mae Joy", date: "2026-02-23", category: "Major", event: "PM", status: "P", reason: "via FB Live" },
                     { name: "Mallari, Jennifer Victoria", date: "2026-02-21", category: "Major", event: "PM", status: "A", reason: "may work" },
-                    { name: "Agarin, Dione", date: "2026-02-21", category: "Major", event: "PM", status: "PNF", reason: "masama po pakiramdam" }
+                    { name: "Agarin, Dione", date: "2026-02-21", category: "Major", event: "PM", status: "PNF", reason: "masama po pakiramdam" },
+                    { name: "Agarin, Christine", date: "2026-03-01", category: "Minor", event: "SK EVENING", status: "P", reason: "" },
+                    { name: "Agarin, Christine", date: "2026-03-01", category: "Minor", event: "24/7", status: "P", reason: "" }
                 ];
                 saveData();
             }
@@ -651,12 +623,10 @@
             populateDropdowns();
         }
 
-        // Save data
         function saveData() {
             localStorage.setItem('pagsulongAttendance', JSON.stringify(attendanceData));
         }
 
-        // Render member cards
         function renderMembersGrid() {
             let html = '';
             members.forEach(member => {
@@ -671,7 +641,6 @@
             document.getElementById('membersGrid').innerHTML = html;
         }
 
-        // Populate dropdowns
         function populateDropdowns() {
             const nameSelect = document.getElementById('name');
             const filterName = document.getElementById('filterName');
@@ -685,7 +654,6 @@
             });
         }
 
-        // Update event dropdown
         function updateEventDropdown() {
             const category = document.getElementById('eventCategory').value;
             const eventSelect = document.getElementById('event');
@@ -702,7 +670,6 @@
             });
         }
 
-        // Update filter event dropdown
         function updateFilterEventDropdown() {
             const filterEvent = document.getElementById('filterEvent');
             filterEvent.innerHTML = '<option value="">All Events</option>';
@@ -711,14 +678,12 @@
             });
         }
 
-        // Clear date range
         function clearDateRange() {
             document.getElementById('dateFrom').value = '';
             document.getElementById('dateTo').value = '';
             loadRecords();
         }
 
-        // Get status badge
         function getStatusBadge(status, reason) {
             let badgeClass = '';
             if (status === 'P') badgeClass = 'status-p';
@@ -733,7 +698,6 @@
             return html;
         }
 
-        // Load records
         function loadRecords() {
             const filterName = document.getElementById('filterName')?.value || '';
             const filterCategory = document.getElementById('filterCategory')?.value || '';
@@ -787,7 +751,6 @@
             document.getElementById('recordsTable').innerHTML = html;
         }
 
-        // Delete single record
         function deleteSingleRecord(index) {
             if (confirm('Delete this record?')) {
                 attendanceData.splice(index, 1);
@@ -797,7 +760,6 @@
             }
         }
 
-        // Delete all records
         function deleteAllRecords() {
             if (confirm('⚠️ Delete ALL records?')) {
                 attendanceData = [];
@@ -807,15 +769,14 @@
             }
         }
 
-        // Render Summary - Numbers Only (Counts)
+        // RENDER SUMMARY - Fixed with proper alignment
         function renderSummary() {
             renderCategorySummary('Major', majorEvents, 'majorSummaryHeader', 'majorSummaryBody');
             renderCategorySummary('Minor', minorEvents, 'minorSummaryHeader', 'minorSummaryBody');
         }
 
-        // Render category summary with COUNTS only
         function renderCategorySummary(category, events, headerId, bodyId) {
-            // Calculate counts per member per status
+            // Calculate counts per member
             const counts = {};
             members.forEach(member => {
                 counts[member.name] = { P: 0, PNF: 0, A: 0, NR: 0 };
@@ -830,7 +791,17 @@
                 }
             });
 
-            // Build header
+            // Get latest status for each event per member
+            const latestStatus = {};
+            members.forEach(member => {
+                latestStatus[member.name] = {};
+                events.forEach(event => {
+                    const records = attendanceData.filter(r => r.name === member.name && r.event === event && r.category === category);
+                    latestStatus[member.name][event] = records.length > 0 ? records[records.length - 1].status : 'NR';
+                });
+            });
+
+            // Build Header
             let headerHtml = '<tr><th>NAME / VOICE</th>';
             events.forEach(event => {
                 headerHtml += `<th>${event}</th>`;
@@ -838,7 +809,7 @@
             headerHtml += '<th>TOTAL P</th><th>TOTAL PNF</th><th>TOTAL A</th><th>TOTAL NR</th><th>ATTENDANCE RATE</th><th>REMARKS</th></tr>';
             document.getElementById(headerId).innerHTML = headerHtml;
 
-            // Build body with NUMBERS only
+            // Build Body
             let bodyHtml = '';
             members.forEach(member => {
                 let totalP = counts[member.name].P;
@@ -853,16 +824,15 @@
                 bodyHtml += `<tr>
                     <td style="background:#27391C;"><strong>${member.name}</strong><br><small>${member.voice}</small></td>`;
                 
-                // For each event, show the latest status (not count)
+                // Add status for each event
                 events.forEach(event => {
-                    const records = attendanceData.filter(r => r.name === member.name && r.event === event && r.category === category);
-                    let status = records.length > 0 ? records[records.length - 1].status : 'NR';
+                    const status = latestStatus[member.name][event];
                     let cellClass = '';
                     if (status === 'P') cellClass = 'status-p';
                     else if (status === 'PNF') cellClass = 'status-pnf';
                     else if (status === 'A') cellClass = 'status-a';
                     else if (status === 'NR') cellClass = 'status-nr';
-                    bodyHtml += `<td class="${cellClass}">${status}</td>`;
+                    bodyHtml += `<td class="status-cell ${cellClass}">${status}</td>`;
                 });
                 
                 bodyHtml += `
@@ -878,7 +848,6 @@
             document.getElementById(bodyId).innerHTML = bodyHtml;
         }
 
-        // Export to CSV
         function exportToCSV() {
             if (attendanceData.length === 0) {
                 alert('No data to export');
@@ -899,14 +868,12 @@
             URL.revokeObjectURL(url);
         }
 
-        // Show message
         function showMessage(elementId, message, type) {
             const msgDiv = document.getElementById(elementId);
             msgDiv.innerHTML = `<div class="${type === 'success' ? 'success-msg' : 'error-msg'}">${message}</div>`;
             setTimeout(() => msgDiv.innerHTML = '', 3000);
         }
 
-        // Toggle reason field
         function toggleReasonField() {
             const status = document.getElementById('status').value;
             const reasonGroup = document.getElementById('reasonGroup');
@@ -920,7 +887,6 @@
             }
         }
 
-        // Switch tabs
         function switchTab(tab) {
             document.getElementById('formTab').classList.remove('active');
             document.getElementById('summaryTab').classList.remove('active');
@@ -932,7 +898,6 @@
             else if (tab === 'records') { updateFilterEventDropdown(); loadRecords(); }
         }
 
-        // Set today's date
         function setDefaultDate() {
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('date').value = today;
