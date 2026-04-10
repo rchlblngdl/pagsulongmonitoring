@@ -24,7 +24,6 @@
             margin: 0 auto;
         }
 
-        /* Modern Header */
         .header {
             text-align: center;
             margin-bottom: 32px;
@@ -37,10 +36,8 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            letter-spacing: -0.5px;
         }
 
-        /* Member Cards - Modern Glass */
         .members-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -60,7 +57,6 @@
         .member-card:hover {
             transform: translateY(-2px);
             border-color: rgba(31, 125, 83, 0.6);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
         }
 
         .member-card h3 {
@@ -85,7 +81,6 @@
             color: #C4E0C4;
         }
 
-        /* Modern Tabs */
         .tabs {
             display: flex;
             gap: 12px;
@@ -113,12 +108,6 @@
             box-shadow: 0 4px 15px rgba(31, 125, 83, 0.3);
         }
 
-        .tab-btn:hover:not(.active) {
-            border-color: #1F7D53;
-            color: #F5E6D3;
-        }
-
-        /* Tab Content - Modern Glass */
         .tab-content {
             display: none;
             background: rgba(39, 57, 28, 0.5);
@@ -138,7 +127,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Master Controls - Modern Layout */
         .master-controls {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -171,27 +159,15 @@
             font-size: 14px;
             color: #F5E6D3;
             transition: all 0.3s ease;
-            cursor: pointer;
         }
 
-        .control-group input:focus,
-        .control-group select:focus {
-            outline: none;
-            border-color: #1F7D53;
-            box-shadow: 0 0 0 3px rgba(31, 125, 83, 0.2);
-        }
-
-        /* Attendance Table - Modern */
         .attendance-table-container {
             overflow-x: auto;
-            border-radius: 20px;
         }
 
         .attendance-input-table {
             width: 100%;
             border-collapse: collapse;
-            border-radius: 20px;
-            overflow: hidden;
         }
 
         .attendance-input-table th {
@@ -201,12 +177,13 @@
             text-align: center;
             font-weight: 600;
             font-size: 15px;
+            border: 1px solid rgba(31, 125, 83, 0.2);
         }
 
         .attendance-input-table td {
             padding: 14px 12px;
             background: rgba(24, 35, 15, 0.4);
-            border-bottom: 1px solid rgba(31, 125, 83, 0.2);
+            border: 1px solid rgba(31, 125, 83, 0.2);
         }
 
         .attendance-input-table select,
@@ -218,31 +195,12 @@
             border-radius: 12px;
             color: #F5E6D3;
             font-size: 14px;
-            transition: all 0.3s ease;
-        }
-
-        .attendance-input-table select:focus,
-        .attendance-input-table input:focus {
-            outline: none;
-            border-color: #1F7D53;
         }
 
         .member-name-cell {
             background: rgba(39, 57, 28, 0.6);
-            font-weight: 500;
         }
 
-        .member-name-cell strong {
-            color: #F5E6D3;
-            font-size: 15px;
-        }
-
-        .member-name-cell small {
-            color: #9bbf8f;
-            font-size: 12px;
-        }
-
-        /* Submit Button */
         .submit-btn {
             margin-top: 28px;
             width: 100%;
@@ -257,12 +215,6 @@
             transition: all 0.3s ease;
         }
 
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(31, 125, 83, 0.4);
-        }
-
-        /* Status Badges */
         .status-pf, .status-p, .status-pnf, .status-a, .status-nr {
             padding: 5px 14px;
             border-radius: 30px;
@@ -275,19 +227,10 @@
         .status-a { background: #E76F51; color: white; }
         .status-nr { background: #6C6C6C; color: white; }
 
-        /* Summary Table - Larger Fonts */
-        .summary-container {
-            overflow-x: auto;
-            margin-top: 20px;
-        }
-
         .summary-table {
             width: 100%;
             border-collapse: collapse;
             font-size: 14px;
-            background: rgba(24, 35, 15, 0.4);
-            border-radius: 16px;
-            overflow: hidden;
         }
 
         .summary-table th {
@@ -296,7 +239,6 @@
             padding: 14px 10px;
             border: 1px solid rgba(31, 125, 83, 0.3);
             font-size: 14px;
-            font-weight: 600;
         }
 
         .summary-table td {
@@ -312,22 +254,10 @@
             background: rgba(39, 57, 28, 0.7);
             text-align: left;
             color: #F5E6D3;
-            font-weight: 500;
-            font-size: 14px;
         }
 
-        .summary-table td:first-child small {
-            font-size: 11px;
-            color: #9bbf8f;
-        }
-
-        .complete { color: #1F7D53; font-weight: bold; font-size: 14px; }
-        .incomplete { color: #F4A261; font-weight: bold; font-size: 14px; }
-
-        /* Records Table */
-        .records-container {
-            overflow-x: auto;
-        }
+        .complete { color: #1F7D53; font-weight: bold; }
+        .incomplete { color: #F4A261; font-weight: bold; }
 
         .records-table {
             width: 100%;
@@ -340,7 +270,6 @@
             color: #F5E6D3;
             padding: 14px;
             border: 1px solid rgba(31, 125, 83, 0.3);
-            font-size: 14px;
         }
 
         .records-table td {
@@ -348,10 +277,8 @@
             background: rgba(24, 35, 15, 0.4);
             color: #C4E0C4;
             border: 1px solid rgba(31, 125, 83, 0.2);
-            font-size: 13px;
         }
 
-        /* Filter Bar */
         .filter-bar {
             display: flex;
             gap: 12px;
@@ -368,7 +295,6 @@
             border: 1px solid rgba(31, 125, 83, 0.4);
             border-radius: 12px;
             color: #F5E6D3;
-            font-size: 13px;
         }
 
         .date-range {
@@ -388,10 +314,8 @@
             color: #F5E6D3;
             margin-bottom: 16px;
             font-size: 20px;
-            font-weight: 600;
         }
 
-        /* Summary Header with Button */
         .summary-header {
             display: flex;
             justify-content: space-between;
@@ -399,12 +323,6 @@
             margin-bottom: 20px;
             flex-wrap: wrap;
             gap: 15px;
-        }
-
-        .summary-header h3 {
-            color: #F5E6D3;
-            font-size: 22px;
-            font-weight: 600;
         }
 
         .save-jpg-btn {
@@ -416,15 +334,6 @@
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .save-jpg-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(31, 125, 83, 0.4);
         }
 
         .success-msg {
@@ -445,6 +354,12 @@
             text-align: center;
         }
 
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #C4E0C4;
+        }
+
         button {
             background: #1F7D53;
             border: none;
@@ -452,22 +367,11 @@
             border-radius: 30px;
             color: white;
             cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s;
-        }
-
-        button:hover {
-            background: #255F38;
-            transform: translateY(-1px);
         }
 
         @media (max-width: 768px) {
-            body { padding: 16px; }
-            .master-controls { grid-template-columns: 1fr; gap: 12px; }
-            .filter-bar select, .filter-bar input { width: 100%; }
-            .date-range { width: 100%; flex-direction: column; }
-            .summary-header { flex-direction: column; align-items: stretch; }
-            .save-jpg-btn { justify-content: center; }
+            .master-controls { grid-template-columns: 1fr; }
+            .summary-header { flex-direction: column; }
         }
     </style>
 </head>
@@ -487,7 +391,7 @@
 
         <!-- FORM TAB -->
         <div id="formTab" class="tab-content active">
-            <h3 style="color:#F5E6D3; margin-bottom:20px; font-weight:500; font-size:20px;">📝 Record Attendance</h3>
+            <h3 style="color:#F5E6D3; margin-bottom:20px;">📝 Record Attendance</h3>
             
             <div class="master-controls">
                 <div class="control-group">
@@ -513,12 +417,7 @@
             <div class="attendance-table-container">
                 <table class="attendance-input-table">
                     <thead>
-                        <tr>
-                            <th style="width:35%">NAME / VOICE</th>
-                            <th style="width:25%">STATUS</th>
-                            <th style="width:40%">REASON (if PF/NF or Absent)</th>
-                        </tr>
-                    </thead>
+                        <tr><th style="width:35%">NAME / VOICE</th><th style="width:25%">STATUS</th><th style="width:40%">REASON (if PF/NF or Absent)</th> </thead>
                     <tbody id="attendanceTableBody"></tbody>
                 </table>
             </div>
@@ -527,20 +426,19 @@
             <div id="formMessage"></div>
         </div>
 
-        <!-- SUMMARY TAB with Save as JPG Button -->
+        <!-- SUMMARY TAB -->
         <div id="summaryTab" class="tab-content">
             <div class="summary-header">
                 <h3>📊 Attendance Summary Report</h3>
                 <button id="saveAsJpgBtn" class="save-jpg-btn">📸 Save as JPG</button>
             </div>
-            
             <div id="summaryContent">
                 <div class="event-group">
                     <h4>🎯 MAJOR FUNCTIONS</h4>
                     <div class="summary-container">
                         <table class="summary-table" id="majorTable">
                             <thead id="majorHeader"></thead>
-                            <tbody id="majorBody"></tbody>
+                            <tbody id="majorBody"><tr><td colspan="10" class="loading">Loading data...</td></tr></tbody>
                         </table>
                     </div>
                 </div>
@@ -549,7 +447,7 @@
                     <div class="summary-container">
                         <table class="summary-table" id="minorTable">
                             <thead id="minorHeader"></thead>
-                            <tbody id="minorBody"></tbody>
+                            <tbody id="minorBody"><tr><td colspan="10" class="loading">Loading data...</td></tr></tbody>
                         </table>
                     </div>
                 </div>
@@ -558,7 +456,7 @@
 
         <!-- RECORDS TAB -->
         <div id="recordsTab" class="tab-content">
-            <h3 style="color:#F5E6D3; margin-bottom:20px; font-size:20px;">📋 Attendance Records</h3>
+            <h3 style="color:#F5E6D3; margin-bottom:20px;">📋 Attendance Records</h3>
             <div class="filter-bar">
                 <select id="filterName"><option value="">All Members</option></select>
                 <select id="filterCategory"><option value="">All Categories</option><option value="Major">Major Functions</option><option value="Minor">Minor Functions</option></select>
@@ -571,11 +469,16 @@
                 <button id="exportCSV">📥 Export CSV</button>
                 <button id="deleteAll" style="background:#8B4513;">🗑️ Delete All</button>
             </div>
-            <div id="recordsTable"></div>
+            <div id="recordsTable"><div class="loading">Loading records...</div></div>
         </div>
     </div>
 
     <script>
+        // ============================================
+        // REPLACE THIS WITH YOUR GOOGLE SHEETS API URL
+        // ============================================
+        const API_URL = 'https://script.google.com/macros/s/AKfycbyJd37OSQu8j8_m9LB4Qt3dCl-YKiYQlGPSLbLIWeQWvr9eX3NafwwxBB0HW-Oe_seURA/exec';
+        
         const members = [
             { name: "Agarin, Christine", locale: "Bulihan", voice: "Soprano 2" },
             { name: "Imoria, Sheena Mae Joy", locale: "Tartaria", voice: "Soprano 2" },
@@ -594,6 +497,7 @@
 
         let attendanceData = [];
 
+        // Helper Functions
         function formatDate(dateStr) {
             if (!dateStr) return '';
             let d = new Date(dateStr);
@@ -607,18 +511,46 @@
             return days[new Date(dateStr).getDay()];
         }
 
-        function loadData() {
-            let stored = localStorage.getItem('pagsulongAttendance');
-            attendanceData = stored ? JSON.parse(stored) : [];
-            renderMembers();
-            populateFilters();
-            renderAttendanceTable();
+        // API Functions
+        async function fetchAllRecords() {
+            try {
+                const response = await fetch(API_URL);
+                const data = await response.json();
+                if (data.error) throw new Error(data.error);
+                attendanceData = data;
+                return data;
+            } catch (error) {
+                console.error('Error fetching records:', error);
+                showMessage('formMessage', '❌ Failed to load data from Google Sheets', 'error');
+                return [];
+            }
         }
 
-        function saveData() {
-            localStorage.setItem('pagsulongAttendance', JSON.stringify(attendanceData));
+        async function addRecord(record) {
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(record)
+                });
+                return { success: true };
+            } catch (error) {
+                console.error('Error adding record:', error);
+                return { success: false, error: error.message };
+            }
         }
 
+        async function deleteRecordById(id) {
+            try {
+                await fetch(`${API_URL}?id=${id}`, { method: 'DELETE' });
+                return { success: true };
+            } catch (error) {
+                return { success: false };
+            }
+        }
+
+        // Render Functions
         function renderMembers() {
             document.getElementById('membersGrid').innerHTML = members.map(m => `
                 <div class="member-card">
@@ -629,18 +561,13 @@
             `).join('');
         }
 
-        function populateFilters() {
-            let filterName = document.getElementById('filterName');
-            filterName.innerHTML = '<option value="">All Members</option>' + members.map(m => `<option value="${m.name}">${m.name}</option>`).join('');
-        }
-
         function renderAttendanceTable() {
             document.getElementById('attendanceTableBody').innerHTML = members.map(m => `
                 <tr>
                     <td class="member-name-cell"><strong>${m.name}</strong><br><small>${m.voice} | ${m.locale}</small></td>
                     <td><select class="status-select" data-member="${m.name}"><option value="">-- Select Status --</option>${statusOptions.map(opt => `<option value="${opt.value}">${opt.label}</option>`).join('')}</select></td>
                     <td><input type="text" class="reason-input" data-member="${m.name}" placeholder="Reason for PF/NF or Absent"></td>
-                </tr>
+                 </tr>
             `).join('');
             
             document.getElementById('masterDate').valueAsDate = new Date();
@@ -668,71 +595,13 @@
             eventSelect.innerHTML = '<option value="">-- Select Event --</option>' + events.map(e => `<option value="${e}">${e}</option>`).join('');
         }
 
-        document.getElementById('masterCategory').addEventListener('change', updateMasterEventDropdown);
-
-        document.getElementById('submitAttendanceBtn').addEventListener('click', () => {
-            let masterDate = document.getElementById('masterDate').value;
-            let masterCategory = document.getElementById('masterCategory').value;
-            let masterEvent = document.getElementById('masterEvent').value;
-            
-            if (!masterDate || !masterCategory || !masterEvent) {
-                document.getElementById('formMessage').innerHTML = '<div class="error-msg">❌ Please fill Date, Category, and Event</div>';
-                setTimeout(() => document.getElementById('formMessage').innerHTML = '', 3000);
-                return;
-            }
-            
-            let errors = [];
-            let submitted = 0;
-            
-            members.forEach(member => {
-                let statusSelect = document.querySelector(`.status-select[data-member="${member.name}"]`);
-                let reasonInput = document.querySelector(`.reason-input[data-member="${member.name}"]`);
-                let status = statusSelect?.value;
-                let reason = reasonInput?.value || '';
-                
-                if (!status) {
-                    errors.push(`${member.name}: No status selected`);
-                    return;
-                }
-                if ((status === 'PNF' || status === 'A') && !reason) {
-                    errors.push(`${member.name}: Reason required for ${status}`);
-                    return;
-                }
-                
-                attendanceData.push({
-                    name: member.name,
-                    date: masterDate,
-                    category: masterCategory,
-                    event: masterEvent,
-                    status: status === 'PF' ? 'P' : status,
-                    reason: reason
-                });
-                submitted++;
-            });
-            
-            if (errors.length) {
-                document.getElementById('formMessage').innerHTML = `<div class="error-msg">❌ ${errors.join('<br>')}</div>`;
-                setTimeout(() => document.getElementById('formMessage').innerHTML = '', 5000);
-                return;
-            }
-            
-            saveData();
-            document.getElementById('formMessage').innerHTML = `<div class="success-msg">✅ ${submitted} attendance records submitted!</div>`;
-            setTimeout(() => document.getElementById('formMessage').innerHTML = '', 3000);
-            
-            document.querySelectorAll('.status-select').forEach(s => s.value = '');
-            document.querySelectorAll('.reason-input').forEach(r => r.value = '');
-            renderSummary();
-        });
-
-        // RENDER SUMMARY - WITHOUT TOTAL COLUMNS
+        // Summary Functions
         function renderSummary() {
             renderCategorySummary('Major', majorEvents, 'majorHeader', 'majorBody');
             renderCategorySummary('Minor', minorEvents, 'minorHeader', 'minorBody');
         }
 
         function renderCategorySummary(category, events, headerId, bodyId) {
-            // Count P (Present) per member per event
             let pCounts = {};
             members.forEach(m => { 
                 pCounts[m.name] = {};
@@ -747,21 +616,11 @@
                 }
             });
             
-            // Build Header - Only Event Columns + RATE + REMARKS
             document.getElementById(headerId).innerHTML = `<tr><th>NAME / VOICE</th>${events.map(e => `<th>${e}</th>`).join('')}<th>ATTENDANCE RATE</th><th>REMARKS</th></tr>`;
             
-            // Build Body
-            let totalPPerMember = {};
-            members.forEach(m => {
-                let total = 0;
-                events.forEach(e => { total += pCounts[m.name][e]; });
-                totalPPerMember[m.name] = total;
-            });
-            
             let maxPossible = events.length;
-            
             document.getElementById(bodyId).innerHTML = members.map(m => {
-                let totalP = totalPPerMember[m.name];
+                let totalP = events.reduce((sum, e) => sum + pCounts[m.name][e], 0);
                 let rate = maxPossible > 0 ? (totalP / maxPossible * 100).toFixed(1) : 0;
                 let remarks = rate >= 80 ? 'COMPLETE' : 'INCOMPLETE';
                 return `<tr>
@@ -773,50 +632,7 @@
             }).join('');
         }
 
-        // SAVE AS JPG FUNCTION
-        document.getElementById('saveAsJpgBtn')?.addEventListener('click', async function() {
-            const summaryContent = document.getElementById('summaryContent');
-            if (!summaryContent) return;
-            
-            // Show loading state
-            const originalText = this.innerHTML;
-            this.innerHTML = '📸 Generating...';
-            this.disabled = true;
-            
-            try {
-                const canvas = await html2canvas(summaryContent, {
-                    scale: 2,
-                    backgroundColor: '#18230F',
-                    logging: false,
-                    useCORS: true
-                });
-                
-                const link = document.createElement('a');
-                const timestamp = new Date().toISOString().slice(0, 19).replace(/:/g, '-');
-                link.download = `attendance_summary_${timestamp}.png`;
-                link.href = canvas.toDataURL('image/png');
-                link.click();
-                
-                // Show success message
-                const msgDiv = document.createElement('div');
-                msgDiv.className = 'success-msg';
-                msgDiv.innerHTML = '✅ Summary report saved as JPG!';
-                summaryContent.parentNode.insertBefore(msgDiv, summaryContent.nextSibling);
-                setTimeout(() => msgDiv.remove(), 3000);
-                
-            } catch (error) {
-                console.error('Error generating image:', error);
-                const errorDiv = document.createElement('div');
-                errorDiv.className = 'error-msg';
-                errorDiv.innerHTML = '❌ Failed to save image. Please try again.';
-                summaryContent.parentNode.insertBefore(errorDiv, summaryContent.nextSibling);
-                setTimeout(() => errorDiv.remove(), 3000);
-            } finally {
-                this.innerHTML = originalText;
-                this.disabled = false;
-            }
-        });
-
+        // Records Function
         function loadRecords() {
             let filtered = attendanceData.filter(r => {
                 if (document.getElementById('filterName').value && r.name !== document.getElementById('filterName').value) return false;
@@ -833,7 +649,6 @@
             }
             
             document.getElementById('recordsTable').innerHTML = `<div class="records-container"><table class="records-table"><thead><tr><th>DATE</th><th>NAME</th><th>CATEGORY</th><th>EVENT</th><th>STATUS</th><th>REASON</th><th>ACTION</th></tr></thead><tbody>${filtered.map((r, i) => {
-                let idx = attendanceData.findIndex(x => x.name === r.name && x.date === r.date && x.event === r.event);
                 let statusDisplay = r.status === 'P' ? 'PF' : r.status;
                 return `<tr>
                     <td>${formatDate(r.date)}<br><span style="font-size:10px;">${getDayName(r.date)}</span></td>
@@ -842,26 +657,30 @@
                     <td>${r.event}</td>
                     <td><span class="status-${r.status === 'P' ? 'pf' : r.status.toLowerCase()}">${statusDisplay}</span></td>
                     <td>${r.reason || '-'}</td>
-                    <td><button onclick="deleteRecord(${idx})">Delete</button></td>
+                    <td><button onclick="deleteRecord(${i})">Delete</button></td>
                 </tr>`;
             }).join('')}</tbody></table></div><p style="margin-top:10px;">Total: ${filtered.length} records</p>`;
         }
 
-        window.deleteRecord = function(idx) {
+        window.deleteRecord = async function(index) {
             if (confirm('Delete this record?')) {
-                attendanceData.splice(idx, 1);
-                saveData();
-                loadRecords();
+                const record = attendanceData[index];
+                if (record && record.id) {
+                    await deleteRecordById(record.id);
+                }
+                await fetchAllRecords();
                 renderSummary();
+                loadRecords();
+                showMessage('formMessage', '✅ Record deleted successfully!', 'success');
             }
         };
 
         function deleteAllRecords() {
-            if (confirm('Delete ALL records?')) {
+            if (confirm('⚠️ Delete ALL records? This cannot be undone!')) {
                 attendanceData = [];
-                saveData();
-                loadRecords();
                 renderSummary();
+                loadRecords();
+                showMessage('formMessage', '✅ All records deleted!', 'success');
             }
         }
 
@@ -880,19 +699,125 @@
             document.getElementById('filterEvent').innerHTML = '<option value="">All Events</option>' + [...majorEvents, ...minorEvents].map(e => `<option value="${e}">${e}</option>`).join('');
         }
 
+        function showMessage(elementId, message, type) {
+            const msgDiv = document.getElementById(elementId);
+            msgDiv.innerHTML = `<div class="${type === 'success' ? 'success-msg' : 'error-msg'}">${message}</div>`;
+            setTimeout(() => msgDiv.innerHTML = '', 3000);
+        }
+
+        // Submit Attendance
+        document.getElementById('submitAttendanceBtn').addEventListener('click', async () => {
+            let masterDate = document.getElementById('masterDate').value;
+            let masterCategory = document.getElementById('masterCategory').value;
+            let masterEvent = document.getElementById('masterEvent').value;
+            
+            if (!masterDate || !masterCategory || !masterEvent) {
+                showMessage('formMessage', '❌ Please fill Date, Category, and Event', 'error');
+                return;
+            }
+            
+            let errors = [];
+            let submitted = 0;
+            
+            for (let member of members) {
+                let statusSelect = document.querySelector(`.status-select[data-member="${member.name}"]`);
+                let reasonInput = document.querySelector(`.reason-input[data-member="${member.name}"]`);
+                let status = statusSelect?.value;
+                let reason = reasonInput?.value || '';
+                
+                if (!status) {
+                    errors.push(`${member.name}: No status selected`);
+                    continue;
+                }
+                if ((status === 'PNF' || status === 'A') && !reason) {
+                    errors.push(`${member.name}: Reason required for ${status}`);
+                    continue;
+                }
+                
+                let result = await addRecord({
+                    name: member.name,
+                    date: masterDate,
+                    category: masterCategory,
+                    event: masterEvent,
+                    status: status === 'PF' ? 'P' : status,
+                    reason: reason
+                });
+                
+                if (result.success) submitted++;
+                else errors.push(`${member.name}: Failed to save`);
+            }
+            
+            if (errors.length) {
+                showMessage('formMessage', `❌ ${errors.join('<br>')}`, 'error');
+            } else {
+                showMessage('formMessage', `✅ ${submitted} attendance records submitted!`, 'success');
+            }
+            
+            document.querySelectorAll('.status-select').forEach(s => s.value = '');
+            document.querySelectorAll('.reason-input').forEach(r => r.value = '');
+            
+            await fetchAllRecords();
+            renderSummary();
+            loadRecords();
+        });
+
+        // Save as JPG
+        document.getElementById('saveAsJpgBtn')?.addEventListener('click', async function() {
+            const summaryContent = document.getElementById('summaryContent');
+            if (!summaryContent) return;
+            
+            const originalText = this.innerHTML;
+            this.innerHTML = '📸 Generating...';
+            this.disabled = true;
+            
+            try {
+                const canvas = await html2canvas(summaryContent, {
+                    scale: 2,
+                    backgroundColor: '#18230F',
+                    logging: false
+                });
+                
+                const link = document.createElement('a');
+                const timestamp = new Date().toISOString().slice(0, 19).replace(/:/g, '-');
+                link.download = `attendance_summary_${timestamp}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+                
+                showMessage('formMessage', '✅ Summary saved as JPG!', 'success');
+            } catch (error) {
+                showMessage('formMessage', '❌ Failed to save image', 'error');
+            } finally {
+                this.innerHTML = originalText;
+                this.disabled = false;
+            }
+        });
+
+        // Tab Switching
         document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
+            btn.addEventListener('click', async function() {
                 let tab = this.dataset.tab;
                 document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
                 document.querySelectorAll('.tab-btn').forEach(tb => tb.classList.remove('active'));
                 this.classList.add('active');
                 document.getElementById(tab + 'Tab').classList.add('active');
-                if (tab === 'summary') renderSummary();
-                if (tab === 'records') { updateFilterEvents(); loadRecords(); }
+                
+                if (tab === 'summary') {
+                    await fetchAllRecords();
+                    renderSummary();
+                }
+                if (tab === 'records') {
+                    await fetchAllRecords();
+                    updateFilterEvents();
+                    loadRecords();
+                }
             });
         });
 
-        document.getElementById('refreshRecords')?.addEventListener('click', loadRecords);
+        // Event Listeners
+        document.getElementById('refreshRecords')?.addEventListener('click', async () => {
+            await fetchAllRecords();
+            loadRecords();
+        });
         document.getElementById('exportCSV')?.addEventListener('click', exportToCSV);
         document.getElementById('deleteAll')?.addEventListener('click', deleteAllRecords);
         document.getElementById('filterName')?.addEventListener('change', loadRecords);
@@ -900,11 +825,19 @@
         document.getElementById('filterEvent')?.addEventListener('change', loadRecords);
         document.getElementById('dateFrom')?.addEventListener('change', loadRecords);
         document.getElementById('dateTo')?.addEventListener('change', loadRecords);
+        document.getElementById('masterCategory').addEventListener('change', updateMasterEventDropdown);
 
-        loadData();
-        updateFilterEvents();
-        renderSummary();
-        updateMasterEventDropdown();
+        // Initialize
+        async function init() {
+            renderMembers();
+            renderAttendanceTable();
+            updateMasterEventDropdown();
+            updateFilterEvents();
+            await fetchAllRecords();
+            renderSummary();
+        }
+        
+        init();
     </script>
 </body>
 </html>
