@@ -1,7 +1,7 @@
 // ============================================
 // IMPORTANT: REPLACE WITH YOUR DEPLOYED APPS SCRIPT URL
 // ============================================
-const API_URL = 'https://script.google.com/macros/s/AKfycbzxnnpIiwMGS4ftVCOMIIzk_mlmEIq73BFTqSDfW-vqCsHw4K8LEVXAJyS1arGZqx9rgQ/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycbzc_C9xs6GiyX2Bq6-0cixdSXIrJgYaEFddAYsv7fUADJTzPRVlEvpJN_8yfYWNWs5l_w/exec';
 
 const majorEvents = ["PM", "WS", "TG", "HARANA", "COMBINED PM/WS", "LORD SUPPER", "CNY", "SPBB DAY 1", "SPBB DAY 2", "SPBB DAY 3"];
 const minorEvents = ["24/7", "LMI", "MCGI CARES", "SK EVENING", "SK AFTERNOON"];
