@@ -387,16 +387,10 @@ function renderCategory(category, events, headerId, bodyId) {
         <tr>
             <th>NAME / VOICE</th>
             ${events.map(e => `<th>${e}</th>`).join('')}
-            <th>RATE</th>
-            <th>REMARKS</th>
         </tr>
     `;
 
-    let maxPossible = events.length;
     document.getElementById(bodyId).innerHTML = members.map(m => {
-        let total = events.reduce((s, e) => s + counts[m.name][e], 0);
-        let rate = maxPossible > 0 ? (total / maxPossible * 100).toFixed(1) : 0;
-        let remarks = rate >= 80 ? 'COMPLETE' : 'INCOMPLETE';
         return `
             <tr>
                 <td>
@@ -404,8 +398,6 @@ function renderCategory(category, events, headerId, bodyId) {
                     <small>${m.voice}</small>
                 </td>
                 ${events.map(e => `<td><strong>${counts[m.name][e]}</strong></td>`).join('')}
-                <td><strong>${rate}%</strong></td>
-                <td class="${remarks === 'COMPLETE' ? 'complete' : 'incomplete'}">${remarks}</td>
             </tr>
         `;
     }).join('');
@@ -558,8 +550,7 @@ document.getElementById('createBatchBtn').addEventListener('click', () => {
             <input type="text" id="traineeVoice1" placeholder="e.g., Soprano 2">
         </div>
     `;
-    let nextNum = availableBatches.length + 13;
-    document.getElementById('newBatchName').value = `Batch${nextNum}`;
+    document.getElementById('newBatchName').value = '';
     document.getElementById('createBatchModal').style.display = 'flex';
 });
 
@@ -582,8 +573,13 @@ document.getElementById('addTraineeBtn').addEventListener('click', () => {
 });
 
 document.getElementById('modalConfirmBtn').addEventListener('click', async () => {
-    let batchName = document.getElementById('newBatchName').value;
+    let batchName = document.getElementById('newBatchName').value.trim();
     let trainees = [];
+
+    if (!batchName) {
+        alert('Please enter a batch name');
+        return;
+    }
 
     for (let i = 1; i <= traineeCount; i++) {
         let name = document.getElementById(`traineeName${i}`)?.value;
