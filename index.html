@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagsulong Attendance System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="header"><img src="header.png" alt="Pagsulong Attendance System"></div>
+
+    <div class="batch-bar">
+        <div class="batch-info">
+            <span class="batch-label" id="currentBatchLabel">Loading...</span>
+            <select id="batchSelect" class="batch-select"></select>
+            <button id="switchBatchBtn">Switch Batch</button>
+        </div>
+        <button id="createBatchBtn" class="btn-create">Create Another Batch</button>
+    </div>
+
+    <div class="members-grid" id="membersGrid"><div class="loading">Loading members...</div></div>
+
+    <div class="tabs">
+        <button class="tab-btn active" data-tab="form">Add Attendance</button>
+        <button class="tab-btn" data-tab="summary">Summary Report</button>
+        <button class="tab-btn" data-tab="records">View Records</button>
+    </div>
+
+    <div id="formTab" class="tab-content active">
+        <h3 style="color:white; margin-bottom:20px;">Record Attendance for <span id="formBatchName">...</span></h3>
+        <div class="master-controls">
+            <div class="control-group"><label>Date</label><input type="date" id="masterDate"></div>
+            <div class="control-group"><label>Category</label>
+                <select id="masterCategory">
+                    <option value="">-- Select --</option>
+                    <option value="Major">MAJOR FUNCTIONS</option>
+                    <option value="Minor">MINOR FUNCTIONS</option>
+                </select>
+            </div>
+            <div class="control-group"><label>Event</label><select id="masterEvent"><option value="">-- Select Event --</option></select></div>
+        </div>
+        <table class="attendance-table">
+            <thead><tr><th>NAME / VOICE</th><th>STATUS</th><th>REASON (if PNF or Absent)</th></tr></thead>
+            <tbody id="attendanceTableBody"></tbody>
+        </table>
+        <button id="submitAttendanceBtn">Submit All Attendance</button>
+        <div id="formMessage"></div>
+    </div>
+
+    <div id="summaryTab" class="tab-content">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+            <h3 style="color:white;">Summary Report - <span id="summaryBatchName">...</span></h3>
+            <button id="saveAsJpgBtn">Save as JPG</button>
+        </div>
+        <div id="summaryContent">
+            <div class="tab-section"><h4 style="color:white;">MAJOR FUNCTIONS</h4>
+                <table class="summary-table" id="majorTable"><thead id="majorHeader"></thead><tbody id="majorBody"><tr><td class="loading">Loading...</td></tr></tbody></table>
+            </div>
+            <div class="tab-section"><h4 style="color:white;">MINOR FUNCTIONS</h4>
+                <table class="summary-table" id="minorTable"><thead id="minorHeader"></thead><tbody id="minorBody"><tr><td class="loading">Loading...</td></tr></tbody></table>
+            </div>
+        </div>
+    </div>
+
+    <div id="recordsTab" class="tab-content">
+        <h3 style="color:white; margin-bottom:20px;">Attendance Records - <span id="recordsBatchName">...</span></h3>
+        <div class="filter-bar">
+            <select id="filterName"><option value="">All Members</option></select>
+            <select id="filterCategory"><option value="">All Categories</option><option value="Major">Major</option><option value="Minor">Minor</option></select>
+            <select id="filterEvent"><option value="">All Events</option></select>
+            <div>
+                <input type="date" id="dateFrom" placeholder="From">
+                <input type="date" id="dateTo" placeholder="To">
+            </div>
+            <button id="refreshRecords">Refresh</button>
+            <button id="exportCSV" style="background:#6FCF97; color:#1F6F5F;">Export CSV</button>
+            <button id="deleteAll" class="btn-danger">Delete All</button>
+        </div>
+        <div id="recordsTable"><div class="loading">Loading records...</div></div>
+    </div>
+</div>
+
+<div id="createBatchModal" class="modal">
+    <div class="modal-content">
+        <h3>Create New Batch</h3>
+        <div class="modal-form-group"><label>Batch Name:</label><input type="text" id="newBatchName" readonly></div>
+        <div id="traineesContainer">
+            <div class="modal-form-group"><label>Trainee 1 - Name:</label><input type="text" id="traineeName1" placeholder="Full Name"></div>
+            <div class="modal-form-group"><label>Locale:</label><input type="text" id="traineeLocale1" placeholder="e.g., Bulihan"></div>
+            <div class="modal-form-group"><label>Voice:</label><input type="text" id="traineeVoice1" placeholder="e.g., Soprano 2"></div>
+        </div>
+        <button id="addTraineeBtn">+ Add Another Trainee</button>
+        <div class="modal-buttons">
+            <button id="modalConfirmBtn" style="background:#6FCF97; color:#1F6F5F;">Create Batch</button>
+            <button id="modalCancelBtn" class="btn-danger">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="app.supabase.js"></script>
+</body>
+</html>
