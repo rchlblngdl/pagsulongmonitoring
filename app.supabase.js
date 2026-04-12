@@ -249,6 +249,44 @@ async function deleteAllRecords() {
     return { success: !error };
 }
 
+async function deleteBatch(batchName) {
+    const { data: batchData, error: batchError } = await getSupabase()
+        .from('batches')
+        .select('id')
+        .eq('name', batchName)
+        .single();
+
+    if (batchError || !batchData) {
+        showMessage('formMessage', 'Batch not found', 'error');
+        return false;
+    }
+
+    // Delete attendance records
+    await getSupabase()
+        .from('attendance')
+        .delete()
+        .eq('batch_id', batchData.id);
+
+    // Delete members
+    await getSupabase()
+        .from('members')
+        .delete()
+        .eq('batch_id', batchData.id);
+
+    // Delete the batch itself
+    const { error } = await getSupabase()
+        .from('batches')
+        .delete()
+        .eq('id', batchData.id);
+
+    if (error) {
+        showMessage('formMessage', 'Failed to delete batch', 'error');
+        return false;
+    }
+
+    return true;
+}
+
 // ============================================
 // UI FUNCTIONS (same as before, adapted for Supabase)
 // ============================================
@@ -575,6 +613,30 @@ document.getElementById('modalCancelBtn').addEventListener('click', () => {
 
 document.getElementById('switchBatchBtn').addEventListener('click', async () => {
     await switchToBatch(document.getElementById('batchSelect').value);
+});
+
+document.getElementById('deleteBatchBtn').addEventListener('click', async () => {
+    const batchToDelete = document.getElementById('batchSelect').value;
+    if (confirm(`Are you sure you want to delete "${batchToDelete}"? This will remove all members and attendance records.`)) {
+        const success = await deleteBatch(batchToDelete);
+        if (success) {
+            await loadBatches();
+            if (availableBatches.length > 0) {
+                await switchToBatch(availableBatches[0]);
+            } else {
+                currentBatch = '';
+                members = [];
+                attendanceData = [];
+                renderMembersGrid();
+                renderAttendanceTable();
+                renderSummary();
+                loadRecords();
+                updateFilters();
+                updateBatchUI();
+            }
+            showMessage('formMessage', `Deleted ${batchToDelete}`, 'success');
+        }
+    }
 });
 
 document.getElementById('refreshRecords').addEventListener('click', loadAttendance);
