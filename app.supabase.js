@@ -16,7 +16,7 @@ function getSupabase() {
 
 const majorEvents = ["PM", "WS", "TG", "HARANA", "COMBINED PM/WS", "LORD SUPPER", "CNY", "SPBB DAY 1", "SPBB DAY 2", "SPBB DAY 3"];
 const minorEvents = ["24/7", "LMI", "MCGI CARES", "SK EVENING", "SK AFTERNOON"];
-const statusOptions = ["Present/Function", "P(not Function)", "PNF(other Task)", "Absent", "No Report", "P(via FB)", "P(via MCGI TV)", "P(via Other Platform)", "P(as Live Audience)"];
+const statusOptions = ["Present/Function", "Present(not Function)", "PNF(other Task)", "Absent", "No Report", "P(via FB)", "P(via MCGI TV)", "P(via Other Platform)", "P(as Live Audience)"];
 
 let members = [];
 let attendanceData = [];
