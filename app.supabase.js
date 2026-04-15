@@ -359,10 +359,13 @@ function renderAttendanceTable() {
 }
 
 function updateMasterEvent() {
-    let cat = document.getElementById('masterCategory').value;
-    let events = cat === 'Major' ? majorEvents : (cat === 'Minor' ? minorEvents : []);
     let select = document.getElementById('masterEvent');
-    select.innerHTML = '<option value="">-- Select Event --</option>' + events.map(e => `<option value="${e}">${e}</option>`).join('');
+    let allEvents = [...majorEvents, ...minorEvents];
+    select.innerHTML = '<option value="">-- Select Event --</option>' + allEvents.map(e => `<option value="${e}">${e}</option>`).join('');
+}
+
+function getCategoryFromEvent(event) {
+    return majorEvents.includes(event) ? 'Major' : 'Minor';
 }
 
 function renderSummary() {
@@ -406,7 +409,6 @@ function renderCategory(category, events, headerId, bodyId) {
 function loadRecords() {
     let filtered = attendanceData.filter(r => {
         if (document.getElementById('filterName').value && r.name !== document.getElementById('filterName').value) return false;
-        if (document.getElementById('filterCategory').value && r.category !== document.getElementById('filterCategory').value) return false;
         if (document.getElementById('filterEvent').value && r.event !== document.getElementById('filterEvent').value) return false;
         if (document.getElementById('dateFrom').value && r.date < document.getElementById('dateFrom').value) return false;
         if (document.getElementById('dateTo').value && r.date > document.getElementById('dateTo').value) return false;
@@ -435,7 +437,6 @@ function loadRecords() {
                 <tr>
                     <th>DATE</th>
                     <th>NAME</th>
-                    <th>CATEGORY</th>
                     <th>EVENT</th>
                     <th>STATUS</th>
                     <th>REASON</th>
@@ -450,7 +451,6 @@ function loadRecords() {
                             <small>${getDayName(r.date)}</small>
                         </td>
                         <td>${r.name}</td>
-                        <td>${r.category === 'Major' ? 'Major' : 'Minor'}</td>
                         <td>${r.event}</td>
                         <td><span class="status-${r.status === 'P' ? 'pf' : r.status.toLowerCase()}">${r.status === 'P' ? 'PF' : r.status}</span></td>
                         <td>${r.reason || '-'}</td>
@@ -487,13 +487,14 @@ function updateFilters() {
 // Event Listeners
 document.getElementById('submitAttendanceBtn').addEventListener('click', async () => {
     let date = document.getElementById('masterDate').value;
-    let category = document.getElementById('masterCategory').value;
     let event = document.getElementById('masterEvent').value;
 
-    if (!date || !category || !event) {
+    if (!date || !event) {
         showMessage('formMessage', 'Fill all fields', 'error');
         return;
     }
+
+    let category = getCategoryFromEvent(event);
 
     let errors = [], submitted = 0;
     for (let member of members) {
@@ -657,9 +658,7 @@ document.getElementById('deleteAll').addEventListener('click', async () => {
     }
 });
 
-document.getElementById('masterCategory').addEventListener('change', updateMasterEvent);
 document.getElementById('filterName')?.addEventListener('change', loadRecords);
-document.getElementById('filterCategory')?.addEventListener('change', loadRecords);
 document.getElementById('filterEvent')?.addEventListener('change', loadRecords);
 document.getElementById('dateFrom')?.addEventListener('change', loadRecords);
 document.getElementById('dateTo')?.addEventListener('change', loadRecords);

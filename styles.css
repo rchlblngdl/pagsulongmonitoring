@@ -376,6 +376,16 @@ button:active {
     letter-spacing: 0.5px;
 }
 
+.attendance-table th:first-child,
+.attendance-table td:first-child {
+    text-align: left;
+}
+
+.attendance-table th:not(:first-child),
+.attendance-table td:not(:first-child) {
+    text-align: center;
+}
+
 .attendance-table tr:hover {
     background: var(--bg-card-hover);
 }
@@ -464,6 +474,21 @@ button:active {
     font-weight: 600;
     font-size: 12px;
     text-transform: uppercase;
+    text-align: left;
+}
+
+.records-table th:first-child,
+.records-table td:first-child {
+    text-align: left;
+}
+
+.records-table th:not(:first-child),
+.records-table td:not(:first-child) {
+    text-align: center;
+}
+
+.records-table td:last-child {
+    text-align: center;
 }
 
 .records-table tr:hover {

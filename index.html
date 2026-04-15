@@ -35,13 +35,6 @@
         <h3 style="color:white; margin-bottom:20px;">Record Attendance for <span id="formBatchName">...</span></h3>
         <div class="master-controls">
             <div class="control-group"><label>Date</label><input type="date" id="masterDate"></div>
-            <div class="control-group"><label>Category</label>
-                <select id="masterCategory">
-                    <option value="">-- Select --</option>
-                    <option value="Major">MAJOR FUNCTIONS</option>
-                    <option value="Minor">MINOR FUNCTIONS</option>
-                </select>
-            </div>
             <div class="control-group"><label>Event</label><select id="masterEvent"><option value="">-- Select Event --</option></select></div>
         </div>
         <table class="attendance-table">
@@ -58,10 +51,10 @@
             <button id="saveAsJpgBtn">Save as JPG</button>
         </div>
         <div id="summaryContent">
-            <div class="tab-section"><h4 style="color:white;">MAJOR FUNCTIONS</h4>
+            <div class="tab-section">
                 <table class="summary-table" id="majorTable"><thead id="majorHeader"></thead><tbody id="majorBody"><tr><td class="loading">Loading...</td></tr></tbody></table>
             </div>
-            <div class="tab-section"><h4 style="color:white;">MINOR FUNCTIONS</h4>
+            <div class="tab-section">
                 <table class="summary-table" id="minorTable"><thead id="minorHeader"></thead><tbody id="minorBody"><tr><td class="loading">Loading...</td></tr></tbody></table>
             </div>
         </div>
@@ -71,7 +64,6 @@
         <h3 style="color:white; margin-bottom:20px;">Attendance Records - <span id="recordsBatchName">...</span></h3>
         <div class="filter-bar">
             <select id="filterName"><option value="">All Members</option></select>
-            <select id="filterCategory"><option value="">All Categories</option><option value="Major">Major</option><option value="Minor">Minor</option></select>
             <select id="filterEvent"><option value="">All Events</option></select>
             <div>
                 <input type="date" id="dateFrom" placeholder="From">
