@@ -16,7 +16,7 @@ function getSupabase() {
 
 const majorEvents = ["PM", "WS", "TG", "HARANA", "COMBINED PM/WS", "LORD SUPPER", "CNY", "SPBB DAY 1", "SPBB DAY 2", "SPBB DAY 3"];
 const minorEvents = ["24/7", "LMI", "MCGI CARES", "SK EVENING", "SK AFTERNOON"];
-const statusOptions = ["Present/Function", "Present(not Function)", "PNF(other Task)", "Absent", "No Report", "P(via FB)", "P(via MCGI TV)", "P(via Other Platform)", "P(as Live Audience)"];
+const statusOptions = ["Present/Function", "Present(not Function)", "Present", "PNF(other Task)", "Absent", "No Report"];
 
 let members = [];
 let attendanceData = [];
@@ -347,7 +347,7 @@ function renderAttendanceTable() {
     document.querySelectorAll('.status-select').forEach(s => {
         s.addEventListener('change', function () {
             let reason = document.querySelector(`.reason-input[data-name="${this.dataset.name}"]`);
-            if (this.value === 'PNF' || this.value === 'A') {
+            if (this.value === 'PNF(other Task)' || this.value === 'Absent') {
                 reason.required = true;
                 reason.placeholder = "Required: Enter reason...";
             } else {
@@ -381,7 +381,7 @@ function renderCategory(category, events, headerId, bodyId) {
     });
 
     attendanceData.forEach(r => {
-        if (r.category === category && r.status === 'P' && counts[r.name]) {
+        if (r.category === category && (r.status === 'Present/Function' || r.status === 'Present') && counts[r.name]) {
             counts[r.name][r.event]++;
         }
     });
@@ -452,7 +452,7 @@ function loadRecords() {
                         </td>
                         <td>${r.name}</td>
                         <td>${r.event}</td>
-                        <td><span class="status-${r.status === 'P' ? 'pf' : r.status.toLowerCase()}">${r.status === 'P' ? 'PF' : r.status}</span></td>
+                        <td><span class="status-${r.status === 'Present/Function' || r.status === 'Present' ? 'pf' : r.status.toLowerCase()}">${r.status}</span></td>
                         <td>${r.reason || '-'}</td>
                         <td><button onclick="deleteRecord(${i})" class="btn-danger delete-btn">Delete</button></td>
                     </tr>
@@ -505,13 +505,12 @@ document.getElementById('submitAttendanceBtn').addEventListener('click', async (
             errors.push(`${member.name}: No status`);
             continue;
         }
-        if ((status === 'PNF' || status === 'A') && !reason) {
+        if ((status === 'PNF(other Task)' || status === 'Absent') && !reason) {
             errors.push(`${member.name}: Reason required`);
             continue;
         }
 
-        let storedStatus = status === 'PF' ? 'P' : status;
-        await addRecord({ name: member.name, date, category, event, status: storedStatus, reason });
+        await addRecord({ name: member.name, date, category, event, status: status, reason });
         submitted++;
     }
 
@@ -640,8 +639,7 @@ document.getElementById('refreshRecords').addEventListener('click', loadAttendan
 
 document.getElementById('exportCSV').addEventListener('click', () => {
     let csv = 'Name,Date,Category,Event,Status,Reason\n' + attendanceData.map(r => {
-        let displayStatus = r.status === 'P' ? 'PF' : r.status;
-        return `"${r.name}","${r.date}","${r.category}","${r.event}","${displayStatus}","${r.reason || ''}"`;
+        return `"${r.name}","${r.date}","${r.category}","${r.event}","${r.status}","${r.reason || ''}"`;
     }).join('\n');
 
     let blob = new Blob([csv], { type: 'text/csv' });
