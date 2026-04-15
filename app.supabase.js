@@ -16,7 +16,7 @@ function getSupabase() {
 
 const majorEvents = ["PM", "WS", "TG", "HARANA", "COMBINED PM/WS", "LORD SUPPER", "CNY", "SPBB DAY 1", "SPBB DAY 2", "SPBB DAY 3"];
 const minorEvents = ["24/7", "LMI", "MCGI CARES", "SK EVENING", "SK AFTERNOON"];
-const statusOptions = ["PF", "PNF", "A", "NR"];
+const statusOptions = ["Present/Function", "P(not Function)", "PNF(other Task)", "Absent", "No Report", "P(via FB)", "P(via MCGI TV)", "P(via Other Platform)", "P(as Live Audience)"];
 
 let members = [];
 let attendanceData = [];
@@ -339,7 +339,7 @@ function renderAttendanceTable() {
                 </select>
             </td>
             <td>
-                <input type="text" class="reason-input" data-name="${m.name}" placeholder="Reason for PNF or Absent">
+                <input type="text" class="reason-input" data-name="${m.name}" placeholder="Enter reason">
             </td>
         </tr>
     `).join('');
@@ -352,7 +352,7 @@ function renderAttendanceTable() {
                 reason.placeholder = "Required: Enter reason...";
             } else {
                 reason.required = false;
-                reason.placeholder = "Reason for PNF or Absent";
+                reason.placeholder = "Enter reason";
             }
         });
     });
