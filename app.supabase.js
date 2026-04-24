@@ -484,7 +484,10 @@ function normalizeEvent(name) {
 }
 
 function renderWeeklyReport() {
-    computeWeekRanges();
+    // Only compute default ranges if none exist yet
+    if (weekRanges.length === 0) {
+        computeWeekRanges();
+    }
 
     if (weekRanges.length === 0) {
         document.getElementById('weeklyTable').innerHTML = '<div class="loading">No records found</div>';
@@ -499,7 +502,15 @@ function renderWeeklyReport() {
     const weekNum = currentWeekIndex + 1;
 
     document.getElementById('weeklyHeader').style.display = 'block';
-    document.getElementById('weeklyWeekTitle').textContent = `Week ${weekNum} | ${week.label}`;
+    document.getElementById('weeklyWeekNum').textContent = 'Week ' + weekNum;
+    document.getElementById('weeklyWeekLabel').textContent = week.label;
+
+    renderWeeklyTableData();
+}
+
+function renderWeeklyTableData() {
+    const week = weekRanges[currentWeekIndex];
+    if (!week) return;
 
     const filtered = attendanceData.filter(r => r.date >= week.start && r.date <= week.end);
 
@@ -811,9 +822,86 @@ document.getElementById('filterEvent')?.addEventListener('change', loadRecords);
 document.getElementById('dateFrom')?.addEventListener('change', loadRecords);
 document.getElementById('dateTo')?.addEventListener('change', loadRecords);
 
+// Weekly Report Week Editor
+function openWeekEditor() {
+    // Initialize defaults if needed
+    if (weekRanges.length === 0) {
+        computeWeekRanges();
+    }
+
+    var container = document.getElementById('weeksEditorContainer');
+    var html = '';
+
+    for (var i = 0; i < weekRanges.length; i++) {
+        var w = weekRanges[i];
+        html += '<div style="display:flex; gap:12px; align-items:center; margin-bottom:12px; flex-wrap:wrap;">';
+        html += '<span style="width:60px; font-weight:600;">Week ' + (i + 1) + '</span>';
+        html += '<div class="modal-form-group" style="margin:0; flex:1;">';
+        html += '<label>Start Date</label>';
+        html += '<input type="date" id="weekStart' + i + '" value="' + w.start + '">';
+        html += '</div>';
+        html += '<div class="modal-form-group" style="margin:0; flex:1;">';
+        html += '<label>End Date</label>';
+        html += '<input type="date" id="weekEnd' + i + '" value="' + w.end + '">';
+        html += '</div>';
+        html += '<div class="modal-form-group" style="margin:0; flex:1;">';
+        html += '<label>Label</label>';
+        html += '<input type="text" id="weekLabel' + i + '" value="' + w.label + '">';
+        html += '</div>';
+        html += '</div>';
+    }
+
+    container.innerHTML = html;
+    document.getElementById('editWeeksModal').style.display = 'flex';
+}
+
+function saveWeeks() {
+    // Read form values
+    for (var i = 0; i < weekRanges.length; i++) {
+        var startEl = document.getElementById('weekStart' + i);
+        var endEl = document.getElementById('weekEnd' + i);
+        var labelEl = document.getElementById('weekLabel' + i);
+
+        if (startEl) weekRanges[i].start = startEl.value;
+        if (endEl) weekRanges[i].end = endEl.value;
+        if (labelEl) weekRanges[i].label = labelEl.value;
+    }
+
+    // Ensure index is valid
+    if (currentWeekIndex >= weekRanges.length) {
+        currentWeekIndex = weekRanges.length - 1;
+    }
+    if (currentWeekIndex < 0) currentWeekIndex = 0;
+
+    // Close modal
+    document.getElementById('editWeeksModal').style.display = 'none';
+
+    // Show success alert
+    alert('Date Saved!');
+
+    // Re-render with new values
+    renderWeeklyReport();
+}
+
+document.getElementById('saveWeeksBtn').addEventListener('click', saveWeeks);
+document.getElementById('cancelWeeksBtn').addEventListener('click', function() {
+    document.getElementById('editWeeksModal').style.display = 'none';
+});
+document.getElementById('cancelWeeksBtn')?.addEventListener('click', () => {
+    document.getElementById('editWeeksModal').style.display = 'none';
+});
+
 // Weekly Report
+document.getElementById('refreshWeekly')?.addEventListener('click', () => {
+    loadAttendance().then(() => {
+        renderWeeklyReport();
+    });
+});
+
 document.getElementById('exportWeeklyJPG')?.addEventListener('click', async function () {
-    computeWeekRanges();
+    if (weekRanges.length === 0) {
+        computeWeekRanges();
+    }
     if (weekRanges.length === 0) {
         alert('No data to export');
         return;
@@ -963,6 +1051,12 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
 
 // Modal backdrop close
 document.getElementById('createBatchModal').addEventListener('click', function (e) {
+    if (e.target === this) {
+        this.style.display = 'none';
+    }
+});
+
+document.getElementById('editWeeksModal').addEventListener('click', function (e) {
     if (e.target === this) {
         this.style.display = 'none';
     }
