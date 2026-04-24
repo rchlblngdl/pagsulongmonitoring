@@ -23,6 +23,8 @@ let attendanceData = [];
 let currentBatch = "";
 let availableBatches = [];
 let traineeCount = 1;
+let currentWeekIndex = 0;
+let weekRanges = [];
 
 // ============================================
 // DATABASE FUNCTIONS
@@ -302,6 +304,7 @@ function updateBatchUI() {
     document.getElementById('formBatchName').innerText = currentBatch;
     document.getElementById('summaryBatchName').innerText = currentBatch;
     document.getElementById('recordsBatchName').innerText = currentBatch;
+    document.getElementById('weeklyBatchName').innerText = currentBatch;
     const select = document.getElementById('batchSelect');
     select.innerHTML = availableBatches.map(b => `<option value="${b}" ${b === currentBatch ? 'selected' : ''}>${b}</option>`).join('');
 }
@@ -444,7 +447,9 @@ function loadRecords() {
                 </tr>
             </thead>
             <tbody>
-                ${filtered.map((r, i) => `
+                ${filtered.map((r, i) => {
+                    const origIndex = attendanceData.indexOf(r);
+                    return `
                     <tr>
                         <td>
                             ${formatDate(r.date)}<br>
@@ -454,14 +459,159 @@ function loadRecords() {
                         <td>${r.event}</td>
                         <td><span class="status-${r.status === 'Present/Function' || r.status === 'Present' ? 'pf' : r.status.toLowerCase()}">${r.status}</span></td>
                         <td>${r.reason || '-'}</td>
-                        <td><button onclick="deleteRecord(${i})" class="btn-danger delete-btn">Delete</button></td>
+                        <td><button onclick="deleteRecord(${origIndex})" class="btn-danger delete-btn">Delete</button></td>
                     </tr>
-                `).join('')}
+                `;
+            }).join('')}
             </tbody>
         </table>
         <p class="records-count">Total: ${filtered.length} records</p>
     `;
 }
+
+function computeWeekRanges() {
+    weekRanges = [
+        { start: '2026-04-01', end: '2026-04-04', label: 'April 1 – 4' },
+        { start: '2026-04-06', end: '2026-04-11', label: 'April 6 – 11' },
+        { start: '2026-04-13', end: '2026-04-18', label: 'April 13 – 18' },
+        { start: '2026-04-20', end: '2026-04-25', label: 'April 20 – 25' },
+        { start: '2026-04-27', end: '2026-04-30', label: 'April 27 – 30' }
+    ];
+}
+
+function normalizeEvent(name) {
+    return name.split(/\s+/).join(' ').trim().toUpperCase();
+}
+
+function renderWeeklyReport() {
+    computeWeekRanges();
+
+    if (weekRanges.length === 0) {
+        document.getElementById('weeklyTable').innerHTML = '<div class="loading">No records found</div>';
+        document.getElementById('weeklyHeader').style.display = 'none';
+        return;
+    }
+
+    if (currentWeekIndex >= weekRanges.length) currentWeekIndex = weekRanges.length - 1;
+    if (currentWeekIndex < 0) currentWeekIndex = 0;
+
+    const week = weekRanges[currentWeekIndex];
+    const weekNum = currentWeekIndex + 1;
+
+    document.getElementById('weeklyHeader').style.display = 'block';
+    document.getElementById('weeklyWeekTitle').textContent = `Week ${weekNum} | ${week.label}`;
+
+    const filtered = attendanceData.filter(r => r.date >= week.start && r.date <= week.end);
+
+    // Iterate all days in week (string-based)
+    const allDates = [];
+    let d = week.start;
+    while (d <= week.end) {
+        allDates.push(d);
+        const [y, m, day] = d.split('-').map(Number);
+        const next = new Date(y, m - 1, day + 1);
+        d = `${next.getFullYear()}-${String(next.getMonth() + 1).padStart(2, '0')}-${String(next.getDate()).padStart(2, '0')}`;
+    }
+
+    // Map date -> sessions
+    const daySessionsMap = new Map();
+    allDates.forEach(dd => daySessionsMap.set(dd, []));
+
+    filtered.forEach(r => {
+        if (daySessionsMap.has(r.date)) {
+            const sessions = daySessionsMap.get(r.date);
+            const existing = sessions.find(s => s.event === r.event);
+            if (existing) {
+                existing.records.push(r);
+            } else {
+                sessions.push({ date: r.date, event: r.event, records: [r] });
+            }
+        }
+    });
+
+    // Sort sessions within each day
+    allDates.forEach(dd => {
+        daySessionsMap.get(dd).sort((a, b) => a.event.localeCompare(b.event));
+    });
+
+    let html = `<table class="weekly-table">
+        <thead>
+            <tr>
+                <th class="grid-name-header" style="vertical-align:middle; text-align:center; width:180px;">NAME</th>
+                ${allDates.map(dd => {
+                    const sessions = daySessionsMap.get(dd);
+                    const [y, m, day] = dd.split('-').map(Number);
+                    const dow = new Date(y, m - 1, day).toLocaleDateString('en-US', { weekday: 'short' }).toUpperCase();
+                    if (sessions.length === 0) {
+                        const mon = new Date(y, m - 1, day).toLocaleDateString('en-US', { month: 'short' }).toUpperCase();
+                        return `<th class="grid-session-header" style="font-size:11px; line-height:1.3;">
+                            ${mon} ${day}<br>${dow}
+                        </th>`;
+                    }
+                    return sessions.map(s => {
+                        const [sy, sm, sday] = s.date.split('-').map(Number);
+                        const mon = new Date(sy, sm - 1, sday).toLocaleDateString('en-US', { month: 'short' }).toUpperCase();
+                        const eventName = normalizeEvent(s.event);
+                        return `<th class="grid-session-header" style="font-size:11px; line-height:1.4;">
+                            ${mon} ${sday}<br>${eventName}<br><span style="font-size:10px; opacity:0.8;">${dow}</span>
+                        </th>`;
+                    }).join('');
+                }).join('')}
+            </tr>
+        </thead>
+        <tbody>
+            ${members.map(m => {
+                return `<tr>
+                    <td class="grid-name-cell"><strong>${m.name}</strong></td>
+                    ${allDates.map(dd => {
+                        const sessions = daySessionsMap.get(dd);
+                        if (sessions.length === 0) {
+                            return `<td></td>`;
+                        }
+                        return sessions.map(s => {
+                            const memberRecords = s.records.filter(r => r.name === m.name);
+                            if (memberRecords.length === 0) {
+                                return `<td></td>`;
+                            }
+                            // Build status+reason string for each record
+                            const cellParts = memberRecords.map(r => {
+                                let initial = '';
+                                if (r.status === 'Present/Function') initial = 'PF';
+                                else if (r.status === 'Present(not Function)') initial = 'PNF';
+                                else if (r.status === 'PNF(other Task)') initial = 'PNF/OT';
+                                else if (r.status === 'Present') initial = 'P';
+                                else if (r.status === 'Absent') initial = 'A';
+                                // No Report = no initial
+
+                                if (!initial) return '';
+                                if (r.reason && r.reason.trim()) {
+                                    return `${initial} - ${r.reason.trim()}`;
+                                }
+                                return initial;
+                            }).filter(p => p);
+
+                            if (cellParts.length === 0) return `<td></td>`;
+                            return `<td>${cellParts.join(', ')}</td>`;
+                        }).join('');
+                    }).join('')}
+                </tr>`;
+            }).join('')}
+        </tbody>
+    </table>`;
+
+    document.getElementById('weeklyTable').innerHTML = html;
+}
+
+// Navigation
+document.getElementById('prevWeek')?.addEventListener('click', () => {
+    currentWeekIndex--;
+    renderWeeklyReport();
+});
+
+document.getElementById('nextWeek')?.addEventListener('click', () => {
+    currentWeekIndex++;
+    renderWeeklyReport();
+});
 
 window.deleteRecord = async function (index) {
     if (confirm('Delete this record?')) {
@@ -661,6 +811,140 @@ document.getElementById('filterEvent')?.addEventListener('change', loadRecords);
 document.getElementById('dateFrom')?.addEventListener('change', loadRecords);
 document.getElementById('dateTo')?.addEventListener('change', loadRecords);
 
+// Weekly Report
+document.getElementById('exportWeeklyJPG')?.addEventListener('click', async function () {
+    computeWeekRanges();
+    if (weekRanges.length === 0) {
+        alert('No data to export');
+        return;
+    }
+    const el = document.getElementById('weeklyTable');
+    if (!el || el.querySelector('.loading') || !el.querySelector('table')) {
+        alert('No table to export');
+        return;
+    }
+    const week = weekRanges[currentWeekIndex] || weekRanges[0];
+    const weekNum = currentWeekIndex + 1;
+    const headerEl = document.getElementById('weeklyHeader');
+    const wrapper = document.createElement('div');
+    wrapper.style.background = '#2FA084';
+    wrapper.style.padding = '20px';
+    wrapper.style.borderRadius = '8px';
+    wrapper.style.fontFamily = 'Inter, sans-serif';
+    wrapper.style.position = 'absolute';
+    wrapper.style.left = '-9999px';
+    wrapper.style.top = '0';
+
+    const headerClone = headerEl.cloneNode(true);
+    headerClone.style.display = 'block';
+    wrapper.appendChild(headerClone);
+
+    const tableClone = el.querySelector('table')?.cloneNode(true);
+    if (tableClone) {
+        tableClone.style.background = '#fff';
+        tableClone.style.width = 'auto';
+        // Style all cells in the cloned table
+        const cells = tableClone.querySelectorAll('td, th');
+        cells.forEach(cell => {
+            cell.style.backgroundColor = '#fff';
+            cell.style.color = '#1E293B';
+            cell.style.border = '1px solid #ccc';
+        });
+        // Style header cells specifically
+        const headers = tableClone.querySelectorAll('th');
+        headers.forEach(cell => {
+            cell.style.backgroundColor = '#0F766E';
+            cell.style.color = '#fff';
+        });
+        wrapper.appendChild(tableClone);
+    }
+
+    document.body.appendChild(wrapper);
+
+    const canvas = await html2canvas(wrapper, {
+        scale: 2,
+        backgroundColor: '#2FA084',
+        useCORS: true,
+        width: wrapper.offsetWidth,
+        height: wrapper.offsetHeight
+    });
+
+    document.body.removeChild(wrapper);
+
+    const link = document.createElement('a');
+    link.download = `${currentBatch}_week${weekNum}_report.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+});
+
+document.getElementById('exportWeeklyCSV')?.addEventListener('click', () => {
+    if (weekRanges.length === 0) {
+        alert('No data to export');
+        return;
+    }
+    const week = weekRanges[currentWeekIndex] || weekRanges[0];
+    const weekNum = currentWeekIndex + 1;
+
+    const filtered = attendanceData.filter(r => r.date >= week.start && r.date <= week.end);
+    if (!filtered.length) {
+        alert('No records for this week');
+        return;
+    }
+
+    const sessions = [];
+    const sessionMap = new Map();
+    filtered.forEach(r => {
+        const key = `${r.date}|${r.event}`;
+        if (!sessionMap.has(key)) {
+            sessionMap.set(key, { date: r.date, event: r.event, records: [] });
+            sessions.push(sessionMap.get(key));
+        }
+        sessionMap.get(key).records.push(r);
+    });
+    sessions.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+    // Use initials logic for CSV
+    let csv = 'Name,' + sessions.map(s => {
+        const d = new Date(s.date);
+        const dateStr = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }).toUpperCase();
+        return `"${dateStr} ${s.event}"`;
+    }).join(',') + '\n';
+
+    members.forEach(m => {
+        const row = [m.name];
+        sessions.forEach(s => {
+            const memberRecords = s.records.filter(r => r.name === m.name);
+            if (memberRecords.length === 0) {
+                row.push('');
+            } else {
+                const cellParts = memberRecords.map(r => {
+                    let initial = '';
+                    if (r.status === 'Present/Function') initial = 'PF';
+                    else if (r.status === 'Present(not Function)') initial = 'PNF';
+                    else if (r.status === 'PNF(other Task)') initial = 'PNF/OT';
+                    else if (r.status === 'Present') initial = 'P';
+                    else if (r.status === 'Absent') initial = 'A';
+
+                    if (!initial) return '';
+                    if (r.reason && r.reason.trim()) {
+                        return `${initial} - ${r.reason.trim()}`;
+                    }
+                    return initial;
+                }).filter(p => p);
+
+                row.push(cellParts.length > 0 ? cellParts.join('; ') : '');
+            }
+        });
+        csv += row.join(',') + '\n';
+    });
+
+    let blob = new Blob([csv], { type: 'text/csv' });
+    let a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `${currentBatch}_week${weekNum}_report.csv`;
+    a.click();
+});
+
 // Tab switching
 document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.addEventListener('click', function () {
@@ -668,6 +952,12 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
         document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
         this.classList.add('active');
         document.getElementById(this.dataset.tab + 'Tab').classList.add('active');
+
+        // Initialize weekly report when tab is shown
+        if (this.dataset.tab === 'weekly') {
+            currentWeekIndex = 0;
+            renderWeeklyReport();
+        }
     });
 });
 

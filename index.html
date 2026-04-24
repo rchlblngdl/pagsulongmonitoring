@@ -29,6 +29,7 @@
         <button class="tab-btn active" data-tab="form">Add Attendance</button>
         <button class="tab-btn" data-tab="summary">Summary Report</button>
         <button class="tab-btn" data-tab="records">View Records</button>
+        <button class="tab-btn" data-tab="weekly">Weekly Report</button>
     </div>
 
     <div id="formTab" class="tab-content active">
@@ -74,6 +75,23 @@
             <button id="deleteAll" class="btn-danger">Delete All</button>
         </div>
         <div id="recordsTable"><div class="loading">Loading records...</div></div>
+    </div>
+
+    <div id="weeklyTab" class="tab-content">
+        <h3 style="color:white; margin-bottom:20px;">Weekly Report - <span id="weeklyBatchName">...</span></h3>
+        <div id="weeklyHeader" style="display:none; background:var(--primary-dark); color:white; padding:16px 20px; border-radius:var(--radius-md); margin-bottom:16px; text-align:center; font-size:16px; font-weight:600;">
+            Silang Phase 02 Trainees <span style="margin:0 12px; opacity:0.6;">|</span> <span id="weeklyWeekTitle"></span>
+        </div>
+        <div id="weeklyTableWrapper" style="display:flex; align-items:stretch; gap:0; min-height:300px;">
+            <button id="prevWeek" style="background:var(--primary); color:white; padding:40px 12px; border:none; border-radius:var(--radius-md) 0 0 var(--radius-md); cursor:pointer; font-size:20px; height:100%;">&#10094;</button>
+            <div style="flex:1; width:100%; overflow-x:auto;">
+                <div id="weeklyTable"><div class="loading">Loading weekly report...</div></div>
+            </div>
+            <button id="nextWeek" style="background:var(--primary); color:white; padding:40px 12px; border:none; border-radius:0 var(--radius-md) var(--radius-md) 0; cursor:pointer; font-size:20px; height:100%;">&#10095;</button>
+        </div>
+        <div style="margin-top:16px; text-align:right;">
+            <button id="exportWeeklyJPG" style="background:#6FCF97; color:#1F6F5F; padding:10px 20px; border:none; border-radius:var(--radius-md); cursor:pointer; font-weight:600;">Export as JPG</button>
+        </div>
     </div>
 </div>
 

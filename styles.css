@@ -495,6 +495,45 @@ button:active {
     background: var(--bg-card-hover);
 }
 
+.weekly-table {
+    width: 100%;
+    min-width: 1200px;
+    border-collapse: collapse;
+    font-size: 13px;
+    background: var(--bg-main);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    table-layout: auto;
+}
+
+.weekly-table th,
+.weekly-table td {
+    padding: 14px 20px;
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border);
+    border-right: 1px solid rgba(255,255,255,0.08);
+    text-align: center;
+    white-space: nowrap;
+}
+
+.weekly-table th {
+    background: var(--primary-dark);
+    color: white;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.weekly-table th:first-child,
+.weekly-table td:first-child {
+    text-align: left;
+    padding-left: 20px;
+    width: 180px;
+}
+
+.weekly-table tr:hover {
+    background: var(--bg-card-hover);
+}
+
 /* Filter Bar */
 .filter-bar {
     display: flex;
