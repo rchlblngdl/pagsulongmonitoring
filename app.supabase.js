@@ -556,7 +556,8 @@ function renderWeeklyTableData() {
                     if (sessions.length === 0) {
                         const mon = new Date(y, m - 1, day).toLocaleDateString('en-US', { month: 'short' }).toUpperCase();
                         return `<th class="grid-session-header" style="font-size:11px; line-height:1.3;">
-                            ${mon} ${day}<br>${dow}
+                            <span style="background:#3b82f6; color:white; padding:2px 6px; border-radius:4px; font-weight:bold;">${mon} ${day}</span><br>
+                            <span style="background:#e2e8f0; color:#334155; padding:1px 5px; border-radius:3px; font-size:10px; font-weight:500; margin-top:2px; display:inline-block;">${dow}</span>
                         </th>`;
                     }
                     return sessions.map(s => {
@@ -564,7 +565,9 @@ function renderWeeklyTableData() {
                         const mon = new Date(sy, sm - 1, sday).toLocaleDateString('en-US', { month: 'short' }).toUpperCase();
                         const eventName = normalizeEvent(s.event);
                         return `<th class="grid-session-header" style="font-size:11px; line-height:1.4;">
-                            ${mon} ${sday}<br><span style="font-size:10px; opacity:0.8;">${dow}</span><br>${eventName}
+                            <span style="background:#3b82f6; color:white; padding:2px 6px; border-radius:4px; font-weight:bold;">${mon} ${sday}</span><br>
+                            <span style="background:#e2e8f0; color:#334155; padding:1px 5px; border-radius:3px; font-size:10px; font-weight:500;">${dow}</span><br>
+                            <span style="background:#f59e0b; color:white; padding:1px 4px; border-radius:3px; font-size:10px; margin-top:2px; display:inline-block;">${eventName}</span>
                         </th>`;
                     }).join('');
                 }).join('')}
