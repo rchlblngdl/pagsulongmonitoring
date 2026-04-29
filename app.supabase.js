@@ -564,7 +564,7 @@ function renderWeeklyTableData() {
                         const mon = new Date(sy, sm - 1, sday).toLocaleDateString('en-US', { month: 'short' }).toUpperCase();
                         const eventName = normalizeEvent(s.event);
                         return `<th class="grid-session-header" style="font-size:11px; line-height:1.4;">
-                            ${mon} ${sday}<br>${eventName}<br><span style="font-size:10px; opacity:0.8;">${dow}</span>
+                            ${mon} ${sday}<br><span style="font-size:10px; opacity:0.8;">${dow}</span><br>${eventName}
                         </th>`;
                     }).join('');
                 }).join('')}
